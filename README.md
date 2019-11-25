@@ -1,5 +1,7 @@
 # Codecool Quest
 
+#TEST COMMIT
+
 This is a simple tile-based RPG game.
 
 ## Opening the project
