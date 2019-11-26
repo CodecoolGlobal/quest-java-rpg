@@ -39,7 +39,7 @@ public abstract class Actor implements Drawable {
     }
 
     public boolean isPassable(int x, int y) {
-        boolean isEnemy = this.getCell().getNeighbor(x, y).getActor() == null;
-        return this.getCell().getNeighbor(x, y).getTileName().equals(CellType.FLOOR.getTileName()) && isEnemy;
+        boolean isNotEnemy = this.getCell().getNeighbor(x, y).getActor() == null;
+        return this.getCell().getNeighbor(x, y).getTileName().equals(CellType.FLOOR.getTileName()) && isNotEnemy;
     }
 }
