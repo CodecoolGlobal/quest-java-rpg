@@ -3,10 +3,17 @@ package com.codecool.quest.logic.actors;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Drawable;
+import com.codecool.quest.logic.items.Item;
+import com.codecool.quest.logic.items.Key;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Actor implements Drawable {
     private Cell cell;
     private int health = 10;
+    private Item itemToPickUp;
+
 
     public Actor(Cell cell) {
         this.cell = cell;
@@ -19,12 +26,26 @@ public abstract class Actor implements Drawable {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
+            itemToPickUp = isItemInCell();
         }
+    }
+
+    public Item isItemInCell() {
+        if (this.getCell().getItem() != null) return this.getCell().getItem();
+        Item emptyItem = new Item() {
+            @Override
+            public String getTileName() {
+                return "empty";
+            }
+        };
+        return emptyItem;
     }
 
     public int getHealth() {
         return health;
     }
+
+    public Item getItemToPickUp() {return itemToPickUp;}
 
     public Cell getCell() {
         return cell;

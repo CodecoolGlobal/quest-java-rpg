@@ -1,21 +1,31 @@
 package com.codecool.quest;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
+import com.codecool.quest.logic.actors.Player;
+import com.codecool.quest.logic.items.Item;
+import com.sun.javafx.collections.MapAdapterChange;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
@@ -28,6 +38,9 @@ public class Main extends Application {
         public void requestFocus() {
         }
     };
+    ListView<String> inventory = new ListView<>();
+    Map<String, Integer> inventoryMap = new HashMap<>();
+    private String itemName;
 
 
     public static void main(String[] args) {
@@ -47,6 +60,7 @@ public class Main extends Application {
         ui.add(new Label(""), 0, 3);
         ui.add(pickUpButton, 0, 4);
         ui.add(new Label("Inventory:"), 0, 5);
+        ui.add(inventory, 0, 6);
 
         BorderPane borderPane = new BorderPane();
 
@@ -62,25 +76,54 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    private void clickButton() {
+        itemName = map.getPlayer().getItemToPickUp().getTileName();
+
+        if (!itemName.equals("empty")) {
+            pickUpButton.setOnAction(actionEvent -> {
+                if (!inventoryMap.containsKey(itemName)) {
+                    inventoryMap.put(itemName, 1);
+                } else {
+                    Integer value = inventoryMap.get(itemName);
+                    inventoryMap.replace(itemName, value + 1);
+                }
+
+                inventory.getItems().clear();
+
+                for (Map.Entry<String, Integer> entry : inventoryMap.entrySet()) {
+                    if (!entry.getKey().equals("empty")) {
+                        inventory.getItems().add(entry.getKey() + ": " + entry.getValue());
+                    }
+                }
+            });
+
+        }
+    }
+
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(0, -1);
+                clickButton();
                 refresh();
                 break;
             case DOWN:
                 map.getPlayer().move(0, 1);
+                clickButton();
                 refresh();
                 break;
             case LEFT:
                 map.getPlayer().move(-1, 0);
+                clickButton();
                 refresh();
                 break;
             case RIGHT:
-                map.getPlayer().move(1,0);
+                map.getPlayer().move(1, 0);
+                clickButton();
                 refresh();
                 break;
         }
+
     }
 
     private void refresh() {
@@ -93,13 +136,15 @@ public class Main extends Application {
                     Tiles.drawTile(context, cell.getActor(), x, y);
                 } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
-                }
-                else {
+                } else {
                     Tiles.drawTile(context, cell, x, y);
                 }
 
             }
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
+
     }
+
+
 }
