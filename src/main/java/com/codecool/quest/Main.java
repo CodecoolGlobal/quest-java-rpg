@@ -79,8 +79,8 @@ public class Main extends Application {
     private void clickButton() {
         itemName = map.getPlayer().getItemToPickUp().getTileName();
 
-        if (!itemName.equals("empty")) {
-            pickUpButton.setOnAction(actionEvent -> {
+        pickUpButton.setOnAction(actionEvent -> {
+            if (!"".equals(itemName)) {
                 if (!inventoryMap.containsKey(itemName)) {
                     inventoryMap.put(itemName, 1);
                 } else {
@@ -91,14 +91,12 @@ public class Main extends Application {
                 inventory.getItems().clear();
 
                 for (Map.Entry<String, Integer> entry : inventoryMap.entrySet()) {
-                    if (!entry.getKey().equals("empty")) {
-                        inventory.getItems().add(entry.getKey() + ": " + entry.getValue());
-                    }
+                    inventory.getItems().add(entry.getKey() + ": " + entry.getValue());
                 }
-            });
-
-        }
+            }
+        });
     }
+
 
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {

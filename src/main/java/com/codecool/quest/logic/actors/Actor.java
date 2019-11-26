@@ -35,7 +35,7 @@ public abstract class Actor implements Drawable {
         Item emptyItem = new Item() {
             @Override
             public String getTileName() {
-                return "empty";
+                return "";
             }
         };
         return emptyItem;
