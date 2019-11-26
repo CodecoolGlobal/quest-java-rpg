@@ -34,12 +34,15 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
+
     private Button pickUpButton = new Button("Pick Up Item") {
         public void requestFocus() {
         }
     };
+
     ListView<String> inventory = new ListView<>();
     Map<String, Integer> inventoryMap = new HashMap<>();
+
     private String itemName;
 
 
