@@ -13,7 +13,6 @@ public abstract class Item implements Drawable {
     }
 
     public Cell getCell() {
-        System.out.println(cell);
         return cell;
     }
 
