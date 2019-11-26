@@ -24,7 +24,11 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
-    Button pickUpButton = new Button("Pick Up Item");
+    private Button pickUpButton = new Button("Pick Up Item") {
+        public void requestFocus() {
+        }
+    };
+
 
     public static void main(String[] args) {
         launch(args);
