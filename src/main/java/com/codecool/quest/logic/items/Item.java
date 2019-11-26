@@ -1,5 +1,11 @@
 package com.codecool.quest.logic.items;
 
-public abstract class Item {
+import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.CellType;
+import com.codecool.quest.logic.Drawable;
 
+public abstract class Item implements Drawable {
+
+    public Item(Cell cell) {
+    }
 }
