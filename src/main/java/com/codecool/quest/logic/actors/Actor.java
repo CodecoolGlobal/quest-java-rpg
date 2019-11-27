@@ -6,7 +6,6 @@ import com.codecool.quest.logic.Drawable;
 import com.codecool.quest.logic.items.Item;
 import javafx.scene.control.ListView;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public abstract class Actor implements Drawable {
@@ -38,11 +37,16 @@ public abstract class Actor implements Drawable {
             itemToPickUp = isItemInCell();
         }
     }
-    
+
     public void monsterMove() {
         int[] actualMove = movementCoordinates.get(rnd.nextInt(movementCoordinates.size()));
-        System.out.println(Arrays.toString(actualMove));
+        int x = actualMove[0];
+        int y = actualMove[1];
+        this.move(x, y);
 
+            /*} catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
     }
 
     public Item isItemInCell() {
@@ -94,11 +98,15 @@ public abstract class Actor implements Drawable {
 
         boolean neighborIsDoor = this.getCell().getNeighbor(x, y).getTileName().equals("door");
         boolean neighborIsOpenDoor = this.getCell().getNeighbor(x, y).getTileName().equals("door-open");
-        if (hasKey() &&  neighborIsDoor) {
+        if (hasKey() && neighborIsDoor) {
             neighbor.setOpenDoor();
             inventoryMap.remove("key");
-        };
+        }
+
         if (neighborIsOpenDoor) return true;
+
+        boolean isSecretDoor = this.getCell().getNeighbor(x, y).getTileName().equals("secret-door");
+        if (isSecretDoor) return true;
 
         if (this.getCell().getNeighbor(x, y).getActor() != null) {
             boolean isEnemy = this.getCell().getNeighbor(x, y).getActor().getTileName().equals("skeleton");
@@ -107,7 +115,6 @@ public abstract class Actor implements Drawable {
                 return false;
             }
         }
-
 
         boolean isNotEnemy = this.getCell().getNeighbor(x, y).getActor() == null;
         boolean isFloor = this.getCell().getNeighbor(x, y).getTileName().equals(CellType.FLOOR.getTileName());
@@ -120,7 +127,7 @@ public abstract class Actor implements Drawable {
         if (enemyHealth > 0) {
             neighbour.getActor().setHealth(enemyHealth - actualDamage);
             if (neighbour.getActor().getHealth() > 0) {
-                this.setHealth(this.getHealth()-neighbour.getActor().getDamage() + this.getDefense());
+                this.setHealth(this.getHealth() - neighbour.getActor().getDamage() + this.getDefense());
             } else {
                 neighbour.setActor(null);
             }
@@ -167,5 +174,9 @@ public abstract class Actor implements Drawable {
 
     public int getDamage() {
         return this.damage;
+    }
+
+    private void showSecretTunnel() {
+        
     }
 }

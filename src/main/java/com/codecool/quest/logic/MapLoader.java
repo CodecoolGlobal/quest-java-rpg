@@ -31,12 +31,15 @@ public class MapLoader {
                         case '#':
                             cell.setType(CellType.WALL);
                             break;
+                        case '+':
+                            cell.setType(CellType.SECRETDOOR);
+                            break;
                         case '.':
                             cell.setType(CellType.FLOOR);
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
-                            new Skeleton(cell);
+                            map.setSkeleton(new Skeleton(cell));
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);

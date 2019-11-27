@@ -1,30 +1,23 @@
 package com.codecool.quest;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.actors.Actor;
-import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
-import com.codecool.quest.logic.actors.Player;
-import com.codecool.quest.logic.items.Item;
-import com.sun.javafx.collections.MapAdapterChange;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Main extends Application {
@@ -44,7 +37,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         inventory.setFocusTraversable(false);
 
         GridPane ui = new GridPane();
@@ -70,12 +63,15 @@ public class Main extends Application {
 
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
+
     }
+
 
 
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
+                map.getSkeleton().skeletonMove();
                 map.getPlayer().move(0, -1);
                 refresh();
                 break;
@@ -99,7 +95,7 @@ public class Main extends Application {
     }
 
     private void refresh() {
-        map.getPlayer().monsterMove();
+
         fillInventory();
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -130,6 +126,7 @@ public class Main extends Application {
             inventory.getItems().add(entry.getKey() + ": " + entry.getValue());
         }
     }
+
 
 
 }
