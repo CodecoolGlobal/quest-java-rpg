@@ -6,10 +6,12 @@ import com.codecool.quest.logic.Drawable;
 import com.codecool.quest.logic.items.Item;
 import javafx.scene.control.ListView;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public abstract class Actor implements Drawable {
+    private List<int[]> movementCoordinates = new ArrayList<>();
+    Random rnd = new Random();
     private Cell cell;
     private int health = 10;
     private Item itemToPickUp;
@@ -23,6 +25,8 @@ public abstract class Actor implements Drawable {
     public Actor(Cell cell) {
         this.cell = cell;
         this.cell.setActor(this);
+        int[][] cords = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        movementCoordinates.addAll(Arrays.asList(cords));
     }
 
     public void move(int dx, int dy) {
@@ -33,6 +37,12 @@ public abstract class Actor implements Drawable {
             cell = nextCell;
             itemToPickUp = isItemInCell();
         }
+    }
+    
+    public void monsterMove() {
+        int[] actualMove = movementCoordinates.get(rnd.nextInt(movementCoordinates.size()));
+        System.out.println(Arrays.toString(actualMove));
+
     }
 
     public Item isItemInCell() {

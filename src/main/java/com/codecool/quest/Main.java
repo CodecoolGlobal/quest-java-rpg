@@ -99,6 +99,7 @@ public class Main extends Application {
     }
 
     private void refresh() {
+        map.getPlayer().monsterMove();
         fillInventory();
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());

@@ -7,10 +7,12 @@ public class Skeleton extends Actor {
     public Skeleton(Cell cell) {
         super(cell);
         this.setDamage(2);
+        this.monsterMove();
     }
 
     @Override
     public String getTileName() {
         return "skeleton";
     }
+
 }
