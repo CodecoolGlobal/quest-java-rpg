@@ -91,4 +91,9 @@ public abstract class Actor implements Drawable {
             this.getCell().setItem(null);
         }
     }
+
+
+    public boolean hasWeapon() {
+        return false;
+    }
 }

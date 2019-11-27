@@ -49,8 +49,7 @@ public class Main extends Application {
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
 
-        ui.add(new Label("Health: "), 0, 0);
-        ui.add(healthLabel, 1, 0);
+        ui.add(healthLabel, 0, 0);
         ui.add(new Label(""), 0, 1);
         ui.add(new Label(""), 0, 2);
         ui.add(new Label(""), 0, 3);
@@ -114,7 +113,7 @@ public class Main extends Application {
 
             }
         }
-        healthLabel.setText("" + map.getPlayer().getHealth());
+        healthLabel.setText("Health: " + map.getPlayer().getHealth());
 
 
     }
