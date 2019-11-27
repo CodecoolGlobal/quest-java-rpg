@@ -94,6 +94,8 @@ public abstract class Actor implements Drawable {
 
 
     public boolean hasWeapon() {
+        Map itemList = inventoryMap;
+
         return false;
     }
 }
