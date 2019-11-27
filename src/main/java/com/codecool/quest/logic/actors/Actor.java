@@ -14,6 +14,7 @@ public abstract class Actor implements Drawable {
     private int health = 10;
     private Item itemToPickUp;
     private String itemName;
+    public int damage;
     Map<String, Integer> inventoryMap = new HashMap<>();
     ListView<String> inventory = new ListView<>();
 
@@ -48,6 +49,10 @@ public abstract class Actor implements Drawable {
         return health;
     }
 
+    public void setHealth(int newHealth) {
+        this.health = newHealth;
+    }
+
     public Map<String, Integer> getInventoryMap() {
         return inventoryMap;
     }
@@ -76,9 +81,31 @@ public abstract class Actor implements Drawable {
         };
         if (neighborIsOpenDoor) return true;
 
+        if (this.getCell().getNeighbor(x, y).getActor() != null) {
+            boolean isEnemy = this.getCell().getNeighbor(x, y).getActor().getTileName().equals("skeleton");
+            if (isEnemy) {
+                attack(this.getCell().getNeighbor(x, y));
+                return false;
+            }
+        }
+
+
         boolean isNotEnemy = this.getCell().getNeighbor(x, y).getActor() == null;
         boolean isFloor = this.getCell().getNeighbor(x, y).getTileName().equals(CellType.FLOOR.getTileName());
         return isFloor && isNotEnemy;
+    }
+
+    private void attack(Cell neighbour) {
+        int enemyHealth = neighbour.getActor().getHealth();
+        int actualDamage = this.getDamage();
+        if (enemyHealth > 0) {
+            neighbour.getActor().setHealth(enemyHealth - actualDamage);
+            if (neighbour.getActor().getHealth() > 0) {
+                this.setHealth(this.getHealth()-neighbour.getActor().getDamage());
+            } else {
+                neighbour.setActor(null);
+            }
+        }
     }
 
     public void pickUpItem() {
@@ -101,8 +128,15 @@ public abstract class Actor implements Drawable {
         }
     }
 
-
     private boolean hasKey() {
         return inventoryMap.containsKey("key");
+    }
+
+    public void setDamage(int newDamage) {
+        this.damage = newDamage;
+    }
+
+    public int getDamage() {
+        return this.damage;
     }
 }

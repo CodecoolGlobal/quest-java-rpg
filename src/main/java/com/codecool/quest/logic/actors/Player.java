@@ -7,6 +7,7 @@ public class Player extends Actor {
 
     public Player(Cell cell) {
         super(cell);
+        this.setDamage(5);
     }
 
     public String getTileName() {
@@ -23,5 +24,6 @@ public class Player extends Actor {
             this.tileName = "player-h";
         }
     }
+
 }
 
