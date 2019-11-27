@@ -97,6 +97,7 @@ public abstract class Actor implements Drawable {
 
     private void attack(Cell neighbour) {
         int enemyHealth = neighbour.getActor().getHealth();
+        if (hasHelmet()) neighbour.getActor().setDamage(-1);
         int actualDamage = this.getDamage();
         if (enemyHealth > 0) {
             neighbour.getActor().setHealth(enemyHealth - actualDamage);
@@ -118,7 +119,7 @@ public abstract class Actor implements Drawable {
                 Integer value = inventoryMap.get(itemName);
                 inventoryMap.replace(itemName, value + 1);
             }
-
+            if (hasWeapon() && this.getDamage() != 10) this.setDamage(5);
             inventory.getItems().clear();
 
             for (Map.Entry<String, Integer> entry : inventoryMap.entrySet()) {
@@ -128,12 +129,20 @@ public abstract class Actor implements Drawable {
         }
     }
 
+    private boolean hasWeapon() {
+        return inventoryMap.containsKey("weapon");
+    }
+
+    private boolean hasHelmet() {
+        return inventoryMap.containsKey("helmet");
+    }
+
     private boolean hasKey() {
         return inventoryMap.containsKey("key");
     }
 
     public void setDamage(int newDamage) {
-        this.damage = newDamage;
+        this.damage += newDamage;
     }
 
     public int getDamage() {
