@@ -48,6 +48,10 @@ public class Cell implements Drawable {
         return type.getTileName();
     }
 
+    public void setOpenDoor() {
+        type.setTileName("door-open");
+    }
+
     public int getX() {
         return x;
     }

@@ -64,14 +64,21 @@ public abstract class Actor implements Drawable {
         return cell.getY();
     }
 
-    public boolean isPassable(int x, int y) {
+    private boolean isPassable(int x, int y) {
         Cell neighbor = this.getCell().getNeighbor(x, y);
         if (neighbor == null) return false;
+
+        boolean neighborIsDoor = this.getCell().getNeighbor(x, y).getTileName().equals("door");
+        boolean neighborIsOpenDoor = this.getCell().getNeighbor(x, y).getTileName().equals("door-open");
+        if (hasKey() &&  neighborIsDoor) {
+            neighbor.setOpenDoor();
+            inventoryMap.remove("key");
+        };
+        if (neighborIsOpenDoor) return true;
+
         boolean isNotEnemy = this.getCell().getNeighbor(x, y).getActor() == null;
         boolean isFloor = this.getCell().getNeighbor(x, y).getTileName().equals(CellType.FLOOR.getTileName());
-        //boolean playerHasKey = hasKey();
-        //boolean neighborIsDoor = this.getCell().getNeighbor(x, y).getTileName().equals("door");
-        return isFloor && isNotEnemy; //&& playerHasKey && neighborIsDoor;
+        return isFloor && isNotEnemy;
     }
 
     public void pickUpItem() {
@@ -95,10 +102,7 @@ public abstract class Actor implements Drawable {
     }
 
 
-    public boolean hasKey() {
-        if (inventoryMap.containsKey("key")) {
-            return true;
-        }
-        return false;
+    private boolean hasKey() {
+        return inventoryMap.containsKey("key");
     }
 }
