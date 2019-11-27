@@ -69,7 +69,9 @@ public abstract class Actor implements Drawable {
         if (neighbor == null) return false;
         boolean isNotEnemy = this.getCell().getNeighbor(x, y).getActor() == null;
         boolean isFloor = this.getCell().getNeighbor(x, y).getTileName().equals(CellType.FLOOR.getTileName());
-        return isFloor && isNotEnemy;
+        //boolean playerHasKey = hasKey();
+        //boolean neighborIsDoor = this.getCell().getNeighbor(x, y).getTileName().equals("door");
+        return isFloor && isNotEnemy; //&& playerHasKey && neighborIsDoor;
     }
 
     public void pickUpItem() {
@@ -93,9 +95,10 @@ public abstract class Actor implements Drawable {
     }
 
 
-    public boolean hasWeapon() {
-        Map itemList = inventoryMap;
-
+    public boolean hasKey() {
+        if (inventoryMap.containsKey("key")) {
+            return true;
+        }
         return false;
     }
 }

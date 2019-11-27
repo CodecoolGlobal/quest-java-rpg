@@ -15,8 +15,12 @@ public class Player extends Actor {
     }
 
     public void setTileName() {
-        if (inventoryMap.containsKey("weapon")) {
-            this.tileName = "player2";
+        if (inventoryMap.containsKey("weapon") && !inventoryMap.containsKey("helmet")) {
+            this.tileName = "player-w";
+        } else if (inventoryMap.containsKey("weapon") && inventoryMap.containsKey("helmet")) {
+            this.tileName = "player-w-h";
+        } else if (!inventoryMap.containsKey("weapon") && inventoryMap.containsKey("helmet")) {
+            this.tileName = "player-h";
         }
     }
 }
