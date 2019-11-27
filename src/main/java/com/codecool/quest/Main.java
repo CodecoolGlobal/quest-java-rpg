@@ -34,6 +34,8 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
+    Label damageLabel = new Label();
+    Label defenseLabel = new Label();
     ListView<String> inventory = new ListView<>();
 
 
@@ -50,8 +52,8 @@ public class Main extends Application {
         ui.setPadding(new Insets(10));
 
         ui.add(healthLabel, 0, 0);
-        ui.add(new Label(""), 0, 1);
-        ui.add(new Label(""), 0, 2);
+        ui.add(damageLabel, 0, 1);
+        ui.add(defenseLabel, 0, 2);
         ui.add(new Label(""), 0, 3);
         ui.add(new Label("Inventory:"), 0, 4);
         ui.add(inventory, 0, 5);
@@ -91,8 +93,7 @@ public class Main extends Application {
                 break;
             case A:
                 map.getPlayer().pickUpItem();
-                fillInventory();
-
+                refresh();
         }
 
     }
@@ -115,6 +116,8 @@ public class Main extends Application {
             }
         }
         healthLabel.setText("Health: " + map.getPlayer().getHealth());
+        damageLabel.setText("Attack: " + map.getPlayer().getDamage());
+        defenseLabel.setText("Defense: " + map.getPlayer().getDefense());
 
 
     }

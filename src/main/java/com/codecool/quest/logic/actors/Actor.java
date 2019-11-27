@@ -15,6 +15,7 @@ public abstract class Actor implements Drawable {
     private Item itemToPickUp;
     private String itemName;
     public int damage;
+    public int defense = 0;
     Map<String, Integer> inventoryMap = new HashMap<>();
     ListView<String> inventory = new ListView<>();
 
@@ -51,6 +52,14 @@ public abstract class Actor implements Drawable {
 
     public void setHealth(int newHealth) {
         this.health = newHealth;
+    }
+
+    public int getDefense() {
+        return this.defense;
+    }
+
+    public void setDefense(int newDefense) {
+        this.defense += newDefense;
     }
 
     public Map<String, Integer> getInventoryMap() {
@@ -97,12 +106,11 @@ public abstract class Actor implements Drawable {
 
     private void attack(Cell neighbour) {
         int enemyHealth = neighbour.getActor().getHealth();
-        if (hasHelmet()) neighbour.getActor().setDamage(-1);
         int actualDamage = this.getDamage();
         if (enemyHealth > 0) {
             neighbour.getActor().setHealth(enemyHealth - actualDamage);
             if (neighbour.getActor().getHealth() > 0) {
-                this.setHealth(this.getHealth()-neighbour.getActor().getDamage());
+                this.setHealth(this.getHealth()-neighbour.getActor().getDamage() + this.getDefense());
             } else {
                 neighbour.setActor(null);
             }
@@ -120,6 +128,8 @@ public abstract class Actor implements Drawable {
                 inventoryMap.replace(itemName, value + 1);
             }
             if (hasWeapon() && this.getDamage() != 10) this.setDamage(5);
+            if (hasHelmet() && this.getDefense() != 1) this.setDefense(1);
+
             inventory.getItems().clear();
 
             for (Map.Entry<String, Integer> entry : inventoryMap.entrySet()) {
