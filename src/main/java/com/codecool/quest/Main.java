@@ -34,16 +34,7 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
-
-    private Button pickUpButton = new Button("Pick Up Item") {
-        public void requestFocus() {
-        }
-    };
-
     ListView<String> inventory = new ListView<>();
-    Map<String, Integer> inventoryMap = new HashMap<>();
-
-    private String itemName;
 
 
     public static void main(String[] args) {
@@ -52,6 +43,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        inventory.setFocusTraversable(false);
+
         GridPane ui = new GridPane();
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
@@ -61,9 +54,8 @@ public class Main extends Application {
         ui.add(new Label(""), 0, 1);
         ui.add(new Label(""), 0, 2);
         ui.add(new Label(""), 0, 3);
-        ui.add(pickUpButton, 0, 4);
-        ui.add(new Label("Inventory:"), 0, 5);
-        ui.add(inventory, 0, 6);
+        ui.add(new Label("Inventory:"), 0, 4);
+        ui.add(inventory, 0, 5);
 
         BorderPane borderPane = new BorderPane();
 
@@ -79,50 +71,29 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    private void clickButton() {
-        itemName = map.getPlayer().getItemToPickUp().getTileName();
-
-        pickUpButton.setOnAction(actionEvent -> {
-            if (!"".equals(itemName)) {
-                if (!inventoryMap.containsKey(itemName)) {
-                    inventoryMap.put(itemName, 1);
-                } else {
-                    Integer value = inventoryMap.get(itemName);
-                    inventoryMap.replace(itemName, value + 1);
-                }
-
-                inventory.getItems().clear();
-
-                for (Map.Entry<String, Integer> entry : inventoryMap.entrySet()) {
-                    inventory.getItems().add(entry.getKey() + ": " + entry.getValue());
-                }
-            }
-        });
-    }
-
 
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(0, -1);
-                clickButton();
                 refresh();
                 break;
             case DOWN:
                 map.getPlayer().move(0, 1);
-                clickButton();
                 refresh();
                 break;
             case LEFT:
                 map.getPlayer().move(-1, 0);
-                clickButton();
                 refresh();
                 break;
             case RIGHT:
                 map.getPlayer().move(1, 0);
-                clickButton();
                 refresh();
                 break;
+            case A:
+                map.getPlayer().pickUpItem();
+                fillInventory();
+
         }
 
     }
@@ -145,6 +116,15 @@ public class Main extends Application {
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
 
+
+    }
+
+    private void fillInventory() {
+        inventory.getItems().clear();
+        Map<String, Integer> inventoryMap = map.getPlayer().getInventoryMap();
+        for (Map.Entry<String, Integer> entry : inventoryMap.entrySet()) {
+            inventory.getItems().add(entry.getKey() + ": " + entry.getValue());
+        }
     }
 
 

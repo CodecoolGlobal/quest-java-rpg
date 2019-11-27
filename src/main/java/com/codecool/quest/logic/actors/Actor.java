@@ -4,7 +4,7 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Drawable;
 import com.codecool.quest.logic.items.Item;
-import com.codecool.quest.logic.items.Key;
+import javafx.scene.control.ListView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +13,9 @@ public abstract class Actor implements Drawable {
     private Cell cell;
     private int health = 10;
     private Item itemToPickUp;
+    private String itemName;
+    Map<String, Integer> inventoryMap = new HashMap<>();
+    ListView<String> inventory = new ListView<>();
 
 
     public Actor(Cell cell) {
@@ -45,7 +48,9 @@ public abstract class Actor implements Drawable {
         return health;
     }
 
-    public Item getItemToPickUp() {return itemToPickUp;}
+    public Map<String, Integer> getInventoryMap() {
+        return inventoryMap;
+    }
 
     public Cell getCell() {
         return cell;
@@ -64,6 +69,26 @@ public abstract class Actor implements Drawable {
         if (neighbor == null) return false;
         boolean isNotEnemy = this.getCell().getNeighbor(x, y).getActor() == null;
         boolean isFloor = this.getCell().getNeighbor(x, y).getTileName().equals(CellType.FLOOR.getTileName());
-        return  isFloor && isNotEnemy;
+        return isFloor && isNotEnemy;
+    }
+
+    public void pickUpItem() {
+        itemName = itemToPickUp.getTileName();
+
+        if (!"".equals(itemName)) {
+            if (!inventoryMap.containsKey(itemName)) {
+                inventoryMap.put(itemName, 1);
+            } else {
+                Integer value = inventoryMap.get(itemName);
+                inventoryMap.replace(itemName, value + 1);
+            }
+
+            inventory.getItems().clear();
+
+            for (Map.Entry<String, Integer> entry : inventoryMap.entrySet()) {
+                inventory.getItems().add(entry.getKey() + ": " + entry.getValue());
+            }
+            this.getCell().setItem(null);
+        }
     }
 }

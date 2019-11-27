@@ -1,6 +1,7 @@
 package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.Player;
+import com.codecool.quest.logic.items.Item;
 
 public class GameMap {
     private int width;
@@ -31,6 +32,7 @@ public class GameMap {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
 
     public Player getPlayer() {
         return player;
