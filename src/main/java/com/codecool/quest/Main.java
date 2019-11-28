@@ -134,13 +134,15 @@ public class Main extends Application {
                 moveAllSkeletons(map.monsterList);
                 map.getPlayer().pickUpItem();
                 refresh();
-            case S:
+                break;
+            case D:
                 if (map.getPlayer().getHealth() < 1) {
                     break;
                 }
                 moveAllSkeletons(map.monsterList);
                 map.getPlayer().openLeverDoor();
                 refresh();
+                break;
         }
 
     }

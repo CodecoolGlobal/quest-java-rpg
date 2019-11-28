@@ -6,7 +6,7 @@ v...........#......ff...v
 vr...##B#####fff..ff....v
 vrr..#rrrfrfff...f.h.s..v
 vf...#rfffrrfrrrff......v
-v....fff...ffffrrfff....v
+v....fffr..ffffrrfff....v
 v.ff....ff...s..rrrf..ffv
 v..frr...ffh.....ff..fffv
 v...Crrr...ffff...f...fff
