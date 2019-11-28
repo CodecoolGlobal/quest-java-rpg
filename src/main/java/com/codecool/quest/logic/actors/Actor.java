@@ -170,7 +170,7 @@ public abstract class Actor implements Drawable {
                 inventoryMap.replace(itemName, value + 1);
             }
             if (hasWeapon() && this.getDamage() != 10) this.setDamage(5);
-            if (hasHelmet()) this.setDefense(1);
+            if (hasCloak()) this.setDefense(1);
 
             inventory.getItems().clear();
 
@@ -187,8 +187,8 @@ public abstract class Actor implements Drawable {
         return inventoryMap.containsKey("weapon");
     }
 
-    private boolean hasHelmet() {
-        return inventoryMap.containsKey("helmet");
+    private boolean hasCloak() {
+        return inventoryMap.containsKey("cloak");
     }
 
 

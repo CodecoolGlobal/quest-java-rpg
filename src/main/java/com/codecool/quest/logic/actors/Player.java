@@ -16,11 +16,11 @@ public class Player extends Actor {
     }
 
     public void setTileName() {
-        if (inventoryMap.containsKey("weapon") && !inventoryMap.containsKey("helmet")) {
+        if (inventoryMap.containsKey("weapon") && !inventoryMap.containsKey("cloak")) {
             this.tileName = "player-w";
-        } else if (inventoryMap.containsKey("weapon") && inventoryMap.containsKey("helmet")) {
+        } else if (inventoryMap.containsKey("weapon") && inventoryMap.containsKey("cloak")) {
             this.tileName = "player-w-h";
-        } else if (!inventoryMap.containsKey("weapon") && inventoryMap.containsKey("helmet")) {
+        } else if (!inventoryMap.containsKey("weapon") && inventoryMap.containsKey("cloak")) {
             this.tileName = "player-h";
         }
     }
