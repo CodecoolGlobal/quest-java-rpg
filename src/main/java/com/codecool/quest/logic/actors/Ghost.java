@@ -7,6 +7,7 @@ public class Ghost extends Actor {
     public Ghost(Cell cell) {
         super(cell);
         this.setDamage(4);
+        this.setHealth(15);
     }
 
     @Override
