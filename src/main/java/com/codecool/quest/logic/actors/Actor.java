@@ -141,7 +141,9 @@ public abstract class Actor implements Drawable {
     }
 
     public void pickUpItem() {
-        itemName = itemToPickUp.getTileName();
+        if (itemToPickUp != null) {
+            itemName = itemToPickUp.getTileName();
+        }
 
         if (!"".equals(itemName)) {
             if (!inventoryMap.containsKey(itemName)) {
@@ -159,6 +161,8 @@ public abstract class Actor implements Drawable {
                 inventory.getItems().add(entry.getKey() + ": " + entry.getValue());
             }
             this.getCell().setItem(null);
+            itemToPickUp = null;
+            itemName = "";
         }
     }
 
