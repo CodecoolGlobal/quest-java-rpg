@@ -13,15 +13,18 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 public class Main extends Application {
@@ -35,6 +38,9 @@ public class Main extends Application {
     Label defenseLabel = new Label();
     ListView<String> inventory = new ListView<>();
 
+    public static Label nameLabel = new Label();
+    public static String cheatCode = "Cinci";
+
 
     public static void main(String[] args) {
         launch(args);
@@ -47,14 +53,11 @@ public class Main extends Application {
         GridPane ui = new GridPane();
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
-
-        ui.add(healthLabel, 0, 0);
-        ui.add(damageLabel, 0, 1);
-        ui.add(defenseLabel, 0, 2);
-        ui.add(new Label(""), 0, 3);
-        ui.add(new Label("Inventory:"), 0, 4);
-        ui.add(inventory, 0, 5);
-
+        ui.add(healthLabel, 0, 1);
+        ui.add(damageLabel, 0, 2);
+        ui.add(defenseLabel, 0, 3);
+        ui.add(new Label("Inventory:"), 0, 5);
+        ui.add(inventory, 0, 6);
         BorderPane borderPane = new BorderPane();
 
         borderPane.setCenter(canvas);
@@ -64,12 +67,31 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
-
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
-
+        getPlayerName();
+        String characterName = "Name: " + nameLabel.getText();
+        ui.add(new Label(characterName),0,0);
+        refresh();
     }
 
+    public void getPlayerName(){
+        try {
+            TextInputDialog dialog = new TextInputDialog("Bob");
+
+            dialog.setTitle("Greetings Adventurer");
+            dialog.setHeaderText("What's your name?");
+            dialog.setContentText("Name:");
+
+            Optional<String> result = dialog.showAndWait();
+
+            result.ifPresent(name -> {
+                this.nameLabel.setText(name);
+            });
+        } catch (NullPointerException e){
+            System.out.println("Wrong character name");
+        }
+    }
 
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
@@ -144,6 +166,7 @@ public class Main extends Application {
             }
         }
     }
+
 
 
 }
