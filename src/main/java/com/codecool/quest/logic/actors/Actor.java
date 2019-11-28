@@ -31,7 +31,7 @@ public abstract class Actor implements Drawable {
     }
 
     public void move(int dx, int dy) {
-        if (isPassable(dx, dy)) {
+        if (isPassable(dx, dy) && this.getHealth() > 0) {
             Cell nextCell = cell.getNeighbor(dx, dy);
             cell.setActor(null);
             nextCell.setActor(this);
@@ -137,6 +137,9 @@ public abstract class Actor implements Drawable {
             neighbour.getActor().setHealth(enemyHealth - actualDamage);
             if (neighbour.getActor().getHealth() > 0) {
                 this.setHealth(this.getHealth() - neighbour.getActor().getDamage() + this.getDefense());
+                if (this.getHealth() <= 0) {
+                    this.getCell().setActor(null);
+                }
             } else {
                 neighbour.setActor(null);
             }
