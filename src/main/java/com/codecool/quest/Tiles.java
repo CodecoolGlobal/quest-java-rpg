@@ -46,6 +46,7 @@ public class Tiles {
         tileMap.put("roof-right", new Tile(12, 15));
         tileMap.put("house-left", new Tile(10, 16));
         tileMap.put("house-center", new Tile(3, 3));
+        tileMap.put("house-center-open", new Tile(4, 3));
         tileMap.put("house-right", new Tile(12, 16));
         tileMap.put("grass", new Tile(5, 0));
         tileMap.put("forest", new Tile(3, 2));

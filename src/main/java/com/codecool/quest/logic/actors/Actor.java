@@ -118,8 +118,10 @@ public abstract class Actor implements Drawable {
         if (neighborIsOpenDoor) return true;
         boolean isLeverDoorOpen = this.getCell().getNeighbor(x, y).getTileName().equals("lever-door-open");
         if (isLeverDoorOpen) {return true;}
+
+        boolean isPubOpen = this.getCell().getNeighbor(x, y).getTileName().equals("house-center-open");
         boolean isSecretDoor = this.getCell().getNeighbor(x, y).getTileName().equals("secret-door");
-        if (isSecretDoor &&
+        if ((isSecretDoor || isPubOpen) &&
                 !this.getCell().getActor().getTileName().equals("ghost")
                 && !this.getCell().getActor().getTileName().equals("skeleton")) return true;
 
@@ -226,6 +228,14 @@ public abstract class Actor implements Drawable {
         return false;
     }
 
+    private boolean isPub() {
+        String pubName = this.getCell().getNeighbor(0, -1).getTileName();
+        if (pubName.equals("house-center")) {
+            return true;
+        }
+        return false;
+    }
+
     public void openLeverDoor() {
         if (isLever() && !isLeverOpen) {
             this.getCell().getNeighbor(-1, 1).setType(CellType.LEVERDOOROPEN);
@@ -235,6 +245,12 @@ public abstract class Actor implements Drawable {
             this.getCell().getNeighbor(-1, 1).setType(CellType.LEVERDOOR);
             this.getCell().getNeighbor(0, 1).setType(CellType.LEVER);
             isLeverOpen = false;
+        }
+    }
+
+    public void openPub() {
+        if (isPub()) {
+            this.getCell().getNeighbor(0, -1).setType(CellType.HOUSEOPEN);
         }
     }
 }

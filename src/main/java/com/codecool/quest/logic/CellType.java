@@ -12,6 +12,7 @@ public enum CellType {
     ROOFRIGHT("roof-right"),
     HOUSELEFT("house-left"),
     HOUSECENTER("house-center"),
+    HOUSEOPEN("house-center-open"),
     HOUSERIGHT("house-right"),
     WATER("water"),
     GRASS("grass"),

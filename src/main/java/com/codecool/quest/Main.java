@@ -141,6 +141,7 @@ public class Main extends Application {
                 }
                 moveAllSkeletons(map.monsterList);
                 map.getPlayer().openLeverDoor();
+                map.getPlayer().openPub();
                 refresh();
                 break;
         }
