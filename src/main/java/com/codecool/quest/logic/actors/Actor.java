@@ -137,7 +137,7 @@ public abstract class Actor implements Drawable {
             neighbour.getActor().setHealth(enemyHealth - actualDamage);
             if (neighbour.getActor().getHealth() > 0) {
                 this.setHealth(this.getHealth() - neighbour.getActor().getDamage() + this.getDefense());
-                if (this.getHealth() <= 0) {
+                if (this.getHealth() < 1) {
                     this.getCell().setActor(null);
                 }
             } else {
