@@ -91,6 +91,30 @@ public class MapLoader {
                         case 'v':
                             cell.setType(CellType.WATER);
                             break;
+                        case 'r':
+                            cell.setType(CellType.GRASS);
+                            break;
+                        case 'f':
+                            cell.setType(CellType.FOREST);
+                            break;
+                        case 'c':
+                            cell.setType(CellType.CEMETERY);
+                            break;
+                        case 'C':
+                            cell.setType(CellType.CEMETRYPRO);
+                            break;
+                        case 'b':
+                            cell.setType(CellType.BONES);
+                            break;
+                        case 'B':
+                            cell.setType(CellType.BONESPRO);
+                            break;
+                        case 'l':
+                            cell.setType(CellType.LEVER);
+                            break;
+                        case 'L':
+                            cell.setType(CellType.LEVERDOOR);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

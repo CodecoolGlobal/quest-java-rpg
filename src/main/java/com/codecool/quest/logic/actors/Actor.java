@@ -19,6 +19,7 @@ public abstract class Actor implements Drawable {
     private String itemName;
     public int damage;
     public int defense = 0;
+    private boolean isLeverOpen = false;
     private int countSecretDoorOpen = 0;
     Map<String, Integer> inventoryMap = new HashMap<>();
     ListView<String> inventory = new ListView<>();
@@ -43,7 +44,7 @@ public abstract class Actor implements Drawable {
                 itemToPickUp = isItemInCell();
                 showSecretTunnel();
             }
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
 
         }
     }
@@ -115,11 +116,12 @@ public abstract class Actor implements Drawable {
         }
 
         if (neighborIsOpenDoor) return true;
-
+        boolean isLeverDoorOpen = this.getCell().getNeighbor(x, y).getTileName().equals("lever-door-open");
+        if (isLeverDoorOpen) {return true;}
         boolean isSecretDoor = this.getCell().getNeighbor(x, y).getTileName().equals("secret-door");
         if (isSecretDoor &&
                 !this.getCell().getActor().getTileName().equals("ghost")
-        && !this.getCell().getActor().getTileName().equals("skeleton")) return true;
+                && !this.getCell().getActor().getTileName().equals("skeleton")) return true;
 
         if (this.getCell().getNeighbor(x, y).getActor() != null) {
             String monster = this.getCell().getNeighbor(x, y).getActor().getTileName();
@@ -166,7 +168,7 @@ public abstract class Actor implements Drawable {
                 inventoryMap.replace(itemName, value + 1);
             }
             if (hasWeapon() && this.getDamage() != 10) this.setDamage(5);
-            if (hasHelmet() && this.getDefense() != 1) this.setDefense(1);
+            if (hasHelmet()) this.setDefense(1);
 
             inventory.getItems().clear();
 
@@ -186,6 +188,7 @@ public abstract class Actor implements Drawable {
     private boolean hasHelmet() {
         return inventoryMap.containsKey("helmet");
     }
+
 
     private boolean hasKey() {
         return inventoryMap.containsKey("key");
@@ -214,6 +217,24 @@ public abstract class Actor implements Drawable {
             this.getCell().getNeighbor(-4, -1).setType(CellType.WALL);
             this.getCell().getNeighbor(-5, -1).setType(CellType.WALL);
             this.getCell().getNeighbor(-5, 0).setType(CellType.WALL);
+        }
+    }
+
+    private boolean isLever() {
+        String leverUpName = this.getCell().getNeighbor(0,1).getTileName();
+        if (leverUpName.equals("lever-up") || leverUpName.equals("lever-down")) return true;
+        return false;
+    }
+
+    public void openLeverDoor() {
+        if (isLever() && !isLeverOpen) {
+            this.getCell().getNeighbor(-1, 1).setType(CellType.LEVERDOOROPEN);
+            this.getCell().getNeighbor(0, 1).setType(CellType.LEVEROPEN);
+            isLeverOpen = true;
+        } else if (isLever() && isLeverOpen){
+            this.getCell().getNeighbor(-1, 1).setType(CellType.LEVERDOOR);
+            this.getCell().getNeighbor(0, 1).setType(CellType.LEVER);
+            isLeverOpen = false;
         }
     }
 }

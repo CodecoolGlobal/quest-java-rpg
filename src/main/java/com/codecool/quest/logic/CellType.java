@@ -13,7 +13,17 @@ public enum CellType {
     HOUSELEFT("house-left"),
     HOUSECENTER("house-center"),
     HOUSERIGHT("house-right"),
-    WATER("water");
+    WATER("water"),
+    GRASS("grass"),
+    CEMETERY("cemetery"),
+    CEMETRYPRO("Cemetery"),
+    BONES("bones"),
+    BONESPRO("Bones"),
+    FOREST("forest"),
+    LEVER("lever-up"),
+    LEVEROPEN("lever-down"),
+    LEVERDOOR("lever-door-locked"),
+    LEVERDOOROPEN("lever-door-open");
 
     private String tileName;
 
