@@ -35,14 +35,14 @@ public class MapLoader {
                         case '+':
                             cell.setType(CellType.SECRETDOOR);
                             break;
-                        case '&':
+                        case '.':
                             cell.setType(CellType.TUNNEL);
                             break;
-                        case '.':
+                        case ':':
                             cell.setType(CellType.FLOOR);
                             break;
                         case 's':
-                            cell.setType(CellType.FLOOR);
+                            cell.setType(CellType.TUNNEL);
                             map.setSkeleton(new Skeleton(cell));
                             map.monsterList.add(map.getSkeleton());
                             break;
@@ -52,7 +52,7 @@ public class MapLoader {
                             map.monsterList.add(map.getGhost());
                             break;
                         case '@':
-                            cell.setType(CellType.FLOOR);
+                            cell.setType(CellType.TUNNEL);
                             map.setPlayer(new Player(cell));
                             break;
                         case 'k':
@@ -64,11 +64,29 @@ public class MapLoader {
                             map.setWeapon(new Weapon(cell));
                             break;
                         case 'h':
-                            cell.setType(CellType.FLOOR);
+                            cell.setType(CellType.TUNNEL);
                             map.setHelmet(new Helmet(cell));
                             break;
                         case 'd':
                             cell.setType(CellType.DOOR);
+                            break;
+                        case '4':
+                            cell.setType(CellType.HOUSELEFT);
+                            break;
+                        case '5':
+                            cell.setType(CellType.HOUSECENTER);
+                            break;
+                        case '6':
+                            cell.setType(CellType.HOUSERIGHT);
+                            break;
+                        case '1':
+                            cell.setType(CellType.ROOFLEFT);
+                            break;
+                        case '2':
+                            cell.setType(CellType.ROOFCENTER);
+                            break;
+                        case '3':
+                            cell.setType(CellType.ROOFRIGHT);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

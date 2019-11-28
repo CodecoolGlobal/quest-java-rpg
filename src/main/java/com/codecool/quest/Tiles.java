@@ -40,6 +40,12 @@ public class Tiles {
         tileMap.put("helmet", new Tile(4, 22));
         tileMap.put("door", new Tile(0, 9));
         tileMap.put("door-open", new Tile(2, 9));
+        tileMap.put("roof-left", new Tile(10, 15));
+        tileMap.put("roof-center", new Tile(11, 15));
+        tileMap.put("roof-right", new Tile(12, 15));
+        tileMap.put("house-left", new Tile(10, 16));
+        tileMap.put("house-center", new Tile(11, 16));
+        tileMap.put("house-right", new Tile(12, 16));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {

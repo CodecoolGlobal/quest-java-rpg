@@ -130,10 +130,10 @@ public abstract class Actor implements Drawable {
             }
         }
 
-        boolean isTunnel = this.getCell().getNeighbor(x, y).getTileName().equals(CellType.TUNNEL.getTileName());
+        boolean isTunnel = this.getCell().getNeighbor(x, y).getTileName().equals(CellType.FLOOR.getTileName());
         if (isTunnel) return true;
         boolean isNotEnemy = this.getCell().getNeighbor(x, y).getActor() == null;
-        boolean isFloor = this.getCell().getNeighbor(x, y).getTileName().equals(CellType.FLOOR.getTileName());
+        boolean isFloor = this.getCell().getNeighbor(x, y).getTileName().equals(CellType.TUNNEL.getTileName());
         return isFloor && isNotEnemy;
     }
 
@@ -202,10 +202,10 @@ public abstract class Actor implements Drawable {
     private void showSecretTunnel() {
         if (this.getCell().getTileName().equals("secret-door")) {
             countSecretDoorOpen++;
-            this.getCell().getNeighbor(-1, 0).setType(CellType.TUNNEL);
-            this.getCell().getNeighbor(-2, 0).setType(CellType.TUNNEL);
-            this.getCell().getNeighbor(-3, 0).setType(CellType.TUNNEL);
-            this.getCell().getNeighbor(-4, 0).setType(CellType.TUNNEL);
+            this.getCell().getNeighbor(-1, 0).setType(CellType.FLOOR);
+            this.getCell().getNeighbor(-2, 0).setType(CellType.FLOOR);
+            this.getCell().getNeighbor(-3, 0).setType(CellType.FLOOR);
+            this.getCell().getNeighbor(-4, 0).setType(CellType.FLOOR);
             if (countSecretDoorOpen == 1) {
                 new Weapon(this.getCell().getNeighbor(-3, 0));
             }
