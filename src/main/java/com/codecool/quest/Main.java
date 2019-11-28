@@ -74,26 +74,41 @@ public class Main extends Application {
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
+                if (map.getPlayer().getHealth() < 1) {
+                    break;
+                }
                 moveAllSkeletons(map.monsterList);
                 map.getPlayer().move(0, -1);
                 refresh();
                 break;
             case DOWN:
+                if (map.getPlayer().getHealth() < 1) {
+                    break;
+                }
                 moveAllSkeletons(map.monsterList);
                 map.getPlayer().move(0, 1);
                 refresh();
                 break;
             case LEFT:
+                if (map.getPlayer().getHealth() < 1) {
+                    break;
+                }
                 moveAllSkeletons(map.monsterList);
                 map.getPlayer().move(-1, 0);
                 refresh();
                 break;
             case RIGHT:
+                if (map.getPlayer().getHealth() < 1) {
+                    break;
+                }
                 moveAllSkeletons(map.monsterList);
                 map.getPlayer().move(1, 0);
                 refresh();
                 break;
             case A:
+                if (map.getPlayer().getHealth() < 1) {
+                    break;
+                }
                 moveAllSkeletons(map.monsterList);
                 map.getPlayer().pickUpItem();
                 refresh();
@@ -144,6 +159,7 @@ public class Main extends Application {
             }
         }
     }
+
 
 
 }
