@@ -3,6 +3,7 @@ package com.codecool.quest;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
+import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.actors.Skeleton;
 import javafx.application.Application;
 import javafx.event.Event;
@@ -73,27 +74,27 @@ public class Main extends Application {
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
-                moveAllSkeletons(map.skeletonList);
+                moveAllSkeletons(map.monsterList);
                 map.getPlayer().move(0, -1);
                 refresh();
                 break;
             case DOWN:
-                moveAllSkeletons(map.skeletonList);
+                moveAllSkeletons(map.monsterList);
                 map.getPlayer().move(0, 1);
                 refresh();
                 break;
             case LEFT:
-                moveAllSkeletons(map.skeletonList);
+                moveAllSkeletons(map.monsterList);
                 map.getPlayer().move(-1, 0);
                 refresh();
                 break;
             case RIGHT:
-                moveAllSkeletons(map.skeletonList);
+                moveAllSkeletons(map.monsterList);
                 map.getPlayer().move(1, 0);
                 refresh();
                 break;
             case A:
-                moveAllSkeletons(map.skeletonList);
+                moveAllSkeletons(map.monsterList);
                 map.getPlayer().pickUpItem();
                 refresh();
         }
@@ -132,14 +133,14 @@ public class Main extends Application {
         }
     }
 
-    private void moveAllSkeletons(List skeletonList) {
+    private void moveAllSkeletons(List monsterList) {
         Random random = new Random();
 
-        for (int i = 0; i < skeletonList.size(); i++) {
+        for (int i = 0; i < monsterList.size(); i++) {
             int randomNumber = random.nextInt(2);
             if (randomNumber == 1) {
-                Skeleton skeleton = (Skeleton) skeletonList.get(i);
-                skeleton.monsterMove();
+                Actor monster = (Actor) monsterList.get(i);
+                monster.monsterMove();
             }
         }
     }

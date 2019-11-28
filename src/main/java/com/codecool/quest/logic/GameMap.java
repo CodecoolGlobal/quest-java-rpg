@@ -1,5 +1,7 @@
 package com.codecool.quest.logic;
 
+import com.codecool.quest.logic.actors.Actor;
+import com.codecool.quest.logic.actors.Ghost;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Item;
@@ -14,10 +16,11 @@ public class GameMap {
 
     private Player player;
     private Skeleton skeleton;
+    private Ghost ghost;
     private Item key;
     private Item weapon;
     private Item helmet;
-    public List<Skeleton> skeletonList = new ArrayList<>();
+    public List<Actor> monsterList = new ArrayList<>();
 
     public GameMap(int width, int height, CellType defaultCellType) {
         this.width = width;
@@ -53,6 +56,10 @@ public class GameMap {
 
 
     public void setSkeleton(Skeleton skeleton) {this.skeleton = skeleton;}
+
+    public void setGhost(Ghost ghost) {this.ghost = ghost;}
+
+    public Ghost getGhost() {return ghost;}
 
     public void setKey(Item key) {this.key=key;}
 
