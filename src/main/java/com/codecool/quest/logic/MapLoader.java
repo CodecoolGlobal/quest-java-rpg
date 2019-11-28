@@ -70,6 +70,9 @@ public class MapLoader {
                         case 'd':
                             cell.setType(CellType.DOOR);
                             break;
+                        case 'v':
+                            cell.setType(CellType.WATER);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
