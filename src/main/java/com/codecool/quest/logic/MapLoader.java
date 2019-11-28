@@ -88,6 +88,9 @@ public class MapLoader {
                         case '3':
                             cell.setType(CellType.ROOFRIGHT);
                             break;
+                        case 'v':
+                            cell.setType(CellType.WATER);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

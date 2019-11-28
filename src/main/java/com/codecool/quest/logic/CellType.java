@@ -12,7 +12,8 @@ public enum CellType {
     ROOFRIGHT("roof-right"),
     HOUSELEFT("house-left"),
     HOUSECENTER("house-center"),
-    HOUSERIGHT("house-right");
+    HOUSERIGHT("house-right"),
+    WATER("water");
 
     private String tileName;
 
