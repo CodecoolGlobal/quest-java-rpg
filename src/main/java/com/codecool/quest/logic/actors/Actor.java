@@ -110,7 +110,9 @@ public abstract class Actor implements Drawable {
         if (neighborIsOpenDoor) return true;
 
         boolean isSecretDoor = this.getCell().getNeighbor(x, y).getTileName().equals("secret-door");
-        if (isSecretDoor) return true;
+        if (isSecretDoor &&
+                !this.getCell().getActor().getTileName().equals("ghost")
+        && !this.getCell().getActor().getTileName().equals("skeleton")) return true;
 
         if (this.getCell().getNeighbor(x, y).getActor() != null) {
             String monster = this.getCell().getNeighbor(x, y).getActor().getTileName();
