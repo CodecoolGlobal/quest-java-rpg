@@ -51,15 +51,15 @@ public class MapLoader {
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);
-                            new Key(cell);
+                            map.setKey(new Key(cell));
                             break;
                         case 'w':
                             cell.setType(CellType.FLOOR);
-                            new Weapon(cell);
+                            map.setWeapon(new Weapon(cell));
                             break;
                         case 'h':
                             cell.setType(CellType.FLOOR);
-                            new Helmet(cell);
+                            map.setHelmet(new Helmet(cell));
                             break;
                         case 'd':
                             cell.setType(CellType.DOOR);

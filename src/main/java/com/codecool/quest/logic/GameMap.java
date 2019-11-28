@@ -14,6 +14,9 @@ public class GameMap {
 
     private Player player;
     private Skeleton skeleton;
+    private Item key;
+    private Item weapon;
+    private Item helmet;
     public List<Skeleton> skeletonList = new ArrayList<>();
 
     public GameMap(int width, int height, CellType defaultCellType) {
@@ -46,16 +49,22 @@ public class GameMap {
         return player;
     }
 
-    public Skeleton getSkeleton() {
-        return skeleton;
-    }
-
-    public List<Skeleton> getAllSkeletons() {return skeletonList;}
+    public Skeleton getSkeleton() { return skeleton; }
 
 
-    public void setSkeleton(Skeleton skeleton) {
-        this.skeleton = skeleton;
-    }
+    public void setSkeleton(Skeleton skeleton) {this.skeleton = skeleton;}
+
+    public void setKey(Item key) {this.key=key;}
+
+    public Item getKey() {return key;}
+
+    public void setHelmet(Item helmet) {this.helmet = helmet;}
+
+    public Item getHelmet() {return helmet;}
+
+    public void setWeapon(Item weapon) {this.weapon = weapon;}
+
+    public Item getWeapon() {return weapon;}
 
     public int getWidth() {
         return width;

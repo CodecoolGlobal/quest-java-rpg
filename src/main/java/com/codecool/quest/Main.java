@@ -21,6 +21,7 @@ import javafx.stage.Window;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap("/map.txt");
@@ -67,7 +68,6 @@ public class Main extends Application {
         primaryStage.show();
 
     }
-
 
 
     private void onKeyPressed(KeyEvent keyEvent) {
@@ -133,12 +133,16 @@ public class Main extends Application {
     }
 
     private void moveAllSkeletons(List skeletonList) {
-        for (int i=0; i<skeletonList.size(); i++) {
-            Skeleton skeleton = (Skeleton) skeletonList.get(i);
-            skeleton.monsterMove();
+        Random random = new Random();
+
+        for (int i = 0; i < skeletonList.size(); i++) {
+            int randomNumber = random.nextInt(2);
+            if (randomNumber == 1) {
+                Skeleton skeleton = (Skeleton) skeletonList.get(i);
+                skeleton.monsterMove();
+            }
         }
     }
-
 
 
 }

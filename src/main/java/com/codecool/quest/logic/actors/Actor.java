@@ -4,6 +4,7 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Drawable;
 import com.codecool.quest.logic.items.Item;
+import com.codecool.quest.logic.items.Weapon;
 import javafx.scene.control.ListView;
 
 import java.util.*;
@@ -17,6 +18,7 @@ public abstract class Actor implements Drawable {
     private String itemName;
     public int damage;
     public int defense = 0;
+    private int countSecretDoorOpen = 0;
     Map<String, Integer> inventoryMap = new HashMap<>();
     ListView<String> inventory = new ListView<>();
 
@@ -35,6 +37,7 @@ public abstract class Actor implements Drawable {
             nextCell.setActor(this);
             cell = nextCell;
             itemToPickUp = isItemInCell();
+            showSecretTunnel();
         }
     }
 
@@ -42,7 +45,7 @@ public abstract class Actor implements Drawable {
         int[] actualMove = movementCoordinates.get(rnd.nextInt(movementCoordinates.size()));
         int x = actualMove[0];
         int y = actualMove[1];
-        if (this.getHealth()>0) this.move(x, y);
+        if (this.getHealth() > 0) this.move(x, y);
 
 
             /*} catch (InterruptedException e) {
@@ -180,6 +183,20 @@ public abstract class Actor implements Drawable {
     }
 
     private void showSecretTunnel() {
-
+        if (this.getCell().getTileName().equals("secret-door")) {
+            countSecretDoorOpen++;
+            this.getCell().getNeighbor(-1, 0).setType(CellType.TUNNEL);
+            this.getCell().getNeighbor(-2, 0).setType(CellType.TUNNEL);
+            this.getCell().getNeighbor(-3, 0).setType(CellType.TUNNEL);
+            this.getCell().getNeighbor(-4, 0).setType(CellType.TUNNEL);
+            if (countSecretDoorOpen == 1) {
+                new Weapon(this.getCell().getNeighbor(-3, 0));
+            }
+            this.getCell().getNeighbor(-2, -1).setType(CellType.WALL);
+            this.getCell().getNeighbor(-3, -1).setType(CellType.WALL);
+            this.getCell().getNeighbor(-4, -1).setType(CellType.WALL);
+            this.getCell().getNeighbor(-5, -1).setType(CellType.WALL);
+            this.getCell().getNeighbor(-5, 0).setType(CellType.WALL);
+        }
     }
 }
