@@ -19,8 +19,5 @@ public class Skeleton extends Actor {
         return "skeleton";
     }
 
-    public void skeletonMove() {
-            this.monsterMove();
 
-    }
 }

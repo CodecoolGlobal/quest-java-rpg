@@ -42,7 +42,8 @@ public abstract class Actor implements Drawable {
         int[] actualMove = movementCoordinates.get(rnd.nextInt(movementCoordinates.size()));
         int x = actualMove[0];
         int y = actualMove[1];
-        this.move(x, y);
+        if (this.getHealth()>0) this.move(x, y);
+
 
             /*} catch (InterruptedException e) {
                 e.printStackTrace();
@@ -92,7 +93,7 @@ public abstract class Actor implements Drawable {
         return cell.getY();
     }
 
-    private boolean isPassable(int x, int y) {
+    public boolean isPassable(int x, int y) {
         Cell neighbor = this.getCell().getNeighbor(x, y);
         if (neighbor == null) return false;
 
@@ -116,6 +117,8 @@ public abstract class Actor implements Drawable {
             }
         }
 
+        boolean isTunnel = this.getCell().getNeighbor(x, y).getTileName().equals(CellType.TUNNEL.getTileName());
+        if (isTunnel) return true;
         boolean isNotEnemy = this.getCell().getNeighbor(x, y).getActor() == null;
         boolean isFloor = this.getCell().getNeighbor(x, y).getTileName().equals(CellType.FLOOR.getTileName());
         return isFloor && isNotEnemy;
@@ -177,6 +180,6 @@ public abstract class Actor implements Drawable {
     }
 
     private void showSecretTunnel() {
-        
+
     }
 }

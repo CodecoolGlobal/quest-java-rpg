@@ -3,6 +3,7 @@ package com.codecool.quest;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
+import com.codecool.quest.logic.actors.Skeleton;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.geometry.Insets;
@@ -18,10 +19,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import java.util.List;
 import java.util.Map;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap();
+    GameMap map = MapLoader.loadMap("/map.txt");
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
             map.getHeight() * Tiles.TILE_WIDTH);
@@ -71,23 +73,27 @@ public class Main extends Application {
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
-                map.getSkeleton().skeletonMove();
+                moveAllSkeletons(map.skeletonList);
                 map.getPlayer().move(0, -1);
                 refresh();
                 break;
             case DOWN:
+                moveAllSkeletons(map.skeletonList);
                 map.getPlayer().move(0, 1);
                 refresh();
                 break;
             case LEFT:
+                moveAllSkeletons(map.skeletonList);
                 map.getPlayer().move(-1, 0);
                 refresh();
                 break;
             case RIGHT:
+                moveAllSkeletons(map.skeletonList);
                 map.getPlayer().move(1, 0);
                 refresh();
                 break;
             case A:
+                moveAllSkeletons(map.skeletonList);
                 map.getPlayer().pickUpItem();
                 refresh();
         }
@@ -95,7 +101,6 @@ public class Main extends Application {
     }
 
     private void refresh() {
-
         fillInventory();
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -124,6 +129,13 @@ public class Main extends Application {
         Map<String, Integer> inventoryMap = map.getPlayer().getInventoryMap();
         for (Map.Entry<String, Integer> entry : inventoryMap.entrySet()) {
             inventory.getItems().add(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+
+    private void moveAllSkeletons(List skeletonList) {
+        for (int i=0; i<skeletonList.size(); i++) {
+            Skeleton skeleton = (Skeleton) skeletonList.get(i);
+            skeleton.monsterMove();
         }
     }
 
