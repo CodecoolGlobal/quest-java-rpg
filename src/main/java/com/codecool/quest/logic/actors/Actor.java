@@ -170,7 +170,7 @@ public abstract class Actor implements Drawable {
                 inventoryMap.replace(itemName, value + 1);
             }
             if (hasWeapon() && this.getDamage() != 10) this.setDamage(5);
-            if (hasCloak()) this.setDefense(1);
+            if (itemName.equals("cloak")) this.setDefense(1);
 
             inventory.getItems().clear();
 
