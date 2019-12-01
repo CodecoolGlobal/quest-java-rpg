@@ -41,7 +41,7 @@ public abstract class Actor implements Drawable {
                 cell.setActor(null);
                 nextCell.setActor(this);
                 cell = nextCell;
-                itemToPickUp = isItemInCell();
+                itemToPickUp = this.cell.isItemInCell();
                 showSecretTunnel();
             }
         } catch (NullPointerException e) {
@@ -59,17 +59,6 @@ public abstract class Actor implements Drawable {
             /*} catch (InterruptedException e) {
                 e.printStackTrace();
             }*/
-    }
-
-    public Item isItemInCell() {
-        if (this.getCell().getItem() != null) return this.getCell().getItem();
-        Item emptyItem = new Item() {
-            @Override
-            public String getTileName() {
-                return "";
-            }
-        };
-        return emptyItem;
     }
 
     public int getHealth() {
@@ -186,11 +175,6 @@ public abstract class Actor implements Drawable {
     private boolean hasWeapon() {
         return inventoryMap.containsKey("weapon");
     }
-
-    private boolean hasCloak() {
-        return inventoryMap.containsKey("cloak");
-    }
-
 
     private boolean hasKey() {
         return inventoryMap.containsKey("key");

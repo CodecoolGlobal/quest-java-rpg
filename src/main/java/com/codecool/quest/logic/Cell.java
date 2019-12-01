@@ -33,6 +33,18 @@ public class Cell implements Drawable {
         return actor;
     }
 
+
+    public Item isItemInCell() {
+        if (this.getActor().getCell().getItem() != null) return this.getActor().getCell().getItem();
+        Item emptyItem = new Item() {
+            @Override
+            public String getTileName() {
+                return "";
+            }
+        };
+        return emptyItem;
+    }
+
     public void setItem(Item item) {this.item = item;}
 
     public Item getItem() {
