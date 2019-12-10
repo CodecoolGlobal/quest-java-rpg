@@ -4,9 +4,7 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Actor;
-import com.codecool.quest.logic.actors.Skeleton;
 import javafx.application.Application;
-import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -19,8 +17,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.Window;
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.List;
 import java.util.Map;
@@ -99,7 +95,7 @@ public class Main extends Application {
                 if (map.getPlayer().getHealth() < 1) {
                     break;
                 }
-                moveAllSkeletons(map.monsterList);
+                moveAllMonsters(map.monsterList); //rearrange monsterList to MapLoader??
                 map.getPlayer().move(0, -1);
                 refresh();
                 break;
@@ -107,7 +103,7 @@ public class Main extends Application {
                 if (map.getPlayer().getHealth() < 1) {
                     break;
                 }
-                moveAllSkeletons(map.monsterList);
+                moveAllMonsters(map.monsterList);
                 map.getPlayer().move(0, 1);
                 refresh();
                 break;
@@ -115,7 +111,7 @@ public class Main extends Application {
                 if (map.getPlayer().getHealth() < 1) {
                     break;
                 }
-                moveAllSkeletons(map.monsterList);
+                moveAllMonsters(map.monsterList);
                 map.getPlayer().move(-1, 0);
                 refresh();
                 break;
@@ -123,7 +119,7 @@ public class Main extends Application {
                 if (map.getPlayer().getHealth() < 1) {
                     break;
                 }
-                moveAllSkeletons(map.monsterList);
+                moveAllMonsters(map.monsterList);
                 map.getPlayer().move(1, 0);
                 refresh();
                 break;
@@ -131,7 +127,7 @@ public class Main extends Application {
                 if (map.getPlayer().getHealth() < 1) {
                     break;
                 }
-                moveAllSkeletons(map.monsterList);
+                moveAllMonsters(map.monsterList);
                 map.getPlayer().pickUpItem();
                 refresh();
                 break;
@@ -139,7 +135,7 @@ public class Main extends Application {
                 if (map.getPlayer().getHealth() < 1) {
                     break;
                 }
-                moveAllSkeletons(map.monsterList);
+                moveAllMonsters(map.monsterList);
                 map.getPlayer().openLeverDoor();
                 map.getPlayer().openPub();
                 refresh();
@@ -149,7 +145,7 @@ public class Main extends Application {
     }
 
     private void refresh() {
-        fillInventory();
+        displayInventory();
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         for (int x = 0; x < map.getWidth(); x++) {
@@ -172,7 +168,7 @@ public class Main extends Application {
 
     }
 
-    private void fillInventory() {
+    private void displayInventory() {
         inventory.getItems().clear();
         Map<String, Integer> inventoryMap = map.getPlayer().getInventoryMap();
         for (Map.Entry<String, Integer> entry : inventoryMap.entrySet()) {
@@ -180,14 +176,16 @@ public class Main extends Application {
         }
     }
 
-    private void moveAllSkeletons(List monsterList) {
+
+    //Skeleton method
+    private void moveAllMonsters(List monsterList) {
         Random random = new Random();
 
         for (int i = 0; i < monsterList.size(); i++) {
             int randomNumber = random.nextInt(2);
             if (randomNumber == 1) {
                 Actor monster = (Actor) monsterList.get(i);
-                monster.monsterMove();
+                monster.monsterMoveDirection();
             }
         }
     }

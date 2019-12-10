@@ -2,8 +2,8 @@ package com.codecool.quest.logic.items;
 
 import com.codecool.quest.logic.Cell;
 
-public class Helmet extends Item{
-    public Helmet(Cell cell){
+public class Cloak extends Item{
+    public Cloak(Cell cell){ //re-name class - Cloak
         super(cell);
     }
 
