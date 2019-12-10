@@ -50,6 +50,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         inventory.setFocusTraversable(false);
 
+        //        Move code to method
+
         GridPane ui = new GridPane();
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
