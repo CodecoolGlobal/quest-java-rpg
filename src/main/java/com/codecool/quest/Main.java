@@ -4,6 +4,7 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Actor;
+import com.codecool.quest.logic.actors.Monster;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -97,7 +98,7 @@ public class Main extends Application {
                 if (map.getPlayer().getHealth() < 1) {
                     break;
                 }
-                moveAllMonsters(map.monsterList); //rearrange monsterList to MapLoader??
+                moveAllMonsters(map.monsterList);
                 map.getPlayer().move(0, -1);
                 refresh();
                 break;
@@ -179,14 +180,13 @@ public class Main extends Application {
     }
 
 
-    //Skeleton method
     private void moveAllMonsters(List monsterList) {
         Random random = new Random();
 
         for (int i = 0; i < monsterList.size(); i++) {
             int randomNumber = random.nextInt(2);
             if (randomNumber == 1) {
-                Actor monster = (Actor) monsterList.get(i);
+                Monster monster = (Monster) monsterList.get(i);
                 monster.monsterMoveDirection();
             }
         }

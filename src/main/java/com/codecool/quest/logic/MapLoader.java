@@ -36,13 +36,13 @@ public class MapLoader {
                             cell.setType(CellType.SECRETDOOR);
                             break;
                         case '.':
-                            cell.setType(CellType.TUNNEL);
+                            cell.setType(CellType.GROUND);
                             break;
                         case ':':
                             cell.setType(CellType.FLOOR);
                             break;
                         case 's':
-                            cell.setType(CellType.TUNNEL);
+                            cell.setType(CellType.GROUND);
                             map.setSkeleton(new Skeleton(cell));
                             map.monsterList.add(map.getSkeleton());
                             break;
@@ -52,7 +52,7 @@ public class MapLoader {
                             map.monsterList.add(map.getGhost());
                             break;
                         case '@':
-                            cell.setType(CellType.TUNNEL);
+                            cell.setType(CellType.GROUND);
                             map.setPlayer(new Player(cell));
                             break;
                         case 'k':
@@ -64,7 +64,7 @@ public class MapLoader {
                             map.setWeapon(new Weapon(cell));
                             break;
                         case 'a':
-                            cell.setType(CellType.TUNNEL);
+                            cell.setType(CellType.GROUND);
                             map.setHelmet(new Cloak(cell));
                             break;
                         case 'd':
@@ -97,11 +97,11 @@ public class MapLoader {
                         case 'f':
                             cell.setType(CellType.FOREST);
                             break;
-                        case 'h':
-                            cell.setType(CellType.FOREST2);
-                            break;
                         case 'F':
-                            cell.setType(CellType.FOREST3);
+                            cell.setType(CellType.FOREST);
+                            break;
+                        case 'h':
+                            cell.setType(CellType.FOREST);
                             break;
                         case 'c':
                             cell.setType(CellType.CEMETERY);

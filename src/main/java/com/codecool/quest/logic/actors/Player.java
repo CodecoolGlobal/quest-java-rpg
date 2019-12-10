@@ -45,7 +45,7 @@ public class Player extends Actor {
             this.getCell().getNeighbor(-1, 1).setType(CellType.LEVERDOOROPEN);
             this.getCell().getNeighbor(0, 1).setType(CellType.LEVEROPEN);
             isLeverOpen = true;
-        } else if (isNeighbourLever() && isLeverOpen){
+        } else if (isNeighbourLever() && isLeverOpen) {
             this.getCell().getNeighbor(-1, 1).setType(CellType.LEVERDOOR);
             this.getCell().getNeighbor(0, 1).setType(CellType.LEVER);
             isLeverOpen = false;
@@ -61,7 +61,7 @@ public class Player extends Actor {
 
     //Player method
     private boolean isNeighbourLever() {
-        String leverUpName = this.getCell().getNeighbor(0,1).getTileName();
+        String leverUpName = this.getCell().getNeighbor(0, 1).getTileName();
         if (leverUpName.equals("lever-up") || leverUpName.equals("lever-down")) return true;
         return false;
     }
@@ -133,6 +133,7 @@ public class Player extends Actor {
 
     //Player method - need one for monsters too
     private void attack(Cell neighbour) {
+        System.out.println("In attack method");
         int enemyHealth = neighbour.getActor().getHealth();
         int actualDamage = this.getDamage();
         if (enemyHealth > 0) {
@@ -154,7 +155,7 @@ public class Player extends Actor {
 
     public void move(int dx, int dy) {
         try {
-            if ((isPassable(dx, dy) && this.getHealth() > 0)
+            if (((isPassable(dx, dy) || isPassableAsPlayer(dx, dy)) && this.getHealth() > 0)
                     ||
                     Main.nameLabel.getText().equals(Main.cheatCode)) {
                 Cell nextCell = cell.getNeighbor(dx, dy);
@@ -168,6 +169,30 @@ public class Player extends Actor {
 
         }
     }
+
+
+    private boolean isPassableAsPlayer(int x, int y) {
+        System.out.println("Inside the isPassableAsPlayer method");
+        Cell neighbor = this.getCellNeighbour(x, y);
+        boolean neighborIsDoor = isNeighbourActionCell(x, y, "door");
+        boolean neighborIsOpenDoor = isNeighbourActionCell(x, y, "door-open");
+        boolean isLeverDoorOpen = isNeighbourActionCell(x, y, "lever-door-open");
+        boolean isPubOpen = isNeighbourActionCell(x, y, "house-center-open");
+        boolean isSecretDoor = isNeighbourActionCell(x, y, "secret-door");
+
+        if (hasKey() && neighborIsDoor) {
+            neighbor.setOpenDoor();
+            inventoryMap.remove("key");
+        }
+
+        if (this.getCell().getNeighbor(x, y).getActor() != null) {
+            attack(this.getCell().getNeighbor(x, y));
+            return false;
+        }
+
+        return neighborIsOpenDoor || isLeverDoorOpen || isPubOpen || isSecretDoor;
+    }
+
 
 }
 
