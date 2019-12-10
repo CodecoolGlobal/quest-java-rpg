@@ -4,7 +4,7 @@ import com.codecool.quest.logic.actors.Ghost;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Key;
-import com.codecool.quest.logic.items.Helmet;
+import com.codecool.quest.logic.items.Cloak;
 import com.codecool.quest.logic.items.Weapon;
 
 import java.io.InputStream;
@@ -36,13 +36,13 @@ public class MapLoader {
                             cell.setType(CellType.SECRETDOOR);
                             break;
                         case '.':
-                            cell.setType(CellType.TUNNEL);
+                            cell.setType(CellType.GROUND);
                             break;
                         case ':':
                             cell.setType(CellType.FLOOR);
                             break;
                         case 's':
-                            cell.setType(CellType.TUNNEL);
+                            cell.setType(CellType.GROUND);
                             map.setSkeleton(new Skeleton(cell));
                             map.monsterList.add(map.getSkeleton());
                             break;
@@ -52,7 +52,7 @@ public class MapLoader {
                             map.monsterList.add(map.getGhost());
                             break;
                         case '@':
-                            cell.setType(CellType.TUNNEL);
+                            cell.setType(CellType.GROUND);
                             map.setPlayer(new Player(cell));
                             break;
                         case 'k':
@@ -63,9 +63,9 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             map.setWeapon(new Weapon(cell));
                             break;
-                        case 'h':
-                            cell.setType(CellType.TUNNEL);
-                            map.setHelmet(new Helmet(cell));
+                        case 'a':
+                            cell.setType(CellType.GROUND);
+                            map.setHelmet(new Cloak(cell));
                             break;
                         case 'd':
                             cell.setType(CellType.DOOR);
@@ -95,6 +95,12 @@ public class MapLoader {
                             cell.setType(CellType.GRASS);
                             break;
                         case 'f':
+                            cell.setType(CellType.FOREST);
+                            break;
+                        case 'F':
+                            cell.setType(CellType.FOREST);
+                            break;
+                        case 'h':
                             cell.setType(CellType.FOREST);
                             break;
                         case 'c':

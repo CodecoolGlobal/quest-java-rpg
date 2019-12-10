@@ -31,8 +31,8 @@ public class Tiles {
         tileMap.put("floor", new Tile(16, 0));
         tileMap.put("player", new Tile(24, 7));
         tileMap.put("player-w", new Tile(26, 0));
-        tileMap.put("player-w-h", new Tile(24, 1));
-        tileMap.put("player-h", new Tile(24, 2));
+        tileMap.put("player-w-c", new Tile(24, 1));
+        tileMap.put("player-c", new Tile(24, 2));
         tileMap.put("skeleton", new Tile(29, 6));
         tileMap.put("ghost", new Tile(26, 6));
         tileMap.put("key", new Tile(17, 23));
@@ -50,6 +50,8 @@ public class Tiles {
         tileMap.put("house-right", new Tile(12, 16));
         tileMap.put("grass", new Tile(5, 0));
         tileMap.put("forest", new Tile(3, 2));
+        tileMap.put("forest2", new Tile(2, 1));
+        tileMap.put("forest3", new Tile(5, 1));
         tileMap.put("cemetery", new Tile(1, 14));
         tileMap.put("Cemetery", new Tile(2, 14));
         tileMap.put("bones", new Tile(0, 15));
