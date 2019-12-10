@@ -16,7 +16,7 @@ public class Player extends Actor {
     private int countSecretDoorOpen = 0;
     private Item itemToPickUp;
     private String itemName;
-    private Map<String, Integer> inventoryMap = new HashMap<>();
+    public Map<String, Integer> inventoryMap = new HashMap<>();
     private ListView<String> inventory = new ListView<>();
 
     public Player(Cell cell) {
@@ -178,10 +178,7 @@ public class Player extends Actor {
         boolean isPubOpen = isNeighbourActionCell(x, y, "house-center-open");
         boolean isSecretDoor = isNeighbourActionCell(x, y, "secret-door");
 
-        if (hasKey() && neighborIsDoor) {
-            neighbor.setOpenDoor();
-            inventoryMap.remove("key");
-        }
+        openNewLevelDoorIfHasKey(neighbor, neighborIsDoor);
 
         if (this.getCell().getNeighbor(x, y).getActor() != null) {
             attack(this.getCell().getNeighbor(x, y));
@@ -189,6 +186,18 @@ public class Player extends Actor {
         }
 
         return neighborIsOpenDoor || isLeverDoorOpen || isPubOpen || isSecretDoor;
+    }
+
+    private void openNewLevelDoorIfHasKey(Cell neighbor, boolean neighborIsDoor) {
+        if (hasKey() && neighborIsDoor) {
+            neighbor.setOpenDoor();
+            inventoryMap.remove("key");
+        }
+    }
+
+    public boolean isPlayerAtPubDoor() {
+        String tileName = this.getCell().getTileName();
+        return tileName.equals("house-center-open");
     }
 
 

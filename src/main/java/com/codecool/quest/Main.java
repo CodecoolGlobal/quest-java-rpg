@@ -3,8 +3,8 @@ package com.codecool.quest;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
-import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.actors.Monster;
+import com.codecool.quest.logic.actors.Player;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -26,10 +26,13 @@ import java.util.Random;
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap("/map.txt");
+
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
             map.getHeight() * Tiles.TILE_WIDTH);
+
     GraphicsContext context = canvas.getGraphicsContext2D();
+
     Label healthLabel = new Label();
     Label damageLabel = new Label();
     Label defenseLabel = new Label();
@@ -47,20 +50,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         inventory.setFocusTraversable(false);
 
-        //        Move code to method
-
-        GridPane ui = new GridPane();
-        ui.setPrefWidth(200);
-        ui.setPadding(new Insets(10));
-        ui.add(healthLabel, 0, 1);
-        ui.add(damageLabel, 0, 2);
-        ui.add(defenseLabel, 0, 3);
-        ui.add(new Label("Inventory:"), 0, 5);
-        ui.add(inventory, 0, 6);
-        BorderPane borderPane = new BorderPane();
-
-        borderPane.setCenter(canvas);
-        borderPane.setRight(ui);
+        GridPane ui = setGridPane();
+        BorderPane borderPane = setBorderPane(ui);
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
@@ -74,7 +65,28 @@ public class Main extends Application {
         refresh();
     }
 
-    public void getPlayerName(){
+    private GridPane setGridPane() {
+        GridPane ui = new GridPane();
+        ui.setPrefWidth(200);
+        ui.setPadding(new Insets(10));
+        ui.add(healthLabel, 0, 1);
+        ui.add(damageLabel, 0, 2);
+        ui.add(defenseLabel, 0, 3);
+        ui.add(new Label("Inventory:"), 0, 5);
+        ui.add(inventory, 0, 6);
+
+        return ui;
+    }
+
+    private BorderPane setBorderPane(GridPane ui) {
+        BorderPane borderPane = new BorderPane();
+        borderPane.setCenter(canvas);
+        borderPane.setRight(ui);
+
+        return borderPane;
+    }
+
+    private void getPlayerName(){
         try {
             TextInputDialog dialog = new TextInputDialog("Bob");
 
@@ -100,6 +112,9 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(0, -1);
+                if (map.getPlayer().isPlayerAtPubDoor()) {
+                    enterNewLevel("/bonus.txt");
+                }
                 refresh();
                 break;
             case DOWN:
@@ -192,6 +207,14 @@ public class Main extends Application {
         }
     }
 
-
+    private void enterNewLevel(String level) {
+        Player currentPlayer = this.map.getPlayer();
+        this.map = MapLoader.loadMap(level);
+        this.map.getPlayer().setHealth(currentPlayer.getHealth());
+        this.map.getPlayer().setDamage(currentPlayer.getDamage());
+        this.map.getPlayer().setDefense(currentPlayer.getDefense());
+        this.map.getPlayer().inventoryMap = currentPlayer.getInventoryMap();
+        this.map.getPlayer().setTileName();
+    }
 
 }
