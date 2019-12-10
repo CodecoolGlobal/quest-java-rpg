@@ -57,47 +57,23 @@ public abstract class Actor implements Drawable {
         return cell.getY();
     }
 
-    //abstract method - split into functions for Player and monsters
     public boolean isPassable(int x, int y) {
-        if (doesCellExist(x, y) == null) return false;
+        Cell neighbour = getCellNeighbour(x, y);
+        boolean isGround = isNeighbourActionCell(x, y, "tunnel");
+        boolean isFloor = isNeighbourActionCell(x, y, "floor");
+        boolean isNeighbourNotActor = neighbour.getActor() == null;
 
-        boolean neighborIsDoor = this.getCell().getNeighbor(x, y).getTileName().equals("door");
-        boolean neighborIsOpenDoor = this.getCell().getNeighbor(x, y).getTileName().equals("door-open");
-        if (hasKey() && neighborIsDoor) {
-            neighbor.setOpenDoor();
-            inventoryMap.remove("key");
-        }
+        return (isFloor || isGround) && isNeighbourNotActor;
 
-        if (neighborIsOpenDoor) return true;
-        boolean isLeverDoorOpen = this.getCell().getNeighbor(x, y).getTileName().equals("lever-door-open");
-        if (isLeverDoorOpen) {
-            return true;
-        }
 
-        boolean isPubOpen = this.getCell().getNeighbor(x, y).getTileName().equals("house-center-open");
-        boolean isSecretDoor = this.getCell().getNeighbor(x, y).getTileName().equals("secret-door");
-        if ((isSecretDoor || isPubOpen) &&
-                !this.getCell().getActor().getTileName().equals("ghost")
-                && !this.getCell().getActor().getTileName().equals("skeleton")) return true;
-
-        if (this.getCell().getNeighbor(x, y).getActor() != null) {
-            String monster = this.getCell().getNeighbor(x, y).getActor().getTileName();
-            boolean isEnemy = monster.equals("skeleton") || monster.equals("ghost");
-            if (isEnemy) {
-                attack(this.getCell().getNeighbor(x, y));
-                return false;
-            }
-        }
-
-        boolean isTunnel = this.getCell().getNeighbor(x, y).getTileName().equals(CellType.FLOOR.getTileName());
-        if (isTunnel) return true;
-        boolean isNotEnemy = this.getCell().getNeighbor(x, y).getActor() == null;
-        boolean isFloor = this.getCell().getNeighbor(x, y).getTileName().equals(CellType.TUNNEL.getTileName());
-        return isFloor && isNotEnemy;
     }
 
-    private Cell doesCellExist(int x, int y) {
+    Cell getCellNeighbour(int x, int y) {
         return this.getCell().getNeighbor(x, y);
+    }
+
+    boolean isNeighbourActionCell(int x, int y, String tileName) {
+        return this.getCell().getNeighbor(x, y).getTileName().equals(tileName);
     }
 
 

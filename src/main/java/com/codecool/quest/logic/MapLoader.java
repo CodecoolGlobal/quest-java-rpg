@@ -36,13 +36,13 @@ public class MapLoader {
                             cell.setType(CellType.SECRETDOOR);
                             break;
                         case '.':
-                            cell.setType(CellType.TUNNEL);
+                            cell.setType(CellType.GROUND);
                             break;
                         case ':':
                             cell.setType(CellType.FLOOR);
                             break;
                         case 's':
-                            cell.setType(CellType.TUNNEL);
+                            cell.setType(CellType.GROUND);
                             map.setSkeleton(new Skeleton(cell));
                             map.monsterList.add(map.getSkeleton());
                             break;
@@ -52,7 +52,7 @@ public class MapLoader {
                             map.monsterList.add(map.getGhost());
                             break;
                         case '@':
-                            cell.setType(CellType.TUNNEL);
+                            cell.setType(CellType.GROUND);
                             map.setPlayer(new Player(cell));
                             break;
                         case 'k':
@@ -64,7 +64,7 @@ public class MapLoader {
                             map.setWeapon(new Weapon(cell));
                             break;
                         case 'h':
-                            cell.setType(CellType.TUNNEL);
+                            cell.setType(CellType.GROUND);
                             map.setHelmet(new Cloak(cell));
                             break;
                         case 'd':

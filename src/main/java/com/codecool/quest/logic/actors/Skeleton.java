@@ -12,10 +12,27 @@ public class Skeleton extends Actor implements Monster {
 
     }
 
+
     @Override
-    void move(int dx, int dy) {
+    public String getTileName() {
+        return "skeleton";
+    }
+
+
+    @Override
+    public void monsterMoveDirection() {
+        int[] actualMove = movementCoordinates.get(rnd.nextInt(movementCoordinates.size()));
+        int x = actualMove[0];
+        int y = actualMove[1];
+        if (getHealth() > 0) monsterMove(x, y);
+            /*} catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
+    }
+
+    private void monsterMove(int dx, int dy) {
         try {
-            if (isPassable(dx, dy) && this.getHealth() > 0) {
+            if (isPassable(dx, dy) && getHealth() > 0) {
                 Cell nextCell = cell.getNeighbor(dx, dy);
                 cell.setActor(null);
                 nextCell.setActor(this);
@@ -26,13 +43,5 @@ public class Skeleton extends Actor implements Monster {
 
         }
     }
-
-    @Override
-    public String getTileName() {
-        return "skeleton";
-    }
-
-
-
-
 }
+
