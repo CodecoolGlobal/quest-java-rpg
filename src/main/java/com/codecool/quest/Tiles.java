@@ -50,6 +50,8 @@ public class Tiles {
         tileMap.put("house-right", new Tile(12, 16));
         tileMap.put("grass", new Tile(5, 0));
         tileMap.put("forest", new Tile(3, 2));
+        tileMap.put("forest2", new Tile(4, 2));
+        tileMap.put("forest3", new Tile(5, 2));
         tileMap.put("cemetery", new Tile(1, 14));
         tileMap.put("Cemetery", new Tile(2, 14));
         tileMap.put("bones", new Tile(0, 15));

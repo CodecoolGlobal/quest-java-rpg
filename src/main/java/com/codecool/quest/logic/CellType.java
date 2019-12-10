@@ -21,6 +21,8 @@ public enum CellType {
     BONES("bones"),
     BONESPRO("Bones"),
     FOREST("forest"),
+    FOREST2("forest2"),
+    FOREST3("forest3"),
     LEVER("lever-up"),
     LEVEROPEN("lever-down"),
     LEVERDOOR("lever-door-locked"),

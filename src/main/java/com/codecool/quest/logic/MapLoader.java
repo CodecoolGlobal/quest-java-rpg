@@ -63,7 +63,7 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             map.setWeapon(new Weapon(cell));
                             break;
-                        case 'h':
+                        case 'a':
                             cell.setType(CellType.TUNNEL);
                             map.setHelmet(new Cloak(cell));
                             break;
@@ -96,6 +96,12 @@ public class MapLoader {
                             break;
                         case 'f':
                             cell.setType(CellType.FOREST);
+                            break;
+                        case 'h':
+                            cell.setType(CellType.FOREST2);
+                            break;
+                        case 'F':
+                            cell.setType(CellType.FOREST3);
                             break;
                         case 'c':
                             cell.setType(CellType.CEMETERY);

@@ -57,6 +57,7 @@ public abstract class Actor implements Drawable {
         return cell.getY();
     }
 
+
     //abstract method - split into functions for Player and monsters
     public boolean isPassable(int x, int y) {
         if (doesCellExist(x, y) == null) return false;
