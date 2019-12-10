@@ -20,7 +20,7 @@ public class GameMap {
     private Item key;
     private Item weapon;
     private Item helmet;
-    public List<Actor> monsterList = new ArrayList<>();
+    public List<Actor> monsterList = new ArrayList<>(); //into maploader?
 
     public GameMap(int width, int height, CellType defaultCellType) {
         this.width = width;

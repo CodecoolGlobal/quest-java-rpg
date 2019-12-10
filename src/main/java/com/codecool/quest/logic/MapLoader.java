@@ -4,7 +4,7 @@ import com.codecool.quest.logic.actors.Ghost;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Key;
-import com.codecool.quest.logic.items.Helmet;
+import com.codecool.quest.logic.items.Cloak;
 import com.codecool.quest.logic.items.Weapon;
 
 import java.io.InputStream;
@@ -65,7 +65,7 @@ public class MapLoader {
                             break;
                         case 'h':
                             cell.setType(CellType.TUNNEL);
-                            map.setHelmet(new Helmet(cell));
+                            map.setHelmet(new Cloak(cell));
                             break;
                         case 'd':
                             cell.setType(CellType.DOOR);
