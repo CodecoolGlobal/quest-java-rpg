@@ -60,6 +60,13 @@ public class Tiles {
         tileMap.put("lever-down", new Tile(30, 24));
         tileMap.put("lever-door-locked", new Tile(3, 4));
         tileMap.put("lever-door-open", new Tile(4, 4));
+        tileMap.put("pillar-up", new Tile(9, 16));
+        tileMap.put("pillar-center", new Tile(9, 17));
+        tileMap.put("pillar-down", new Tile(9, 18));
+        tileMap.put("pillar-horizontal", new Tile(8, 16));
+        tileMap.put("bar-B", new Tile(20, 30));
+        tileMap.put("bar-A", new Tile(19, 30));
+        tileMap.put("bar-R", new Tile(23, 31));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {

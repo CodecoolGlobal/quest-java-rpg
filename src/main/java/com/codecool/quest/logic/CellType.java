@@ -26,7 +26,14 @@ public enum CellType {
     LEVER("lever-up"),
     LEVEROPEN("lever-down"),
     LEVERDOOR("lever-door-locked"),
-    LEVERDOOROPEN("lever-door-open");
+    LEVERDOOROPEN("lever-door-open"),
+    PILLARUP("pillar-up"),
+    PILLARCENTER("pillar-center"),
+    PILLARDOWN("pillar-down"),
+    PILLARHORIZONTAL("pillar-horizontal"),
+    BAR_B("bar-B"),
+    BAR_A("bar-A"),
+    BAR_R("bar-R");
 
     private String tileName;
 

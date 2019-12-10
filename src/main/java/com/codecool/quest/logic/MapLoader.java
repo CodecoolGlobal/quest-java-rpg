@@ -125,6 +125,27 @@ public class MapLoader {
                         case 'L':
                             cell.setType(CellType.LEVERDOOR);
                             break;
+                        case '^':
+                            cell.setType(CellType.PILLARUP);
+                            break;
+                        case '|':
+                            cell.setType(CellType.PILLARCENTER);
+                            break;
+                        case 'ˇ':
+                            cell.setType(CellType.PILLARDOWN);
+                            break;
+                        case '-':
+                            cell.setType(CellType.PILLARHORIZONTAL);
+                            break;
+                        case 'D':
+                            cell.setType(CellType.BAR_B);
+                            break;
+                        case 'A':
+                            cell.setType(CellType.BAR_A);
+                            break;
+                        case 'R':
+                            cell.setType(CellType.BAR_R);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
