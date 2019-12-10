@@ -52,7 +52,11 @@ public class MapLoader {
                             map.monsterList.add(map.getGhost());
                             break;
                         case '@':
-                            cell.setType(CellType.GROUND);
+                            if (file.equals("/map.txt")) {
+                                cell.setType(CellType.GROUND);
+                            } else if (file.equals("/bonus.txt")) {
+                                cell.setType(CellType.FLOOR);
+                            }
                             map.setPlayer(new Player(cell));
                             break;
                         case 'k':
