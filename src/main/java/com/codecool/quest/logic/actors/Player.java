@@ -16,6 +16,8 @@ public class Player extends Actor {
     private int countSecretDoorOpen = 0;
     private Item itemToPickUp;
     private String itemName;
+    private int pubCoordX;
+    private int pubCoordY;
     public Map<String, Integer> inventoryMap = new HashMap<>();
     private ListView<String> inventory = new ListView<>();
 
@@ -55,7 +57,7 @@ public class Player extends Actor {
     //Player method
     public void openPub() {
         if (isNeighbourPub()) {
-            this.getCell().getNeighbor(0, -1).setType(CellType.HOUSEOPEN);
+            this.getCell().getNeighbor(pubCoordX, pubCoordY).setType(CellType.HOUSEOPEN);
         }
     }
 
@@ -68,8 +70,15 @@ public class Player extends Actor {
 
     //Player method
     private boolean isNeighbourPub() {
-        String pubName = this.getCell().getNeighbor(0, -1).getTileName();
-        if (pubName.equals("house-center")) {
+        String pubNameUp = this.getCell().getNeighbor(0, -1).getTileName();
+        String pubNameDown = this.getCell().getNeighbor(0, 1).getTileName();
+        if (pubNameUp.equals("house-center") ) {
+            pubCoordX = 0;
+            pubCoordY = -1;
+            return true;
+        } else if (pubNameDown.equals("house-center")) {
+            pubCoordX = 0;
+            pubCoordY = 1;
             return true;
         }
         return false;
