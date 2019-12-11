@@ -1,9 +1,6 @@
 package com.codecool.quest.logic;
 
-import com.codecool.quest.logic.actors.Actor;
-import com.codecool.quest.logic.actors.Ghost;
-import com.codecool.quest.logic.actors.Player;
-import com.codecool.quest.logic.actors.Skeleton;
+import com.codecool.quest.logic.actors.*;
 import com.codecool.quest.logic.items.Item;
 
 import java.util.ArrayList;
@@ -17,9 +14,12 @@ public class GameMap {
     private Player player;
     private Skeleton skeleton;
     private Ghost ghost;
+    private Boss boss;
     private Item key;
+    private Item gold;
     private Item weapon;
     private Item helmet;
+    private Item crown;
     public List<Actor> monsterList = new ArrayList<>();
 
     public GameMap(int width, int height, CellType defaultCellType) {
@@ -54,14 +54,20 @@ public class GameMap {
 
     public Skeleton getSkeleton() { return skeleton; }
 
+    public Boss getBoss() { return  boss; }
+
 
     public void setSkeleton(Skeleton skeleton) {this.skeleton = skeleton;}
 
     public void setGhost(Ghost ghost) {this.ghost = ghost;}
 
+    public void setBoss(Boss boss) {this.boss = boss;}
+
     public Ghost getGhost() {return ghost;}
 
     public void setKey(Item key) {this.key=key;}
+
+    public void setGold(Item gold) {this.gold=gold;}
 
     public Item getKey() {return key;}
 
@@ -72,6 +78,10 @@ public class GameMap {
     public void setWeapon(Item weapon) {this.weapon = weapon;}
 
     public Item getWeapon() {return weapon;}
+
+    public void setCrown(Item crown) {this.crown = crown;}
+
+    public Item getCrown() {return crown;}
 
     public int getWidth() {
         return width;

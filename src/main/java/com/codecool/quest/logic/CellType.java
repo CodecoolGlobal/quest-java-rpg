@@ -37,19 +37,23 @@ public enum CellType {
     BAR_B("bar-B"),
     BAR_A("bar-A"),
     BAR_R("bar-R"),
+    CASTLEWALL("castle-wall"),
+    CASTLEWALL2("castle-wall2"),
     BARTENDER("bartender"),
     CLOAKMAN("cloak-man"),
     CARDMAN("card-man"),
     POTION("potion"),
     QUESTION("question"),
-
     CAMPFIRE("campfire"),
     NPC("npc"),
     NPCPET("npc-pet"),
     VILLAGEHOUSE("village-house"),
     VILLAGEHOUSE2("village-house2"),
     VILLAGEDOOR("village-door"),
-    BRIDGE("bridge");
+    CARDBACK("card-back"),
+    BRIDGE("bridge"),
+    TORCH("torch"),
+    CANDLE("candle");
 
     private String tileName;
 

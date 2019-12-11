@@ -69,12 +69,15 @@ public class Tiles {
         tileMap.put("bar-B", new Tile(20, 30));
         tileMap.put("bar-A", new Tile(19, 30));
         tileMap.put("bar-R", new Tile(23, 31));
+        tileMap.put("boss", new Tile(30, 6));
+        tileMap.put("crown", new Tile(12,24));
+        tileMap.put("castle-wall", new Tile(11,18));
+        tileMap.put("castle-wall2", new Tile(10,18));
         tileMap.put("bartender", new Tile(26, 9));
         tileMap.put("cloak-man", new Tile(26, 9));
         tileMap.put("card-man", new Tile(26, 9));
         tileMap.put("potion", new Tile(16, 25));
         tileMap.put("question", new Tile(22, 25));
-
         tileMap.put("village-house", new Tile(18, 10));
         tileMap.put("village-house2", new Tile(19, 10));
         tileMap.put("village-door", new Tile(21, 11));
@@ -82,7 +85,10 @@ public class Tiles {
         tileMap.put("npc", new Tile(25, 1));
         tileMap.put("npc-pet", new Tile(21, 9));
         tileMap.put("bridge", new Tile(6, 4));
-
+        tileMap.put("torch", new Tile(4,15));
+        tileMap.put("candle", new Tile(5,15));
+        tileMap.put("gold", new Tile(9, 26));
+        tileMap.put("card-back", new Tile(19, 17));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {

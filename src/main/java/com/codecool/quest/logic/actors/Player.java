@@ -4,6 +4,7 @@ import com.codecool.quest.Main;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.GameMap;
+import com.codecool.quest.logic.items.Gold;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Weapon;
 import javafx.scene.control.ListView;
@@ -17,8 +18,8 @@ public class Player extends Actor {
     private int countSecretDoorOpen = 0;
     private Item itemToPickUp;
     private String itemName;
-    private int pubCoordX;
-    private int pubCoordY;
+    private int pubCoordX = 0;
+    private int pubCoordY = 0;
     public Map<String, Integer> inventoryMap = new HashMap<>();
     private ListView<String> inventory = new ListView<>();
 
@@ -39,6 +40,8 @@ public class Player extends Actor {
             this.tileName = "player-w-c";
         } else if (!inventoryMap.containsKey("weapon") && inventoryMap.containsKey("cloak")) {
             this.tileName = "player-c";
+        } else if (!inventoryMap.containsKey("weapon") && !inventoryMap.containsKey("cloak")) {
+            this.tileName = "player";
         }
     }
 
@@ -74,7 +77,7 @@ public class Player extends Actor {
     private boolean isNeighbourPub() {
         String pubNameUp = this.getCell().getNeighbor(0, -1).getTileName();
         String pubNameDown = this.getCell().getNeighbor(0, 1).getTileName();
-        if (pubNameUp.equals("house-center") ) {
+        if (pubNameUp.equals("house-center")) {
             pubCoordX = 0;
             pubCoordY = -1;
             return true;
@@ -88,7 +91,8 @@ public class Player extends Actor {
 
     //Player method
     private void showSecretTunnel() {
-        if (this.getCell().getTileName().equals("secret-door") &&  ) {
+        if (this.getCell().getTileName().equals("secret-door")) {
+
             countSecretDoorOpen++;
             this.getCell().getNeighbor(-1, 0).setType(CellType.FLOOR);
             this.getCell().getNeighbor(-2, 0).setType(CellType.FLOOR);
@@ -102,6 +106,7 @@ public class Player extends Actor {
             this.getCell().getNeighbor(-4, -1).setType(CellType.WALL);
             this.getCell().getNeighbor(-5, -1).setType(CellType.WALL);
             this.getCell().getNeighbor(-5, 0).setType(CellType.WALL);
+
         }
     }
 
@@ -113,6 +118,14 @@ public class Player extends Actor {
     //Player method
     private boolean hasKey() {
         return inventoryMap.containsKey("key");
+    }
+
+    private boolean hasCloak() {
+        return inventoryMap.containsKey("cloak");
+    }
+
+    private boolean hasGold() {
+        return inventoryMap.containsKey("gold");
     }
 
     //Player method
@@ -211,23 +224,27 @@ public class Player extends Actor {
         return tileName.equals(specificDoor);
     }
 
-    public void bartenderInteraction(GameMap map) {
+    public void pubPeopleInteraction(GameMap map) {
         Cell cellBar = map.getCell(17, 4);
-        Cell cellCloak = map.getCell(20, 14);
-        Cell cellCard = map.getCell(17, 4);
+        Cell cellCloak = map.getCell(20, 13);
+        Cell cellCard = map.getCell(3, 11);
 
         try {
             Cell neighbor = this.cell.getNeighbor(0, -3);
             Cell neighborNextUp = this.cell.getNeighbor(0, -1);
-            Cell neighborNextRight = this.cell.getNeighbor(1, 0);
-            Cell neighborNextLeft = this.cell.getNeighbor(-1, 0);
             String neighborName = this.cell.getNeighbor(0, -3).getTileName();
             if (neighborName.equals("bartender")) {
                 neighbor.getNeighbor(0, -1).setType(CellType.QUESTION);
+            } else if (neighborNextUp.getTileName().equals("cloak-man") || neighborNextUp.getTileName().equals("card-man")) {
+                neighborNextUp.getNeighbor(0, -1).setType(CellType.QUESTION);
             }
 
             if (!neighborName.equals("bartender") && cellBar.getType() == CellType.QUESTION) {
                 cellBar.setType(CellType.FLOOR);
+            } else if (!neighborNextUp.getTileName().equals("cloak-man") && cellCloak.getType() == CellType.QUESTION) {
+                cellCloak.setType(CellType.FLOOR);
+            } else if (!neighborNextUp.getTileName().equals("card-man") && cellCard.getType() == CellType.QUESTION) {
+                cellCard.setType(CellType.FLOOR);
             }
         } catch (Exception ignored) {
 
@@ -235,6 +252,65 @@ public class Player extends Actor {
 
     }
 
+    public void getGoldForCloak(GameMap map) {
+        Cell cellCloak = map.getCell(20, 13);
+
+        if (cellCloak.getType().equals(CellType.QUESTION)) {
+            if (hasCloak()) {
+                removeItemFromInventory("cloak");
+            }
+        }
+    }
+
+    private void removeItemFromInventory(String item) {
+        Integer value = inventoryMap.get(item);
+        inventoryMap.replace(item, value - 1);
+        if (value - 1 <= 0) {
+            inventoryMap.remove(item);
+            this.setTileName();
+        }
+        if (item.equals("cloak")) {
+            this.setDefense(-1);
+            getGoldForCloak();
+        }
+    }
+
+    private void getGoldForCloak() {
+        int goldValue = inventoryMap.getOrDefault("gold", 0);
+        inventoryMap.put("gold", goldValue + 3);
+    }
+
+    private boolean hasEnoughGold() {
+        if (inventoryMap.containsKey("gold") && inventoryMap.get("gold") >= 5) {
+            return true;
+        }
+        return false;
+    }
+
+    public void bartenderInteraction(GameMap map) {
+        Cell cellBar = map.getCell(17, 4);
+
+        if (cellBar.getType() == CellType.QUESTION && hasEnoughGold()) {
+            int potionNumber = inventoryMap.getOrDefault("potion", 0);
+            int goldValue = inventoryMap.get("gold");
+            inventoryMap.put("potion", potionNumber + 1);
+            inventoryMap.put("gold", goldValue-5);
+            if (goldValue-5 <= 0) {
+                inventoryMap.remove("gold");
+            }
+        }
+    }
+
+    public void usePotion() {
+        if (inventoryMap.containsKey("potion")) {
+            int potionNumber = inventoryMap.get("potion");
+            inventoryMap.replace("potion", potionNumber-1);
+            setHealth(10);
+            if (potionNumber-1 <= 0) {
+                inventoryMap.remove("potion");
+            }
+        }
+    }
 
 }
 

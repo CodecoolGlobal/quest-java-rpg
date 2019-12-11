@@ -7,6 +7,7 @@ import com.codecool.quest.logic.actors.Monster;
 import com.codecool.quest.logic.actors.Player;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -25,7 +26,7 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap("/map2.txt");
+    GameMap map = MapLoader.loadMap("/map.txt");
     GameMap firstLevel = map;
     GameMap secondMap;
     GameMap bonusMap;
@@ -124,7 +125,7 @@ public class Main extends Application {
                 } else if(map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter>0) {
                     enterPreviousLevel(firstLevel);
                 }
-                this.map.getPlayer().bartenderInteraction(map);
+                this.map.getPlayer().pubPeopleInteraction(map);
                 refresh();
                 break;
             case DOWN:
@@ -136,7 +137,7 @@ public class Main extends Application {
                 if (map.getPlayer().isPlayerAtSpecificDoor("house-center-open")) {
                     enterPreviousLevel(firstLevel);
                 }
-                this.map.getPlayer().bartenderInteraction(map);
+                this.map.getPlayer().pubPeopleInteraction(map);
                 refresh();
                 break;
             case LEFT:
@@ -145,7 +146,7 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(-1, 0);
-                this.map.getPlayer().bartenderInteraction(map);
+                this.map.getPlayer().pubPeopleInteraction(map);
                 refresh();
                 break;
             case RIGHT:
@@ -154,7 +155,7 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(1, 0);
-                this.map.getPlayer().bartenderInteraction(map);
+                this.map.getPlayer().pubPeopleInteraction(map);
                 refresh();
                 break;
             case A:
@@ -172,6 +173,21 @@ public class Main extends Application {
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().openLeverDoor();
                 map.getPlayer().openPub();
+                refresh();
+                break;
+            case S:
+                if (map.getPlayer().getHealth() < 1) {
+                    break;
+                }
+                map.getPlayer().getGoldForCloak(map);
+                map.getPlayer().bartenderInteraction(map);
+                refresh();
+                break;
+            case P:
+                if (map.getPlayer().getHealth() < 1) {
+                    break;
+                }
+                map.getPlayer().usePotion();
                 refresh();
                 break;
         }
@@ -231,7 +247,7 @@ public class Main extends Application {
         if (level.equals("/bonus.txt")) {
             bonusMap = this.map;
         } else if (level.equals("/map2.txt")) {
-            secondMap = this.map;
+            secondMap = this.map;getHostServices();
         }
 
        setStageSize();
