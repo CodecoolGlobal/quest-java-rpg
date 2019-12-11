@@ -249,6 +249,11 @@ public class Main extends Application {
         } else if (level.equals("/map2.txt")) {
             secondMap = this.map;getHostServices();
         }
+        this.map.getPlayer().setHealth(currentPlayer.getHealth());
+        this.map.getPlayer().setDamage(currentPlayer.getDamage());
+        this.map.getPlayer().setDefense(currentPlayer.getDefense());
+        this.map.getPlayer().inventoryMap = currentPlayer.getInventoryMap();
+        this.map.getPlayer().setTileName();
 
        setStageSize();
     }
