@@ -67,6 +67,9 @@ public class Tiles {
         tileMap.put("bar-B", new Tile(20, 30));
         tileMap.put("bar-A", new Tile(19, 30));
         tileMap.put("bar-R", new Tile(23, 31));
+        tileMap.put("bartender", new Tile(26, 9));
+        tileMap.put("potion", new Tile(16, 25));
+        tileMap.put("question", new Tile(22, 25));
 
         tileMap.put("village-house", new Tile(18, 10));
         tileMap.put("village-house2", new Tile(19, 10));

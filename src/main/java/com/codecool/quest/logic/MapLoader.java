@@ -162,6 +162,12 @@ public class MapLoader {
                         case 'N':
                             cell.setType(CellType.NPC);
                             break;
+                        case 't':
+                            cell.setType(CellType.BARTENDER);
+                            break;
+                        case 'p':
+                            cell.setType(CellType.POTION);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
