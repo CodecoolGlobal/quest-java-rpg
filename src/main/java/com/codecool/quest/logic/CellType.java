@@ -51,6 +51,13 @@ public enum CellType {
     VILLAGEHOUSE2("village-house2"),
     VILLAGEDOOR("village-door"),
     CARDBACK("card-back"),
+    SEVEN("seven"),
+    EIGHT("eight"),
+    NINE("nine"),
+    JUMBO("jumbo"),
+    QUEEN("queen"),
+    KING("king"),
+    ACE("ace"),
     BRIDGE("bridge"),
     TORCH("torch"),
     CANDLE("candle");

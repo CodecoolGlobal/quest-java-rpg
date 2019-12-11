@@ -89,6 +89,13 @@ public class Tiles {
         tileMap.put("candle", new Tile(5,15));
         tileMap.put("gold", new Tile(9, 26));
         tileMap.put("card-back", new Tile(19, 17));
+        tileMap.put("seven", new Tile(26, 17));
+        tileMap.put("eight", new Tile(27, 16));
+        tileMap.put("nine", new Tile(28, 17));
+        tileMap.put("jumbo", new Tile(29, 16));
+        tileMap.put("queen", new Tile(30, 17));
+        tileMap.put("king", new Tile(31, 16));
+        tileMap.put("ace", new Tile(20, 17));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {

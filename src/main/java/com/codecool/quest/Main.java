@@ -110,7 +110,7 @@ public class Main extends Application {
         }
     }
 
-    private void onKeyPressed(KeyEvent keyEvent) {
+    private void onKeyPressed(KeyEvent keyEvent){
         switch (keyEvent.getCode()) {
             case UP:
                 if (map.getPlayer().getHealth() < 1) {
@@ -269,11 +269,12 @@ public class Main extends Application {
         Player currentPlayer = this.map.getPlayer();
         if (this.map != previousMap) {
             this.map = previousMap;
-
+            saveStats(currentPlayer);
         } else {
             this.map = secondMap;
+            saveStats(currentPlayer);
         }
-        saveStats(currentPlayer);
+
 
     }
 
