@@ -1,5 +1,7 @@
 package com.codecool.quest.logic;
 
+import javafx.scene.transform.Rotate;
+
 public enum CellType {
     EMPTY("empty"),
     FLOOR("floor"),
@@ -16,6 +18,7 @@ public enum CellType {
     HOUSERIGHT("house-right"),
     WATER("water"),
     GRASS("grass"),
+    GRASS2("grass2"),
     CEMETERY("cemetery"),
     CEMETRYPRO("Cemetery"),
     BONES("bones"),
@@ -40,9 +43,11 @@ public enum CellType {
 
     CAMPFIRE("campfire"),
     NPC("npc"),
+    NPCPET("npc-pet"),
     VILLAGEHOUSE("village-house"),
     VILLAGEHOUSE2("village-house2"),
-    VILLAGEDOOR("village-door");
+    VILLAGEDOOR("village-door"),
+    BRIDGE("bridge");
 
     private String tileName;
 

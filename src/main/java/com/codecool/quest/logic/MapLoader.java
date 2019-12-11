@@ -99,6 +99,9 @@ public class MapLoader {
                         case 'r':
                             cell.setType(CellType.GRASS);
                             break;
+                        case '0':
+                            cell.setType(CellType.GRASS2);
+                            break;
                         case 'f':
                             cell.setType(CellType.FOREST);
                             break;
@@ -159,8 +162,14 @@ public class MapLoader {
                         case 'M':
                             cell.setType(CellType.CAMPFIRE);
                             break;
+                        case 'G':
+                            cell.setType(CellType.BRIDGE);
+                            break;
                         case 'N':
                             cell.setType(CellType.NPC);
+                            break;
+                        case 'm':
+                            cell.setType(CellType.NPCPET);
                             break;
                         case 't':
                             cell.setType(CellType.BARTENDER);

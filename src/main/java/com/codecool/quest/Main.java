@@ -25,7 +25,7 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap("/map.txt");
+    GameMap map = MapLoader.loadMap("/map2.txt");
     GameMap firstLevel = map;
     GameMap secondMap;
     GameMap bonusMap;

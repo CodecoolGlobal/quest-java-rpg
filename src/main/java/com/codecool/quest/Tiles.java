@@ -49,6 +49,7 @@ public class Tiles {
         tileMap.put("house-center-open", new Tile(4, 3));
         tileMap.put("house-right", new Tile(12, 16));
         tileMap.put("grass", new Tile(5, 0));
+        tileMap.put("grass2", new Tile(7, 0));
         tileMap.put("forest", new Tile(3, 2));
         tileMap.put("forest2", new Tile(2, 1));
         tileMap.put("forest3", new Tile(5, 1));
@@ -76,6 +77,8 @@ public class Tiles {
         tileMap.put("village-door", new Tile(21, 11));
         tileMap.put("campfire", new Tile(14, 10));
         tileMap.put("npc", new Tile(25, 1));
+        tileMap.put("npc-pet", new Tile(21, 9));
+        tileMap.put("bridge", new Tile(6, 4));
 
     }
 
