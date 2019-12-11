@@ -23,7 +23,6 @@ public abstract class Monster extends Actor {
         try {
             boolean isBoss = this.getCell().getActor().getTileName().equals("boss");
             if (isPassable(dx, dy) && getHealth() > 0 && !isBoss) {
-                System.out.println(isBoss);
                 Cell nextCell = cell.getNeighbor(dx, dy);
                 cell.setActor(null);
                 nextCell.setActor(this);
