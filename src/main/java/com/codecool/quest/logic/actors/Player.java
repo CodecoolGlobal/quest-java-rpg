@@ -88,7 +88,7 @@ public class Player extends Actor {
 
     //Player method
     private void showSecretTunnel() {
-        if (this.getCell().getTileName().equals("secret-door")) {
+        if (this.getCell().getTileName().equals("secret-door") &&  ) {
             countSecretDoorOpen++;
             this.getCell().getNeighbor(-1, 0).setType(CellType.FLOOR);
             this.getCell().getNeighbor(-2, 0).setType(CellType.FLOOR);

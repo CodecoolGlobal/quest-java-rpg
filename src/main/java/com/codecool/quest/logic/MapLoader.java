@@ -6,12 +6,12 @@ import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Key;
 import com.codecool.quest.logic.items.Cloak;
 import com.codecool.quest.logic.items.Weapon;
+import javafx.scene.transform.Rotate;
 
 import java.io.InputStream;
 import java.util.Scanner;
 
 public class MapLoader {
-
     public static GameMap loadMap(String file) {
         InputStream is = MapLoader.class.getResourceAsStream(file);
         Scanner scanner = new Scanner(is);
@@ -48,6 +48,7 @@ public class MapLoader {
                             map.monsterList.add(map.getSkeleton());
                             break;
                         case 'g':
+//                            if (map.)
                             cell.setType(CellType.FLOOR);
                             map.setGhost(new Ghost(cell));
                             map.monsterList.add(map.getGhost());
@@ -58,7 +59,7 @@ public class MapLoader {
                             } else {
                                 cell.setType(CellType.GROUND);
                             }
-                            map.setPlayer(new Player(cell));
+                            map.setPlayer(new Player(cell))
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);
