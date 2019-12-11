@@ -3,6 +3,7 @@ package com.codecool.quest.logic;
 import com.codecool.quest.logic.actors.Ghost;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
+import com.codecool.quest.logic.items.Gold;
 import com.codecool.quest.logic.items.Key;
 import com.codecool.quest.logic.items.Cloak;
 import com.codecool.quest.logic.items.Weapon;
@@ -182,6 +183,13 @@ public class MapLoader {
                             break;
                         case 'P':
                             cell.setType(CellType.CARDMAN);
+                            break;
+                        case '$':
+                            cell.setType(CellType.PILLARHORIZONTAL);
+                            map.setGold(new Gold(cell));
+                            break;
+                        case 'S':
+                            cell.setType(CellType.CARDBACK);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

@@ -49,6 +49,7 @@ public enum CellType {
     VILLAGEHOUSE("village-house"),
     VILLAGEHOUSE2("village-house2"),
     VILLAGEDOOR("village-door"),
+    CARDBACK("card-back"),
     BRIDGE("bridge");
 
     private String tileName;

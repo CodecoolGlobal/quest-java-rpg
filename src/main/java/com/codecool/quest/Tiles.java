@@ -73,7 +73,6 @@ public class Tiles {
         tileMap.put("card-man", new Tile(26, 9));
         tileMap.put("potion", new Tile(16, 25));
         tileMap.put("question", new Tile(22, 25));
-
         tileMap.put("village-house", new Tile(18, 10));
         tileMap.put("village-house2", new Tile(19, 10));
         tileMap.put("village-door", new Tile(21, 11));
@@ -81,6 +80,8 @@ public class Tiles {
         tileMap.put("npc", new Tile(25, 1));
         tileMap.put("npc-pet", new Tile(21, 9));
         tileMap.put("bridge", new Tile(6, 4));
+        tileMap.put("gold", new Tile(9, 26));
+        tileMap.put("card-back", new Tile(19, 17));
 
     }
 

@@ -18,6 +18,7 @@ public class GameMap {
     private Skeleton skeleton;
     private Ghost ghost;
     private Item key;
+    private Item gold;
     private Item weapon;
     private Item helmet;
     public List<Actor> monsterList = new ArrayList<>();
@@ -62,6 +63,8 @@ public class GameMap {
     public Ghost getGhost() {return ghost;}
 
     public void setKey(Item key) {this.key=key;}
+
+    public void setGold(Item gold) {this.gold=gold;}
 
     public Item getKey() {return key;}
 

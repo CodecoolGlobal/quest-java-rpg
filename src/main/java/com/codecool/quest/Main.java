@@ -124,7 +124,7 @@ public class Main extends Application {
                 } else if(map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter>0) {
                     enterPreviousLevel(firstLevel);
                 }
-                this.map.getPlayer().bartenderInteraction(map);
+                this.map.getPlayer().pubPeopleInteraction(map);
                 refresh();
                 break;
             case DOWN:
@@ -136,7 +136,7 @@ public class Main extends Application {
                 if (map.getPlayer().isPlayerAtSpecificDoor("house-center-open")) {
                     enterPreviousLevel(firstLevel);
                 }
-                this.map.getPlayer().bartenderInteraction(map);
+                this.map.getPlayer().pubPeopleInteraction(map);
                 refresh();
                 break;
             case LEFT:
@@ -145,7 +145,7 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(-1, 0);
-                this.map.getPlayer().bartenderInteraction(map);
+                this.map.getPlayer().pubPeopleInteraction(map);
                 refresh();
                 break;
             case RIGHT:
@@ -154,7 +154,7 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(1, 0);
-                this.map.getPlayer().bartenderInteraction(map);
+                this.map.getPlayer().pubPeopleInteraction(map);
                 refresh();
                 break;
             case A:
@@ -173,6 +173,20 @@ public class Main extends Application {
                 map.getPlayer().openLeverDoor();
                 map.getPlayer().openPub();
                 refresh();
+                break;
+            case S:
+                if (map.getPlayer().getHealth() < 1) {
+                    break;
+                }
+                map.getPlayer().getGoldForCloak(map);
+                map.getPlayer().bartenderInteraction(map);
+                refresh();
+                break;
+            case P:
+                if (map.getPlayer().getHealth() < 1) {
+                    break;
+                }
+                map.getPlayer().usePotion();
                 break;
         }
 
