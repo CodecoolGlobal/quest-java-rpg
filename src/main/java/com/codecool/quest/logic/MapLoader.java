@@ -99,14 +99,17 @@ public class MapLoader {
                         case 'r':
                             cell.setType(CellType.GRASS);
                             break;
+                        case '0':
+                            cell.setType(CellType.GRASS2);
+                            break;
                         case 'f':
                             cell.setType(CellType.FOREST);
                             break;
                         case 'F':
-                            cell.setType(CellType.FOREST);
+                            cell.setType(CellType.FOREST2);
                             break;
                         case 'h':
-                            cell.setType(CellType.FOREST);
+                            cell.setType(CellType.FOREST3);
                             break;
                         case 'c':
                             cell.setType(CellType.CEMETERY);
@@ -146,6 +149,27 @@ public class MapLoader {
                             break;
                         case 'R':
                             cell.setType(CellType.BAR_R);
+                            break;
+                        case 'V':
+                            cell.setType(CellType.VILLAGEDOOR);
+                            break;
+                        case 'Z':
+                            cell.setType(CellType.VILLAGEHOUSE);
+                            break;
+                        case 'X':
+                            cell.setType(CellType.VILLAGEHOUSE2);
+                            break;
+                        case 'M':
+                            cell.setType(CellType.CAMPFIRE);
+                            break;
+                        case 'G':
+                            cell.setType(CellType.BRIDGE);
+                            break;
+                        case 'N':
+                            cell.setType(CellType.NPC);
+                            break;
+                        case 'm':
+                            cell.setType(CellType.NPCPET);
                             break;
                         case 't':
                             cell.setType(CellType.BARTENDER);

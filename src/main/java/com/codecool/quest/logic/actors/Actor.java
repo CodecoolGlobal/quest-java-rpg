@@ -62,9 +62,11 @@ public abstract class Actor implements Drawable {
         Cell neighbour = getCellNeighbour(x, y);
         boolean isGround = isNeighbourActionCell(x, y, "tunnel");
         boolean isFloor = isNeighbourActionCell(x, y, "floor");
+        boolean isGrass = isNeighbourActionCell(x, y, "grass2");
+        boolean isBridge = isNeighbourActionCell(x, y, "bridge");
         boolean isNeighbourNotActor = neighbour.getActor() == null;
 
-        return (isFloor || isGround) && isNeighbourNotActor;
+        return (isFloor || isGround || isGrass || isBridge) && isNeighbourNotActor;
 
 
     }
