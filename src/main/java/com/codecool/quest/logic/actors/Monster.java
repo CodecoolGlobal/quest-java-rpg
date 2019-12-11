@@ -9,6 +9,7 @@ public abstract class Monster extends Actor {
     }
 
     public void monsterMoveDirection() {
+
         int[] actualMove = movementCoordinates.get(rnd.nextInt(movementCoordinates.size()));
         int x = actualMove[0];
         int y = actualMove[1];
@@ -20,12 +21,13 @@ public abstract class Monster extends Actor {
 
     private void monsterMove(int dx, int dy) {
         try {
-            if (isPassable(dx, dy) && getHealth() > 0) {
+            boolean isBoss = this.getCell().getActor().getTileName().equals("boss");
+            if (isPassable(dx, dy) && getHealth() > 0 && !isBoss) {
+                System.out.println(isBoss);
                 Cell nextCell = cell.getNeighbor(dx, dy);
                 cell.setActor(null);
                 nextCell.setActor(this);
                 cell = nextCell;
-
             }
         } catch (NullPointerException ignored) {
 
