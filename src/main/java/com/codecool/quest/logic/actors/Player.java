@@ -3,6 +3,7 @@ package com.codecool.quest.logic.actors;
 import com.codecool.quest.Main;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
+import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Weapon;
 import javafx.scene.control.ListView;
@@ -210,15 +211,23 @@ public class Player extends Actor {
         return tileName.equals(specificDoor);
     }
 
-    public void bartenderInteraction() {
+    public void bartenderInteraction(GameMap map) {
+        Cell cellBar = map.getCell(17, 4);
+        Cell cellCloak = map.getCell(20, 14);
+        Cell cellCard = map.getCell(17, 4);
+
         try {
-            Cell bartender = this.cell.getNeighbor(0, -3);
-            CellType cellType = bartender.getNeighbor(0 , -1).getType();
-            if (bartender.getTileName().equals("bartender")) {
-                bartender.getNeighbor(0, -1).setType(CellType.QUESTION);
+            Cell neighbor = this.cell.getNeighbor(0, -3);
+            Cell neighborNextUp = this.cell.getNeighbor(0, -1);
+            Cell neighborNextRight = this.cell.getNeighbor(1, 0);
+            Cell neighborNextLeft = this.cell.getNeighbor(-1, 0);
+            String neighborName = this.cell.getNeighbor(0, -3).getTileName();
+            if (neighborName.equals("bartender")) {
+                neighbor.getNeighbor(0, -1).setType(CellType.QUESTION);
             }
-            if (!bartender.getTileName().equals("bartender") && bartender.getNeighbor(0, -1).getType().equals(CellType.QUESTION)) {
-                bartender.getNeighbor(0, -1).setType(cellType);
+
+            if (!neighborName.equals("bartender") && cellBar.getType() == CellType.QUESTION) {
+                cellBar.setType(CellType.FLOOR);
             }
         } catch (Exception ignored) {
 
