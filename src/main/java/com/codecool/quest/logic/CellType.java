@@ -35,6 +35,8 @@ public enum CellType {
     BAR_A("bar-A"),
     BAR_R("bar-R"),
     BARTENDER("bartender"),
+    CLOAKMAN("cloak-man"),
+    CARDMAN("card-man"),
     POTION("potion"),
     QUESTION("question");
 

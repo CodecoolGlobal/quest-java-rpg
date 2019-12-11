@@ -153,6 +153,12 @@ public class MapLoader {
                         case 'p':
                             cell.setType(CellType.POTION);
                             break;
+                        case 'T':
+                            cell.setType(CellType.CLOAKMAN);
+                            break;
+                        case 'P':
+                            cell.setType(CellType.CARDMAN);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
