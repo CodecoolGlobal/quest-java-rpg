@@ -210,6 +210,22 @@ public class Player extends Actor {
         return tileName.equals(specificDoor);
     }
 
+    public void bartenderInteraction() {
+        try {
+            Cell bartender = this.cell.getNeighbor(0, -3);
+            CellType cellType = bartender.getNeighbor(0 , -1).getType();
+            if (bartender.getTileName().equals("bartender")) {
+                bartender.getNeighbor(0, -1).setType(CellType.QUESTION);
+            }
+            if (!bartender.getTileName().equals("bartender") && bartender.getNeighbor(0, -1).getType().equals(CellType.QUESTION)) {
+                bartender.getNeighbor(0, -1).setType(cellType);
+            }
+        } catch (Exception ignored) {
+
+        }
+
+    }
+
 
 }
 

@@ -147,6 +147,12 @@ public class MapLoader {
                         case 'R':
                             cell.setType(CellType.BAR_R);
                             break;
+                        case 't':
+                            cell.setType(CellType.BARTENDER);
+                            break;
+                        case 'p':
+                            cell.setType(CellType.POTION);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

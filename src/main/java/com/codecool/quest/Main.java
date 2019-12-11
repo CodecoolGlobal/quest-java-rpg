@@ -124,6 +124,7 @@ public class Main extends Application {
                 } else if(map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter>0) {
                     enterPreviousLevel(firstLevel);
                 }
+                this.map.getPlayer().bartenderInteraction();
                 refresh();
                 break;
             case DOWN:
@@ -135,6 +136,7 @@ public class Main extends Application {
                 if (map.getPlayer().isPlayerAtSpecificDoor("house-center-open")) {
                     enterPreviousLevel(firstLevel);
                 }
+                this.map.getPlayer().bartenderInteraction();
                 refresh();
                 break;
             case LEFT:
@@ -143,6 +145,7 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(-1, 0);
+                this.map.getPlayer().bartenderInteraction();
                 refresh();
                 break;
             case RIGHT:
@@ -151,6 +154,7 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(1, 0);
+                this.map.getPlayer().bartenderInteraction();
                 refresh();
                 break;
             case A:

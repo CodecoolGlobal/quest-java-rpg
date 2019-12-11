@@ -67,6 +67,9 @@ public class Tiles {
         tileMap.put("bar-B", new Tile(20, 30));
         tileMap.put("bar-A", new Tile(19, 30));
         tileMap.put("bar-R", new Tile(23, 31));
+        tileMap.put("bartender", new Tile(26, 9));
+        tileMap.put("potion", new Tile(16, 25));
+        tileMap.put("question", new Tile(22, 25));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
