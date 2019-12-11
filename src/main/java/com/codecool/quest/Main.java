@@ -250,13 +250,7 @@ public class Main extends Application {
         } else if (level.equals("/map2.txt")) {
             secondMap = this.map;getHostServices();
         }
-        this.map.getPlayer().setHealth(currentPlayer.getHealth());
-        this.map.getPlayer().setDamage(currentPlayer.getDamage());
-        this.map.getPlayer().setDefense(currentPlayer.getDefense());
-        this.map.getPlayer().inventoryMap = currentPlayer.getInventoryMap();
-        this.map.getPlayer().setTileName();
-
-       setStageSize();
+        saveStats(currentPlayer);
     }
     private void setStageSize() {
         canvas.setWidth(map.getWidth() * Tiles.TILE_WIDTH);
@@ -272,13 +266,24 @@ public class Main extends Application {
 
 
     private void enterPreviousLevel(GameMap previousMap) {
+        Player currentPlayer = this.map.getPlayer();
         if (this.map != previousMap) {
             this.map = previousMap;
+
         } else {
             this.map = secondMap;
         }
-        setStageSize();
+        saveStats(currentPlayer);
 
+    }
+
+    private void saveStats(Player currentPlayer) {
+        this.map.getPlayer().setHealth(currentPlayer.getHealth());
+        this.map.getPlayer().setDamage(currentPlayer.getDamage());
+        this.map.getPlayer().setDefense(currentPlayer.getDefense());
+        this.map.getPlayer().inventoryMap = currentPlayer.getInventoryMap();
+        this.map.getPlayer().setTileName();
+        setStageSize();
     }
 
     private void setMapName(String mapName) {
