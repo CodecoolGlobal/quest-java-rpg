@@ -61,7 +61,6 @@ public class Player extends Actor {
     //Player method
     public void openPub() {
         if (isNeighbourPub()) {
-            System.out.println("Open door");
             this.getCell().getNeighbor(pubCoordX, pubCoordY).setType(CellType.HOUSEOPEN);
         }
     }
@@ -285,6 +284,13 @@ public class Player extends Actor {
             return true;
         }
         return false;
+    }
+
+    public void playForWeapon(GameMap map) {
+        Cell cellCard = map.getCell(3, 11);
+        if (hasWeapon() && cellCard.getType() == CellType.QUESTION) {
+            System.out.println("Play cards!");
+        }
     }
 
     public void bartenderInteraction(GameMap map) {

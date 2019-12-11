@@ -179,6 +179,7 @@ public class Main extends Application {
                     break;
                 }
                 map.getPlayer().getGoldForCloak(map);
+                map.getPlayer().playForWeapon(map);
                 map.getPlayer().bartenderInteraction(map);
                 refresh();
                 break;
