@@ -147,6 +147,21 @@ public class MapLoader {
                         case 'R':
                             cell.setType(CellType.BAR_R);
                             break;
+                        case 'V':
+                            cell.setType(CellType.VILLAGEDOOR);
+                            break;
+                        case 'Z':
+                            cell.setType(CellType.VILLAGEHOUSE);
+                            break;
+                        case 'X':
+                            cell.setType(CellType.VILLAGEHOUSE2);
+                            break;
+                        case 'M':
+                            cell.setType(CellType.CAMPFIRE);
+                            break;
+                        case 'N':
+                            cell.setType(CellType.NPC);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

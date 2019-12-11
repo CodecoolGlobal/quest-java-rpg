@@ -33,7 +33,13 @@ public enum CellType {
     PILLARHORIZONTAL("pillar-horizontal"),
     BAR_B("bar-B"),
     BAR_A("bar-A"),
-    BAR_R("bar-R");
+    BAR_R("bar-R"),
+
+    CAMPFIRE("campfire"),
+    NPC("npc"),
+    VILLAGEHOUSE("village-house"),
+    VILLAGEHOUSE2("village-house2"),
+    VILLAGEDOOR("village-door");
 
     private String tileName;
 
