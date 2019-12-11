@@ -57,6 +57,7 @@ public class Player extends Actor {
     //Player method
     public void openPub() {
         if (isNeighbourPub()) {
+            System.out.println("Open door");
             this.getCell().getNeighbor(pubCoordX, pubCoordY).setType(CellType.HOUSEOPEN);
         }
     }
@@ -126,7 +127,7 @@ public class Player extends Actor {
                 Integer value = inventoryMap.get(itemName);
                 inventoryMap.replace(itemName, value + 1);
             }
-            if (hasWeapon() && this.getDamage() != 10) this.setDamage(5);
+            if (hasWeapon() && this.getDamage() != 10) this.setDamage(getDamage() + 5);
             if (itemName.equals("cloak")) this.setDefense(1);
 
             inventory.getItems().clear();
@@ -204,9 +205,9 @@ public class Player extends Actor {
         }
     }
 
-    public boolean isPlayerAtPubDoor() {
+    public boolean isPlayerAtSpecificDoor(String specificDoor) {
         String tileName = this.getCell().getTileName();
-        return tileName.equals("house-center-open");
+        return tileName.equals(specificDoor);
     }
 
 

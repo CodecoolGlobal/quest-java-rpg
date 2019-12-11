@@ -26,6 +26,11 @@ import java.util.Random;
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap("/map.txt");
+    GameMap firstLevel = map;
+    GameMap secondMap;
+    GameMap bonusMap;
+    private int counter = 0;
+    private String mapName;
 
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
@@ -61,7 +66,7 @@ public class Main extends Application {
         primaryStage.show();
         getPlayerName();
         String characterName = "Name: " + nameLabel.getText();
-        ui.add(new Label(characterName),0,0);
+        ui.add(new Label(characterName), 0, 0);
         refresh();
     }
 
@@ -86,7 +91,7 @@ public class Main extends Application {
         return borderPane;
     }
 
-    private void getPlayerName(){
+    private void getPlayerName() {
         try {
             TextInputDialog dialog = new TextInputDialog("Bob");
 
@@ -99,7 +104,7 @@ public class Main extends Application {
             result.ifPresent(name -> {
                 this.nameLabel.setText(name);
             });
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("Wrong character name");
         }
     }
@@ -112,8 +117,12 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(0, -1);
-                if (map.getPlayer().isPlayerAtPubDoor()) {
+                if (map.getPlayer().isPlayerAtSpecificDoor("house-center-open")) {
                     enterNewLevel("/bonus.txt");
+                } else if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter==0) {
+                    enterNewLevel("/map2.txt");
+                } else if(map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter>0) {
+                    enterPreviousLevel(firstLevel);
                 }
                 refresh();
                 break;
@@ -123,6 +132,9 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(0, 1);
+                if (map.getPlayer().isPlayerAtSpecificDoor("house-center-open")) {
+                    enterPreviousLevel(firstLevel);
+                }
                 refresh();
                 break;
             case LEFT:
@@ -208,13 +220,42 @@ public class Main extends Application {
     }
 
     private void enterNewLevel(String level) {
+        increaseCounter(level);
+        setMapName(level);
         Player currentPlayer = this.map.getPlayer();
         this.map = MapLoader.loadMap(level);
+        if (level.equals("/bonus.txt")) {
+            bonusMap = this.map;
+        } else if (level.equals("/map2.txt")) {
+            secondMap = this.map;
+        }
         this.map.getPlayer().setHealth(currentPlayer.getHealth());
         this.map.getPlayer().setDamage(currentPlayer.getDamage());
         this.map.getPlayer().setDefense(currentPlayer.getDefense());
         this.map.getPlayer().inventoryMap = currentPlayer.getInventoryMap();
         this.map.getPlayer().setTileName();
+
     }
+
+    private void increaseCounter(String levelName) {
+        if (!levelName.equals("/bonus.txt")) {
+            counter++;
+        }
+    }
+
+
+    private void enterPreviousLevel(GameMap previousMap) {
+        if (this.map != previousMap) {
+            this.map = previousMap;
+        } else {
+            this.map = secondMap;
+        }
+
+    }
+
+    private void setMapName(String mapName) {
+        this.mapName = mapName;
+    }
+
 
 }

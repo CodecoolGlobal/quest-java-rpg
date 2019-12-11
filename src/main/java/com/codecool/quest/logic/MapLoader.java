@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class MapLoader {
+
     public static GameMap loadMap(String file) {
         InputStream is = MapLoader.class.getResourceAsStream(file);
         Scanner scanner = new Scanner(is);
@@ -52,10 +53,10 @@ public class MapLoader {
                             map.monsterList.add(map.getGhost());
                             break;
                         case '@':
-                            if (file.equals("/map.txt")) {
-                                cell.setType(CellType.GROUND);
-                            } else if (file.equals("/bonus.txt")) {
+                            if (!file.equals("/map.txt")) {
                                 cell.setType(CellType.FLOOR);
+                            } else {
+                                cell.setType(CellType.GROUND);
                             }
                             map.setPlayer(new Player(cell));
                             break;
