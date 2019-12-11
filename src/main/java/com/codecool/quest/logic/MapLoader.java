@@ -98,10 +98,10 @@ public class MapLoader {
                             cell.setType(CellType.FOREST);
                             break;
                         case 'F':
-                            cell.setType(CellType.FOREST);
+                            cell.setType(CellType.FOREST2);
                             break;
                         case 'h':
-                            cell.setType(CellType.FOREST);
+                            cell.setType(CellType.FOREST3);
                             break;
                         case 'c':
                             cell.setType(CellType.CEMETERY);

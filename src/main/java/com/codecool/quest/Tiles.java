@@ -60,6 +60,21 @@ public class Tiles {
         tileMap.put("lever-down", new Tile(30, 24));
         tileMap.put("lever-door-locked", new Tile(3, 4));
         tileMap.put("lever-door-open", new Tile(4, 4));
+
+
+
+
+
+
+
+
+        tileMap.put("village-house", new Tile(18, 10));
+        tileMap.put("village-house2", new Tile(19, 10));
+        tileMap.put("village-door", new Tile(21, 11));
+        tileMap.put("campfire", new Tile(14, 10));
+        tileMap.put("npc", new Tile(25, 1));
+
+
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
