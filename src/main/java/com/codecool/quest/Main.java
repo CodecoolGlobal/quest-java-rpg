@@ -7,6 +7,7 @@ import com.codecool.quest.logic.actors.Monster;
 import com.codecool.quest.logic.actors.Player;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -32,7 +33,7 @@ public class Main extends Application {
     private int counter = 0;
     private String mapName;
 
-    Canvas canvas = new Canvas(
+    public Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
             map.getHeight() * Tiles.TILE_WIDTH);
 
@@ -45,7 +46,7 @@ public class Main extends Application {
 
     public static Label nameLabel = new Label();
     public static String cheatCode = "Cinci";
-
+    public Stage stage;
 
     public static void main(String[] args) {
         launch(args);
@@ -54,7 +55,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         inventory.setFocusTraversable(false);
-
+        stage = primaryStage;
         GridPane ui = setGridPane();
         BorderPane borderPane = setBorderPane(ui);
 
@@ -247,7 +248,7 @@ public class Main extends Application {
         if (level.equals("/bonus.txt")) {
             bonusMap = this.map;
         } else if (level.equals("/map2.txt")) {
-            secondMap = this.map;
+            secondMap = this.map;getHostServices();
         }
         this.map.getPlayer().setHealth(currentPlayer.getHealth());
         this.map.getPlayer().setDamage(currentPlayer.getDamage());
@@ -255,8 +256,14 @@ public class Main extends Application {
         this.map.getPlayer().inventoryMap = currentPlayer.getInventoryMap();
         this.map.getPlayer().setTileName();
 
+       setStageSize();
     }
-
+    private void setStageSize() {
+        canvas.setWidth(map.getWidth() * Tiles.TILE_WIDTH);
+        canvas.setHeight(map.getHeight() * Tiles.TILE_WIDTH);
+        stage.setWidth(map.getWidth()*32+200);
+        stage.setHeight(map.getHeight()*32+30);
+    }
     private void increaseCounter(String levelName) {
         if (!levelName.equals("/bonus.txt")) {
             counter++;
@@ -270,12 +277,12 @@ public class Main extends Application {
         } else {
             this.map = secondMap;
         }
+        setStageSize();
 
     }
 
     private void setMapName(String mapName) {
         this.mapName = mapName;
     }
-
 
 }

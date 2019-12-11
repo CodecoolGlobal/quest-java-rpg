@@ -16,6 +16,7 @@ public abstract class Actor implements Drawable {
     private int health = 10;
     private int damage;
     private int defense = 0;
+    private String actualMap;
 
 
     public Actor(Cell cell) {
@@ -35,6 +36,9 @@ public abstract class Actor implements Drawable {
         this.health = newHealth;
     }
 
+    public void setActualMap(String mapName) {
+        this.actualMap = mapName;
+    }
     public int getDefense() {
         return this.defense;
     }

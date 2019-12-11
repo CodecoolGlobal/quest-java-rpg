@@ -3,16 +3,18 @@ package com.codecool.quest.logic;
 import com.codecool.quest.logic.actors.Ghost;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
+import com.codecool.quest.logic.actors.Boss;
 import com.codecool.quest.logic.items.Gold;
+import com.codecool.quest.logic.items.Crown;
 import com.codecool.quest.logic.items.Key;
 import com.codecool.quest.logic.items.Cloak;
 import com.codecool.quest.logic.items.Weapon;
+import javafx.scene.transform.Rotate;
 
 import java.io.InputStream;
 import java.util.Scanner;
 
 public class MapLoader {
-
     public static GameMap loadMap(String file) {
         InputStream is = MapLoader.class.getResourceAsStream(file);
         Scanner scanner = new Scanner(is);
@@ -49,6 +51,7 @@ public class MapLoader {
                             map.monsterList.add(map.getSkeleton());
                             break;
                         case 'g':
+//                            if (map.)
                             cell.setType(CellType.FLOOR);
                             map.setGhost(new Ghost(cell));
                             map.monsterList.add(map.getGhost());
@@ -59,7 +62,7 @@ public class MapLoader {
                             } else {
                                 cell.setType(CellType.GROUND);
                             }
-                            map.setPlayer(new Player(cell));
+                            map.setPlayer(new Player(cell))
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);
@@ -151,6 +154,33 @@ public class MapLoader {
                         case 'R':
                             cell.setType(CellType.BAR_R);
                             break;
+                        case 'O':
+                            cell.setType(CellType.FLOOR);
+                            map.setBoss(new Boss(cell));
+                            map.monsterList.add(map.getBoss());
+                            break;
+                        case '%':
+                            cell.setType(CellType.FLOOR);
+                            map.setCrown(new Crown(cell));
+                            break;
+                        case 'y':
+                            cell.setType(CellType.CASTLEWALL);
+                            break;
+                        case 'Y':
+                            cell.setType(CellType.CASTLEWALL2);
+                            break;
+                        case 't':
+                            cell.setType(CellType.BARTENDER);
+                            break;
+                        case 'p':
+                            cell.setType(CellType.POTION);
+                            break;
+                        case 'T':
+                            cell.setType(CellType.CLOAKMAN);
+                            break;
+                        case 'P':
+                            cell.setType(CellType.CARDMAN);
+                            break;
                         case 'V':
                             cell.setType(CellType.VILLAGEDOOR);
                             break;
@@ -172,17 +202,11 @@ public class MapLoader {
                         case 'm':
                             cell.setType(CellType.NPCPET);
                             break;
-                        case 't':
-                            cell.setType(CellType.BARTENDER);
+                        case 'í':
+                            cell.setType(CellType.TORCH);
                             break;
-                        case 'p':
-                            cell.setType(CellType.POTION);
-                            break;
-                        case 'T':
-                            cell.setType(CellType.CLOAKMAN);
-                            break;
-                        case 'P':
-                            cell.setType(CellType.CARDMAN);
+                        case 'Í':
+                            cell.setType(CellType.CANDLE);
                             break;
                         case '$':
                             cell.setType(CellType.PILLARHORIZONTAL);
