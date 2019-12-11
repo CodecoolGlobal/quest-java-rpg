@@ -74,7 +74,7 @@ public class Player extends Actor {
     private boolean isNeighbourPub() {
         String pubNameUp = this.getCell().getNeighbor(0, -1).getTileName();
         String pubNameDown = this.getCell().getNeighbor(0, 1).getTileName();
-        if (pubNameUp.equals("house-center") ) {
+        if (pubNameUp.equals("house-center")) {
             pubCoordX = 0;
             pubCoordY = -1;
             return true;
@@ -213,21 +213,25 @@ public class Player extends Actor {
 
     public void bartenderInteraction(GameMap map) {
         Cell cellBar = map.getCell(17, 4);
-        Cell cellCloak = map.getCell(20, 14);
-        Cell cellCard = map.getCell(17, 4);
+        Cell cellCloak = map.getCell(20, 13);
+        Cell cellCard = map.getCell(3, 11);
 
         try {
             Cell neighbor = this.cell.getNeighbor(0, -3);
             Cell neighborNextUp = this.cell.getNeighbor(0, -1);
-            Cell neighborNextRight = this.cell.getNeighbor(1, 0);
-            Cell neighborNextLeft = this.cell.getNeighbor(-1, 0);
             String neighborName = this.cell.getNeighbor(0, -3).getTileName();
             if (neighborName.equals("bartender")) {
                 neighbor.getNeighbor(0, -1).setType(CellType.QUESTION);
+            } else if (neighborNextUp.getTileName().equals("cloak-man") || neighborNextUp.getTileName().equals("card-man")) {
+                neighborNextUp.getNeighbor(0, -1).setType(CellType.QUESTION);
             }
 
             if (!neighborName.equals("bartender") && cellBar.getType() == CellType.QUESTION) {
                 cellBar.setType(CellType.FLOOR);
+            } else if (!neighborNextUp.getTileName().equals("cloak-man") && cellCloak.getType() == CellType.QUESTION) {
+                cellCloak.setType(CellType.FLOOR);
+            } else if (!neighborNextUp.getTileName().equals("card-man") && cellCard.getType() == CellType.QUESTION) {
+                cellCard.setType(CellType.FLOOR);
             }
         } catch (Exception ignored) {
 
