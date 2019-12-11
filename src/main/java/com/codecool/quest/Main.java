@@ -3,8 +3,8 @@ package com.codecool.quest;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
-import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.actors.Monster;
+import com.codecool.quest.logic.actors.Player;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -25,11 +25,19 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap("/map2.txt");
+    GameMap map = MapLoader.loadMap("/map.txt");
+    GameMap firstLevel = map;
+    GameMap secondMap;
+    GameMap bonusMap;
+    private int counter = 0;
+    private String mapName;
+
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
             map.getHeight() * Tiles.TILE_WIDTH);
+
     GraphicsContext context = canvas.getGraphicsContext2D();
+
     Label healthLabel = new Label();
     Label damageLabel = new Label();
     Label defenseLabel = new Label();
@@ -47,20 +55,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         inventory.setFocusTraversable(false);
 
-        //        Move code to method
-
-        GridPane ui = new GridPane();
-        ui.setPrefWidth(200);
-        ui.setPadding(new Insets(10));
-        ui.add(healthLabel, 0, 1);
-        ui.add(damageLabel, 0, 2);
-        ui.add(defenseLabel, 0, 3);
-        ui.add(new Label("Inventory:"), 0, 5);
-        ui.add(inventory, 0, 6);
-        BorderPane borderPane = new BorderPane();
-
-        borderPane.setCenter(canvas);
-        borderPane.setRight(ui);
+        GridPane ui = setGridPane();
+        BorderPane borderPane = setBorderPane(ui);
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
@@ -70,11 +66,32 @@ public class Main extends Application {
         primaryStage.show();
         getPlayerName();
         String characterName = "Name: " + nameLabel.getText();
-        ui.add(new Label(characterName),0,0);
+        ui.add(new Label(characterName), 0, 0);
         refresh();
     }
 
-    public void getPlayerName(){
+    private GridPane setGridPane() {
+        GridPane ui = new GridPane();
+        ui.setPrefWidth(200);
+        ui.setPadding(new Insets(10));
+        ui.add(healthLabel, 0, 1);
+        ui.add(damageLabel, 0, 2);
+        ui.add(defenseLabel, 0, 3);
+        ui.add(new Label("Inventory:"), 0, 5);
+        ui.add(inventory, 0, 6);
+
+        return ui;
+    }
+
+    private BorderPane setBorderPane(GridPane ui) {
+        BorderPane borderPane = new BorderPane();
+        borderPane.setCenter(canvas);
+        borderPane.setRight(ui);
+
+        return borderPane;
+    }
+
+    private void getPlayerName() {
         try {
             TextInputDialog dialog = new TextInputDialog("Bob");
 
@@ -87,7 +104,7 @@ public class Main extends Application {
             result.ifPresent(name -> {
                 this.nameLabel.setText(name);
             });
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("Wrong character name");
         }
     }
@@ -100,6 +117,13 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(0, -1);
+                if (map.getPlayer().isPlayerAtSpecificDoor("house-center-open")) {
+                    enterNewLevel("/bonus.txt");
+                } else if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter==0) {
+                    enterNewLevel("/map2.txt");
+                } else if(map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter>0) {
+                    enterPreviousLevel(firstLevel);
+                }
                 refresh();
                 break;
             case DOWN:
@@ -108,6 +132,9 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(0, 1);
+                if (map.getPlayer().isPlayerAtSpecificDoor("house-center-open")) {
+                    enterPreviousLevel(firstLevel);
+                }
                 refresh();
                 break;
             case LEFT:
@@ -192,6 +219,43 @@ public class Main extends Application {
         }
     }
 
+    private void enterNewLevel(String level) {
+        increaseCounter(level);
+        setMapName(level);
+        Player currentPlayer = this.map.getPlayer();
+        this.map = MapLoader.loadMap(level);
+        if (level.equals("/bonus.txt")) {
+            bonusMap = this.map;
+        } else if (level.equals("/map2.txt")) {
+            secondMap = this.map;
+        }
+        this.map.getPlayer().setHealth(currentPlayer.getHealth());
+        this.map.getPlayer().setDamage(currentPlayer.getDamage());
+        this.map.getPlayer().setDefense(currentPlayer.getDefense());
+        this.map.getPlayer().inventoryMap = currentPlayer.getInventoryMap();
+        this.map.getPlayer().setTileName();
+
+    }
+
+    private void increaseCounter(String levelName) {
+        if (!levelName.equals("/bonus.txt")) {
+            counter++;
+        }
+    }
+
+
+    private void enterPreviousLevel(GameMap previousMap) {
+        if (this.map != previousMap) {
+            this.map = previousMap;
+        } else {
+            this.map = secondMap;
+        }
+
+    }
+
+    private void setMapName(String mapName) {
+        this.mapName = mapName;
+    }
 
 
 }

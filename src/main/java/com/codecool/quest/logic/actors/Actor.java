@@ -53,6 +53,7 @@ public abstract class Actor implements Drawable {
         return cell.getX();
     }
 
+
     public int getY() {
         return cell.getY();
     }
@@ -78,7 +79,7 @@ public abstract class Actor implements Drawable {
 
 
     public void setDamage(int newDamage) {
-        this.damage += newDamage;
+        this.damage = newDamage;
     }
 
     public int getDamage() {

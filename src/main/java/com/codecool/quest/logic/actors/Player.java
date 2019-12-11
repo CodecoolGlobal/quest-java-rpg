@@ -16,7 +16,9 @@ public class Player extends Actor {
     private int countSecretDoorOpen = 0;
     private Item itemToPickUp;
     private String itemName;
-    private Map<String, Integer> inventoryMap = new HashMap<>();
+    private int pubCoordX;
+    private int pubCoordY;
+    public Map<String, Integer> inventoryMap = new HashMap<>();
     private ListView<String> inventory = new ListView<>();
 
     public Player(Cell cell) {
@@ -55,7 +57,8 @@ public class Player extends Actor {
     //Player method
     public void openPub() {
         if (isNeighbourPub()) {
-            this.getCell().getNeighbor(0, -1).setType(CellType.HOUSEOPEN);
+            System.out.println("Open door");
+            this.getCell().getNeighbor(pubCoordX, pubCoordY).setType(CellType.HOUSEOPEN);
         }
     }
 
@@ -68,8 +71,15 @@ public class Player extends Actor {
 
     //Player method
     private boolean isNeighbourPub() {
-        String pubName = this.getCell().getNeighbor(0, -1).getTileName();
-        if (pubName.equals("house-center")) {
+        String pubNameUp = this.getCell().getNeighbor(0, -1).getTileName();
+        String pubNameDown = this.getCell().getNeighbor(0, 1).getTileName();
+        if (pubNameUp.equals("house-center") ) {
+            pubCoordX = 0;
+            pubCoordY = -1;
+            return true;
+        } else if (pubNameDown.equals("house-center")) {
+            pubCoordX = 0;
+            pubCoordY = 1;
             return true;
         }
         return false;
@@ -117,7 +127,7 @@ public class Player extends Actor {
                 Integer value = inventoryMap.get(itemName);
                 inventoryMap.replace(itemName, value + 1);
             }
-            if (hasWeapon() && this.getDamage() != 10) this.setDamage(5);
+            if (hasWeapon() && this.getDamage() != 10) this.setDamage(getDamage() + 5);
             if (itemName.equals("cloak")) this.setDefense(1);
 
             inventory.getItems().clear();
@@ -133,7 +143,6 @@ public class Player extends Actor {
 
     //Player method - need one for monsters too
     private void attack(Cell neighbour) {
-        System.out.println("In attack method");
         int enemyHealth = neighbour.getActor().getHealth();
         int actualDamage = this.getDamage();
         if (enemyHealth > 0) {
@@ -172,7 +181,6 @@ public class Player extends Actor {
 
 
     private boolean isPassableAsPlayer(int x, int y) {
-        System.out.println("Inside the isPassableAsPlayer method");
         Cell neighbor = this.getCellNeighbour(x, y);
         boolean neighborIsDoor = isNeighbourActionCell(x, y, "door");
         boolean neighborIsOpenDoor = isNeighbourActionCell(x, y, "door-open");
@@ -180,10 +188,7 @@ public class Player extends Actor {
         boolean isPubOpen = isNeighbourActionCell(x, y, "house-center-open");
         boolean isSecretDoor = isNeighbourActionCell(x, y, "secret-door");
 
-        if (hasKey() && neighborIsDoor) {
-            neighbor.setOpenDoor();
-            inventoryMap.remove("key");
-        }
+        openNewLevelDoorIfHasKey(neighbor, neighborIsDoor);
 
         if (this.getCell().getNeighbor(x, y).getActor() != null) {
             attack(this.getCell().getNeighbor(x, y));
@@ -191,6 +196,18 @@ public class Player extends Actor {
         }
 
         return neighborIsOpenDoor || isLeverDoorOpen || isPubOpen || isSecretDoor;
+    }
+
+    private void openNewLevelDoorIfHasKey(Cell neighbor, boolean neighborIsDoor) {
+        if (hasKey() && neighborIsDoor) {
+            neighbor.setOpenDoor();
+            inventoryMap.remove("key");
+        }
+    }
+
+    public boolean isPlayerAtSpecificDoor(String specificDoor) {
+        String tileName = this.getCell().getTileName();
+        return tileName.equals(specificDoor);
     }
 
 

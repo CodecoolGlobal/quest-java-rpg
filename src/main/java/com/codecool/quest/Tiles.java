@@ -60,20 +60,19 @@ public class Tiles {
         tileMap.put("lever-down", new Tile(30, 24));
         tileMap.put("lever-door-locked", new Tile(3, 4));
         tileMap.put("lever-door-open", new Tile(4, 4));
-
-
-
-
-
-
-
+        tileMap.put("pillar-up", new Tile(9, 16));
+        tileMap.put("pillar-center", new Tile(9, 17));
+        tileMap.put("pillar-down", new Tile(9, 18));
+        tileMap.put("pillar-horizontal", new Tile(8, 16));
+        tileMap.put("bar-B", new Tile(20, 30));
+        tileMap.put("bar-A", new Tile(19, 30));
+        tileMap.put("bar-R", new Tile(23, 31));
 
         tileMap.put("village-house", new Tile(18, 10));
         tileMap.put("village-house2", new Tile(19, 10));
         tileMap.put("village-door", new Tile(21, 11));
         tileMap.put("campfire", new Tile(14, 10));
         tileMap.put("npc", new Tile(25, 1));
-
 
     }
 

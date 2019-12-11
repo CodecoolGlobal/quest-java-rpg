@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class MapLoader {
+
     public static GameMap loadMap(String file) {
         InputStream is = MapLoader.class.getResourceAsStream(file);
         Scanner scanner = new Scanner(is);
@@ -52,7 +53,11 @@ public class MapLoader {
                             map.monsterList.add(map.getGhost());
                             break;
                         case '@':
-                            cell.setType(CellType.GROUND);
+                            if (!file.equals("/map.txt")) {
+                                cell.setType(CellType.FLOOR);
+                            } else {
+                                cell.setType(CellType.GROUND);
+                            }
                             map.setPlayer(new Player(cell));
                             break;
                         case 'k':
@@ -120,6 +125,27 @@ public class MapLoader {
                             break;
                         case 'L':
                             cell.setType(CellType.LEVERDOOR);
+                            break;
+                        case '^':
+                            cell.setType(CellType.PILLARUP);
+                            break;
+                        case '|':
+                            cell.setType(CellType.PILLARCENTER);
+                            break;
+                        case 'ˇ':
+                            cell.setType(CellType.PILLARDOWN);
+                            break;
+                        case '-':
+                            cell.setType(CellType.PILLARHORIZONTAL);
+                            break;
+                        case 'D':
+                            cell.setType(CellType.BAR_B);
+                            break;
+                        case 'A':
+                            cell.setType(CellType.BAR_A);
+                            break;
+                        case 'R':
+                            cell.setType(CellType.BAR_R);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
