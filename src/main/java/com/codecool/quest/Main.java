@@ -187,6 +187,7 @@ public class Main extends Application {
                     break;
                 }
                 map.getPlayer().usePotion();
+                refresh();
                 break;
         }
 
