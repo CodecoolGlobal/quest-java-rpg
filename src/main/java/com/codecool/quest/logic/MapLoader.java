@@ -62,7 +62,7 @@ public class MapLoader {
                             } else {
                                 cell.setType(CellType.GROUND);
                             }
-                            map.setPlayer(new Player(cell))
+                            map.setPlayer(new Player(cell));
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);
