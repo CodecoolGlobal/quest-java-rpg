@@ -26,10 +26,11 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap("/map.txt");
+    GameMap map = MapLoader.loadMap("/map2.txt");
     GameMap firstLevel = map;
     GameMap secondMap;
     GameMap bonusMap;
+    GameMap bossMap;
     private int counter = 0;
     private String mapName;
 
@@ -156,6 +157,11 @@ public class Main extends Application {
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(1, 0);
                 this.map.getPlayer().pubPeopleInteraction(map);
+                if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter==0) {
+                    enterNewLevel("/map3.txt");
+                } else if(map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter>0) {
+                    enterPreviousLevel(secondMap);
+                }
                 refresh();
                 break;
             case A:
@@ -247,7 +253,9 @@ public class Main extends Application {
         if (level.equals("/bonus.txt")) {
             bonusMap = this.map;
         } else if (level.equals("/map2.txt")) {
-            secondMap = this.map;getHostServices();
+            secondMap = this.map;
+        } else if (level.equals("/map3.txt")) {
+            bossMap = this.map;
         }
         this.map.getPlayer().setHealth(currentPlayer.getHealth());
         this.map.getPlayer().setDamage(currentPlayer.getDamage());
@@ -257,6 +265,7 @@ public class Main extends Application {
 
        setStageSize();
     }
+
     private void setStageSize() {
         canvas.setWidth(map.getWidth() * Tiles.TILE_WIDTH);
         canvas.setHeight(map.getHeight() * Tiles.TILE_WIDTH);
@@ -268,7 +277,6 @@ public class Main extends Application {
             counter++;
         }
     }
-
 
     private void enterPreviousLevel(GameMap previousMap) {
         if (this.map != previousMap) {
@@ -283,5 +291,4 @@ public class Main extends Application {
     private void setMapName(String mapName) {
         this.mapName = mapName;
     }
-
 }

@@ -41,8 +41,6 @@ public class GameMap {
         return cells[x][y];
     }
 
-
-
     public void setPlayer(Player player) {
         this.player = player;
     }

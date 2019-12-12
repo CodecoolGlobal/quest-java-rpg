@@ -1,10 +1,10 @@
 50 30
 ###########d##fFfhffhfFFffhfFfvfFfhFhf############
-#::g:::::::@:#hf0000000000FFf0vF...w..+.a.#......#
-#::::::#######ff0f#######00000vf..ggg.#.g.+...k..d
-#####:##Fh0000h00h#sssss#fFFhfvFfhFfhf########V###
-#bmBf0ffhF0fF000Ff###+###fFf00G..............C.C.#
-#bg.f0000000FfhfhFfh000hFffF0fvfff.fff...........#
+#..g.......@.#hf0000000000FFf0vF...w..+.a.#.....í#
+#......#######ff0f#######00000vf..ggg.#.g.+...k..d
+#####.##Fh0000h00h#sssss#fFFhfvFfhFfhf#######...í#
+#bmBf0ffhF0fF000Ff###+###fFf00G.............##V###
+#bg.f0000000FfhfhFfh000hFffF0fvfff.fff.......C.C.#
 #Bb.ffff0hf00000.0000fFhf0000.v..................#
 #...ff000fF....000fhFffFh0hhhhv..................#
 #.Bbfrfffhf.............F0hhhhv..................#

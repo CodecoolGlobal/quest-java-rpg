@@ -16,7 +16,6 @@ public abstract class Actor implements Drawable {
     private int health = 10;
     private int damage;
     private int defense = 0;
-    private String actualMap;
 
 
     public Actor(Cell cell) {
@@ -26,8 +25,6 @@ public abstract class Actor implements Drawable {
         movementCoordinates.addAll(Arrays.asList(cords));
     }
 
-
-
     public int getHealth() {
         return health;
     }
@@ -36,9 +33,6 @@ public abstract class Actor implements Drawable {
         this.health = newHealth;
     }
 
-    public void setActualMap(String mapName) {
-        this.actualMap = mapName;
-    }
     public int getDefense() {
         return this.defense;
     }
@@ -46,8 +40,6 @@ public abstract class Actor implements Drawable {
     public void setDefense(int newDefense) {
         this.defense += newDefense;
     }
-
-
 
     public Cell getCell() {
         return cell;
@@ -68,10 +60,10 @@ public abstract class Actor implements Drawable {
         boolean isFloor = isNeighbourActionCell(x, y, "floor");
         boolean isGrass = isNeighbourActionCell(x, y, "grass2");
         boolean isBridge = isNeighbourActionCell(x, y, "bridge");
+        boolean isVillageDoor = isNeighbourActionCell(x, y, "village-door");
         boolean isNeighbourNotActor = neighbour.getActor() == null;
 
-        return (isFloor || isGround || isGrass || isBridge) && isNeighbourNotActor;
-
+        return (isFloor || isGround || isGrass || isBridge || isVillageDoor) && isNeighbourNotActor;
 
     }
 

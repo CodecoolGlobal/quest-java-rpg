@@ -51,18 +51,21 @@ public class MapLoader {
                             map.monsterList.add(map.getSkeleton());
                             break;
                         case 'g':
-//                            if (map.)
-                            cell.setType(CellType.FLOOR);
+                            if (file.equals("/map2.txt")) {
+                                cell.setType(CellType.GROUND);
+                            } else {
+                                cell.setType(CellType.FLOOR);
+                            }
                             map.setGhost(new Ghost(cell));
                             map.monsterList.add(map.getGhost());
                             break;
                         case '@':
-                            if (!file.equals("/map.txt")) {
+                            map.setPlayer(new Player(cell));
+                            if (!file.equals("/map.txt") && !file.equals("/map2.txt")) {
                                 cell.setType(CellType.FLOOR);
                             } else {
                                 cell.setType(CellType.GROUND);
                             }
-                            map.setPlayer(new Player(cell))
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);
