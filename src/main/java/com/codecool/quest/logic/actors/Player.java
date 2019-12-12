@@ -18,6 +18,7 @@ public class Player extends Actor {
     private String tileName = "player";
     private boolean isLeverOpen = false;
     private int countSecretDoorOpen = 0;
+    private boolean wcIsUsed;
     private Item itemToPickUp;
     private String itemName;
     private int pubCoordX = 0;
@@ -32,6 +33,7 @@ public class Player extends Actor {
     public Player(Cell cell) {
         super(cell);
         this.setDamage(5);
+        this.wcIsUsed = false;
     }
 
     public int getLevel() {return this.level;}
@@ -267,9 +269,9 @@ public class Player extends Actor {
     }
 
     public void pubPeopleInteraction(GameMap map) {
-        Cell cellBar = map.getCell(17, 4);
+        Cell cellBar = map.getCell(12, 4);
         Cell cellCloak = map.getCell(20, 13);
-        Cell cellCard = map.getCell(3, 11);
+        Cell cellCard = map.getCell(8, 10);
 
         try {
             Cell neighbor = this.cell.getNeighbor(0, -3);
@@ -420,6 +422,20 @@ public class Player extends Actor {
                 inventoryMap.remove("potion");
             }
         }
+    }
+
+    public void getHPWhenWCIsUsed() {
+        Cell cellLeft = this.getCellNeighbour(-1, 0);
+        if (cellLeft.getTileName().equals("wc") && !wcIsUsed) {
+            this.setHealth(this.getHealth() + 1);
+            this.wcIsUsed = true;
+        }
+    }
+
+    public boolean getWcIsUsed() {return wcIsUsed;}
+
+    public void setWcIsUsed(boolean used) {
+        this.wcIsUsed = used;
     }
 
 }
