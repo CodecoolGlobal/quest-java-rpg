@@ -242,6 +242,7 @@ public class Main extends Application {
             if (randomNumber == 1) {
                 Monster monster = (Monster) monsterList.get(i);
                 monster.monsterMoveDirection();
+
             }
         }
     }
