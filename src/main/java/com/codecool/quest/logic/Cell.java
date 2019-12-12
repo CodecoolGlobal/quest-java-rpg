@@ -61,7 +61,11 @@ public class Cell implements Drawable {
     }
 
     public void setOpenDoor() {
-        type.setTileName("door-open");
+        this.setType(CellType.DOOROPEN);
+    }
+
+    public void setDoorClose() {
+        type.setTileName("door");
     }
 
     public int getX() {
