@@ -140,6 +140,7 @@ public class Main extends Application {
                 map.getPlayer().move(0, 1);
                 checkIfMonsterIsDead();
                 moveBetweenLevelsDownDirection();
+                this.map.getPlayer().pubPeopleInteraction(map);
                 refresh();
                 break;
             case LEFT:
@@ -149,6 +150,7 @@ public class Main extends Application {
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(-1, 0);
                 checkIfMonsterIsDead();
+                this.map.getPlayer().pubPeopleInteraction(map);
                 refresh();
                 break;
             case RIGHT:
@@ -159,6 +161,7 @@ public class Main extends Application {
                 map.getPlayer().move(1, 0);
                 checkIfMonsterIsDead();
                 moveBetweenLevelsRightDirection();
+                this.map.getPlayer().pubPeopleInteraction(map);
                 refresh();
                 break;
             case A:
