@@ -197,8 +197,10 @@ public class Main extends Application {
                 map.getPlayer().usePotion();
                 refresh();
                 break;
-            case Q:
+            case M:
                 enterNewLevel("/map.txt");
+                counter = 0;
+                refresh();
                 break;
         }
 
@@ -251,21 +253,17 @@ public class Main extends Application {
             healthLabel.setText("Health: " + map.getPlayer().getHealth());
             damageLabel.setText("Attack: " + map.getPlayer().getDamage());
             defenseLabel.setText("Defense: " + map.getPlayer().getDefense());
-        } catch (Exception ignored) {}
-
+        } catch (Exception ignored) {
+        }
 
 
     }
 
     private void displayInventory() {
         inventory.getItems().clear();
-        try {
-            Map<String, Integer> inventoryMap = map.getPlayer().getInventoryMap();
-            for (Map.Entry<String, Integer> entry : inventoryMap.entrySet()) {
-                inventory.getItems().add(entry.getKey() + ": " + entry.getValue());
-            }
-        } catch (Exception ignored) {
-
+        Map<String, Integer> inventoryMap = map.getPlayer().getInventoryMap();
+        for (Map.Entry<String, Integer> entry : inventoryMap.entrySet()) {
+            inventory.getItems().add(entry.getKey() + ": " + entry.getValue());
         }
 
     }
@@ -287,14 +285,19 @@ public class Main extends Application {
         setMapName(level);
         Player currentPlayer = this.map.getPlayer();
         this.map = MapLoader.loadMap(level);
-        if (level.equals("/bonus.txt")) {
-            bonusMap = this.map;
-        } else if (level.equals("/map.txt")) {
-            firstLevel = this.map;
-        }else if (level.equals("/map2.txt")) {
-            secondMap = this.map;
-        } else if (level.equals("/map3.txt")) {
-            bossMap = this.map;
+        switch (level) {
+            case "/bonus.txt":
+                bonusMap = this.map;
+                break;
+            case "/map.txt":
+                firstLevel = this.map;
+                break;
+            case "/map2.txt":
+                secondMap = this.map;
+                break;
+            case "/map3.txt":
+                bossMap = this.map;
+                break;
         }
         this.map.getPlayer().setActualMap(mapName);
         saveStats(currentPlayer);
@@ -349,12 +352,12 @@ public class Main extends Application {
     }
 
 
-    private void checkIfMonsterIsDead(){
+    private void checkIfMonsterIsDead() {
         try {
             this.map.getSkeleton().monsterIsDead();
             this.map.getGhost().monsterIsDead();
             this.map.getYeti().monsterIsDead();
-        } catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
     }
