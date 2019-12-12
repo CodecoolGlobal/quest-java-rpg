@@ -1,6 +1,7 @@
 package com.codecool.quest;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Monster;
@@ -157,7 +158,7 @@ public class Main extends Application {
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(1, 0);
                 this.map.getPlayer().pubPeopleInteraction(map);
-                if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter==0) {
+                if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter>=1) {
                     enterNewLevel("/map3.txt");
                 } else if(map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter>0) {
                     enterPreviousLevel(secondMap);
@@ -248,6 +249,7 @@ public class Main extends Application {
     }
 
     private void enterNewLevel(String level) {
+        System.out.println("In enterNewLevel method");
         increaseCounter(level);
         setMapName(level);
         Player currentPlayer = this.map.getPlayer();
