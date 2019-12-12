@@ -462,7 +462,9 @@ public class Player extends Actor {
         if (inventoryMap.containsKey("potion")) {
             int potionNumber = inventoryMap.get("potion");
             inventoryMap.replace("potion", potionNumber - 1);
-            setHealth(10);
+            if (this.getLevel() == 1 && this.getHealth() < 10) {setHealth(10);};
+            if (this.getLevel() == 2 && this.getHealth() < 12) {setHealth(12);};
+            if (this.getLevel() == 3 && this.getHealth() < 14) {setHealth(14);};
             if (potionNumber - 1 <= 0) {
                 inventoryMap.remove("potion");
             }
