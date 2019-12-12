@@ -120,13 +120,7 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(0, -1);
-                if (map.getPlayer().isPlayerAtSpecificDoor("house-center-open")) {
-                    enterNewLevel("/bonus.txt");
-                } else if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter == 0) {
-                    enterNewLevel("/map2.txt");
-                } else if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter > 0) {
-                    enterPreviousLevel(firstLevel);
-                }
+                moveBetweenLevelsUpDirection();
                 this.map.getPlayer().pubPeopleInteraction(map);
                 refresh();
                 break;
@@ -136,9 +130,7 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(0, 1);
-                if (map.getPlayer().isPlayerAtSpecificDoor("house-center-open")) {
-                    enterPreviousLevel(firstLevel);
-                }
+                moveBetweenLevelsDownDirection();
                 this.map.getPlayer().pubPeopleInteraction(map);
                 refresh();
                 break;
@@ -158,11 +150,7 @@ public class Main extends Application {
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(1, 0);
                 this.map.getPlayer().pubPeopleInteraction(map);
-                if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter == 1) {
-                    enterNewLevel("/map3.txt");
-                } else if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter > 1) {
-                    enterPreviousLevel(secondMap);
-                }
+                moveBetweenLevelsRightDirection();
                 refresh();
                 break;
             case A:
@@ -200,6 +188,30 @@ public class Main extends Application {
                 break;
         }
 
+    }
+
+    private void moveBetweenLevelsRightDirection() {
+        if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter == 1) {
+            enterNewLevel("/map3.txt");
+        } else if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter > 1) {
+            enterPreviousLevel(secondMap);
+        }
+    }
+
+    private void moveBetweenLevelsDownDirection() {
+        if (map.getPlayer().isPlayerAtSpecificDoor("house-center-open")) {
+            enterPreviousLevel(firstLevel);
+        }
+    }
+
+    private void moveBetweenLevelsUpDirection() {
+        if (map.getPlayer().isPlayerAtSpecificDoor("house-center-open")) {
+            enterNewLevel("/bonus.txt");
+        } else if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter == 0) {
+            enterNewLevel("/map2.txt");
+        } else if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter > 0) {
+            enterPreviousLevel(firstLevel);
+        }
     }
 
     private void refresh() {
