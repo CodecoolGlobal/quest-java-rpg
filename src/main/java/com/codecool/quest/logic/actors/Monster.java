@@ -41,19 +41,23 @@ public abstract class Monster extends Actor {
     }
 
     public void monsterMoveDirection() {
-        boolean isBoss = this.getCell().getActor().getTileName().equals("boss");
+        try {
+            boolean isBoss = this.getCell().getActor().getTileName().equals("boss");
+        } catch (Exception ignored){
+
+        }
         int[] actualMove = movementCoordinates.get(rnd.nextInt(movementCoordinates.size()));
         int x = actualMove[0];
         int y = actualMove[1];
-        if (getHealth() > 0 && !isBoss) {
+        if (getHealth() > 0 ) {
             monsterMove(x, y);
         }
         if(this.getCell().getActor() instanceof Boss && this.getHealth() > 0){
-            ((Boss) this.getCell().getActor()).bossMove();
+            ((Boss) this.getCell().getActor()).bossMove(x,y);
         }
     }
 
-    private void monsterMove(int dx, int dy) {
+    public void monsterMove(int dx, int dy) {
 
         try {
             Boolean isDoor = this.getCell().getTileName().equals("village-door");

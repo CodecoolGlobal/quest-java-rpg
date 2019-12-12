@@ -334,6 +334,10 @@ public class Main extends Application {
         this.mapName = mapName;
     }
 
+    private String getMapName(){
+        return mapName;
+    }
+
     private void checkIfMonsterIsDead(){
         try {
             this.map.getSkeleton().monsterIsDead();

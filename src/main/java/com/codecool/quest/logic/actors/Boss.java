@@ -30,10 +30,10 @@ public class Boss extends Monster{
     }
 
 
-    public void bossMove(){
-        System.out.println("what");
-        if (this.getTileName().equals("boss2")){
+    public void bossMove(int x, int y){
+        if (this.getTileName().equals("boss2") && this.getHealth()>0 && !
+                this.getCellNeighbour(x, y).getTileName().equals("player")){
 
-        };
+        }
     }
 }
