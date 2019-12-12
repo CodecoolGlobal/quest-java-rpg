@@ -26,7 +26,7 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap("/map.txt");
+    GameMap map = MapLoader.loadMap("/map2.txt");
     GameMap firstLevel = map;
     GameMap secondMap;
     GameMap bonusMap;
@@ -159,7 +159,7 @@ public class Main extends Application {
                 this.map.getPlayer().pubPeopleInteraction(map);
                 if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter==0) {
                     enterNewLevel("/map3.txt");
-                } else if(map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter>0) {
+                } else if(map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter==0) {
                     enterPreviousLevel(secondMap);
                 }
                 refresh();
