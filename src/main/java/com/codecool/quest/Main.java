@@ -275,11 +275,11 @@ public class Main extends Application {
         if (level.equals("/bonus.txt")) {
             bonusMap = this.map;
         } else if (level.equals("/map2.txt")) {
-            this.map.getPlayer().setActualMap(mapName);
             secondMap = this.map;
         } else if (level.equals("/map3.txt")) {
             bossMap = this.map;
         }
+        this.map.getPlayer().setActualMap(mapName);
         saveStats(currentPlayer);
     }
 

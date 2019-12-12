@@ -36,7 +36,7 @@ public class Player extends Actor {
 
     public int getLevel() {return this.level;}
 
-    public void setLevel(int lvl) {this.level = level;}
+    public void setLevel(int lvl) {this.level = lvl;}
 
     public int getXp() {return this.xp;}
 
@@ -206,6 +206,9 @@ public class Player extends Actor {
             this.level = 2;
             this.addDamage(2);
             this.setHealth(15);
+        }
+        if (this.xp > 29 && this.level == 2) {
+
         }
     }
 
