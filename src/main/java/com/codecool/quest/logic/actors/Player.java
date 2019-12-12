@@ -200,10 +200,16 @@ public class Player extends Actor {
                     this.getCell().setActor(null);
                 }
             } else {
-                if (neighbour.getActor().getTileName().equals("skeleton")) {
-                    this.xp += 2;
-                } else if (neighbour.getActor().getTileName().equals("ghost")) {
-                    this.xp += 3;
+                switch (neighbour.getActor().getTileName()) {
+                    case "skeleton":
+                        this.xp += 2;
+                        break;
+                    case "ghost":
+                        this.xp += 3;
+                        break;
+                    case "yeti":
+                        this.xp += 4;
+                        break;
                 }
                 checkLevel();
                 neighbour.setActor(null);
@@ -218,7 +224,7 @@ public class Player extends Actor {
             this.addDamage(1);
             this.setHealth(12);
         }
-        if (this.xp > 29 && this.level == 2) {
+        if (this.xp > 34 && this.level == 2) {
             this.level = 3;
             this.addDamage(1);
             this.setHealth(14);
