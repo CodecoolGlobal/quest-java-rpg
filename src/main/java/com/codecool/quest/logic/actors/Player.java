@@ -24,6 +24,7 @@ public class Player extends Actor {
     private int pubCoordY = 0;
     public Map<String, Integer> inventoryMap = new HashMap<>();
     private ListView<String> inventory = new ListView<>();
+    private String actualMap = "/map.txt";
 
     public Player(Cell cell) {
         super(cell);
@@ -93,6 +94,10 @@ public class Player extends Actor {
             return true;
         }
         return false;
+    }
+
+    public void setActualMap(String mapName){
+        this.actualMap = mapName;
     }
 
     //Player method
@@ -192,7 +197,9 @@ public class Player extends Actor {
                 nextCell.setActor(this);
                 cell = nextCell;
                 itemToPickUp = this.cell.isItemInCell();
-                showSecretTunnel();
+                if (this.actualMap.equals("/map.txt")) {
+                    showSecretTunnel();
+                }
             }
         } catch (NullPointerException ignored) {
 
