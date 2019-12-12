@@ -22,6 +22,7 @@ public class Player extends Actor {
     private String itemName;
     private int pubCoordX = 0;
     private int pubCoordY = 0;
+    private boolean playedCard = false;
     public Map<String, Integer> inventoryMap = new HashMap<>();
     private ListView<String> inventory = new ListView<>();
     private String actualMap = "/map.txt";
@@ -327,7 +328,7 @@ public class Player extends Actor {
 
     public void playForWeapon(GameMap map) {
         Cell cellCard = map.getCell(3, 11);
-        if (hasWeapon() && cellCard.getType() == CellType.QUESTION) {
+        if (hasWeapon() && cellCard.getType() == CellType.QUESTION && !playedCard) {
             getRandomCard(map);
         }
     }
@@ -350,8 +351,7 @@ public class Player extends Actor {
         index = random.nextInt(7);
         randomCard = cards.get(index);
         displayCardOnTableForStranger(randomCard, map);
-
-
+        playedCard = true;
     }
 
     private void displayCardOnTableForPlayer(String card, GameMap map) {
