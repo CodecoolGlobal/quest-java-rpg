@@ -89,6 +89,7 @@ public class Tiles {
         tileMap.put("candle", new Tile(5,15));
         tileMap.put("gold", new Tile(9, 26));
         tileMap.put("card-back", new Tile(19, 17));
+        tileMap.put("boss2", new Tile(27, 6));
         tileMap.put("seven", new Tile(26, 17));
         tileMap.put("eight", new Tile(27, 16));
         tileMap.put("nine", new Tile(28, 17));
