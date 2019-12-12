@@ -7,7 +7,7 @@ public class Yeti extends Monster {
     public Yeti(Cell cell) {
         super(cell);
         this.setDamage(5);
-        this.setHealth(25);
+        this.setHealth(22);
     }
 
 
