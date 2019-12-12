@@ -4,11 +4,7 @@ import com.codecool.quest.logic.actors.Ghost;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.actors.Boss;
-import com.codecool.quest.logic.items.Gold;
-import com.codecool.quest.logic.items.Crown;
-import com.codecool.quest.logic.items.Key;
-import com.codecool.quest.logic.items.Cloak;
-import com.codecool.quest.logic.items.Weapon;
+import com.codecool.quest.logic.items.*;
 import javafx.scene.transform.Rotate;
 
 import java.io.InputStream;
@@ -106,6 +102,9 @@ public class MapLoader {
                         case 'v':
                             cell.setType(CellType.WATER);
                             break;
+                        case 'ú':
+                            cell.setType(CellType.WATER2);
+                            break;
                         case 'r':
                             cell.setType(CellType.GRASS);
                             break;
@@ -117,6 +116,9 @@ public class MapLoader {
                             break;
                         case 'F':
                             cell.setType(CellType.FOREST2);
+                            break;
+                        case 'q':
+                            cell.setType(CellType.FORESTDEAD);
                             break;
                         case 'h':
                             cell.setType(CellType.FOREST3);
@@ -206,7 +208,8 @@ public class MapLoader {
                             cell.setType(CellType.NPC);
                             break;
                         case 'm':
-                            cell.setType(CellType.NPCPET);
+                            cell.setType(CellType.GROUND);
+                            map.setPet(new Pet(cell));
                             break;
                         case 'í':
                             cell.setType(CellType.TORCH);

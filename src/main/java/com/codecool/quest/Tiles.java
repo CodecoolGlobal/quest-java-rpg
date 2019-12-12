@@ -42,6 +42,7 @@ public class Tiles {
         tileMap.put("door", new Tile(0, 9));
         tileMap.put("door-open", new Tile(2, 9));
         tileMap.put("water", new Tile(8, 4));
+        tileMap.put("water2", new Tile(11, 5));
         tileMap.put("roof-left", new Tile(10, 15));
         tileMap.put("roof-center", new Tile(11, 15));
         tileMap.put("roof-right", new Tile(12, 15));
@@ -54,6 +55,7 @@ public class Tiles {
         tileMap.put("forest", new Tile(3, 2));
         tileMap.put("forest2", new Tile(2, 1));
         tileMap.put("forest3", new Tile(5, 1));
+        tileMap.put("forest-dead", new Tile(6, 2));
         tileMap.put("cemetery", new Tile(1, 14));
         tileMap.put("Cemetery", new Tile(2, 14));
         tileMap.put("bones", new Tile(0, 15));
