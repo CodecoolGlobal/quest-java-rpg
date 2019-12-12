@@ -84,6 +84,8 @@ public abstract class Actor implements Drawable {
         this.damage = newDamage;
     }
 
+    public void addDamage(int damageToAdd) {this.damage += damageToAdd;}
+
     public int getDamage() {
         return this.damage;
     }

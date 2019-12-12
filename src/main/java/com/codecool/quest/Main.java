@@ -27,7 +27,7 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap("/map2.txt");
+    GameMap map = MapLoader.loadMap("/map.txt");
     GameMap firstLevel = map;
     GameMap secondMap;
     GameMap bonusMap;
@@ -44,6 +44,8 @@ public class Main extends Application {
     Label healthLabel = new Label();
     Label damageLabel = new Label();
     Label defenseLabel = new Label();
+    Label levelLabel = new Label();
+    Label xpLabel = new Label();
     ListView<String> inventory = new ListView<>();
 
     public static Label nameLabel = new Label();
@@ -77,11 +79,13 @@ public class Main extends Application {
         GridPane ui = new GridPane();
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
-        ui.add(healthLabel, 0, 1);
-        ui.add(damageLabel, 0, 2);
-        ui.add(defenseLabel, 0, 3);
-        ui.add(new Label("Inventory:"), 0, 5);
-        ui.add(inventory, 0, 6);
+        ui.add(levelLabel, 0, 1);
+        ui.add(xpLabel, 0, 2);
+        ui.add(healthLabel, 0, 3);
+        ui.add(damageLabel, 0, 4);
+        ui.add(defenseLabel, 0, 5);
+        ui.add(new Label("Inventory:"), 0, 7);
+        ui.add(inventory, 0, 8);
 
         return ui;
     }
@@ -219,6 +223,8 @@ public class Main extends Application {
 
             }
         }
+        levelLabel.setText("Hero level: " + map.getPlayer().getLevel());
+        xpLabel.setText("XP: " + map.getPlayer().getXp());
         healthLabel.setText("Health: " + map.getPlayer().getHealth());
         damageLabel.setText("Attack: " + map.getPlayer().getDamage());
         defenseLabel.setText("Defense: " + map.getPlayer().getDefense());
@@ -294,8 +300,11 @@ public class Main extends Application {
         this.map.getPlayer().setHealth(currentPlayer.getHealth());
         this.map.getPlayer().setDamage(currentPlayer.getDamage());
         this.map.getPlayer().setDefense(currentPlayer.getDefense());
+        this.map.getPlayer().setLevel(currentPlayer.getLevel());
+        this.map.getPlayer().setXp(currentPlayer.getXp());
         this.map.getPlayer().inventoryMap = currentPlayer.getInventoryMap();
         this.map.getPlayer().setTileName();
+
         setStageSize();
     }
 

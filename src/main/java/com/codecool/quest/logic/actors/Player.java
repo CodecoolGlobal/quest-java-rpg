@@ -25,11 +25,21 @@ public class Player extends Actor {
     public Map<String, Integer> inventoryMap = new HashMap<>();
     private ListView<String> inventory = new ListView<>();
     private String actualMap = "/map.txt";
+    private int level = 1;
+    private int xp = 0;
 
     public Player(Cell cell) {
         super(cell);
         this.setDamage(5);
     }
+
+    public int getLevel() {return this.level;}
+
+    public void setLevel(int lvl) {this.level = level;}
+
+    public int getXp() {return this.xp;}
+
+    public void setXp(int xp) {this.xp = xp;}
 
     public String getTileName() {
         setTileName();
@@ -152,7 +162,7 @@ public class Player extends Actor {
                 Integer value = inventoryMap.get(itemName);
                 inventoryMap.replace(itemName, value + 1);
             }
-            if (hasWeapon() && this.getDamage() != 10) this.setDamage(getDamage() + 5);
+            if (itemName.equals("weapon")) this.addDamage(3);
             if (itemName.equals("cloak")) this.addDefense(1);
 
             inventory.getItems().clear();
@@ -178,8 +188,23 @@ public class Player extends Actor {
                     this.getCell().setActor(null);
                 }
             } else {
+                if (neighbour.getActor().getTileName().equals("skeleton")) {
+                    this.xp += 2;
+                } else if (neighbour.getActor().getTileName().equals("ghost")) {
+                    this.xp += 3;
+                }
+                checkLevel();
                 neighbour.setActor(null);
+
             }
+        }
+    }
+
+    private void checkLevel() {
+        if (9 < this.xp && this.xp < 30 && this.level == 1) {
+            this.level = 2;
+            this.addDamage(2);
+            this.setHealth(15);
         }
     }
 
