@@ -4,6 +4,7 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
+import com.codecool.quest.logic.actors.Boss;
 import com.codecool.quest.logic.actors.Monster;
 import com.codecool.quest.logic.actors.Player;
 import javafx.application.Application;
@@ -124,6 +125,7 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(0, -1);
+                checkIfMonsterIsDead();
                 moveBetweenLevelsUpDirection();
                 this.map.getPlayer().pubPeopleInteraction(map);
                 refresh();
@@ -134,8 +136,8 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(0, 1);
+                checkIfMonsterIsDead();
                 moveBetweenLevelsDownDirection();
-                this.map.getPlayer().pubPeopleInteraction(map);
                 refresh();
                 break;
             case LEFT:
@@ -144,7 +146,7 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(-1, 0);
-                this.map.getPlayer().pubPeopleInteraction(map);
+                checkIfMonsterIsDead();
                 refresh();
                 break;
             case RIGHT:
@@ -153,7 +155,7 @@ public class Main extends Application {
                 }
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(1, 0);
-                this.map.getPlayer().pubPeopleInteraction(map);
+                checkIfMonsterIsDead();
                 moveBetweenLevelsRightDirection();
                 refresh();
                 break;
@@ -256,13 +258,11 @@ public class Main extends Application {
 
     private void moveAllMonsters(List monsterList) {
         Random random = new Random();
-
         for (int i = 0; i < monsterList.size(); i++) {
             int randomNumber = random.nextInt(2);
             if (randomNumber == 1) {
                 Monster monster = (Monster) monsterList.get(i);
                 monster.monsterMoveDirection();
-
             }
         }
     }
@@ -330,4 +330,14 @@ public class Main extends Application {
     private void setMapName(String mapName) {
         this.mapName = mapName;
     }
+
+    private void checkIfMonsterIsDead(){
+        try {
+            this.map.getSkeleton().monsterIsDead();
+            this.map.getGhost().monsterIsDead();
+        } catch (Exception ignored){
+
+        }
+    }
+
 }

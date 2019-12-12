@@ -7,6 +7,10 @@ public class Weapon extends Item{
         super(cell);
     }
 
+    public Weapon(){
+
+    }
+
     public String getTileName() {
         return "weapon";
     }

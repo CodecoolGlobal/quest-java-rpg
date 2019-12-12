@@ -7,6 +7,10 @@ public class Cloak extends Item{
         super(cell);
     }
 
+    public Cloak(){
+
+    }
+
     public String getTileName() {
         return "cloak";
     }

@@ -12,6 +12,7 @@ public class GameMap {
     private Cell[][] cells;
 
     private Player player;
+    private Monster monster;
     private Skeleton skeleton;
     private Ghost ghost;
     private Boss boss;
@@ -46,6 +47,10 @@ public class GameMap {
         this.player = player;
     }
 
+    public Monster getMonster(){
+        return monster;
+    }
+
 
     public Player getPlayer() {
         return player;
@@ -54,7 +59,6 @@ public class GameMap {
     public Skeleton getSkeleton() { return skeleton; }
 
     public Boss getBoss() { return  boss; }
-
 
     public void setSkeleton(Skeleton skeleton) {this.skeleton = skeleton;}
 
