@@ -224,7 +224,7 @@ public class Player extends Actor {
             this.addDamage(1);
             this.setHealth(12);
         }
-        if (this.xp > 29 && this.level == 2) {
+        if (this.xp > 34 && this.level == 2) {
             this.level = 3;
             this.addDamage(1);
             this.setHealth(14);
