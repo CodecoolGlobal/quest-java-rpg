@@ -148,7 +148,7 @@ public class Player extends Actor {
                 inventoryMap.replace(itemName, value + 1);
             }
             if (hasWeapon() && this.getDamage() != 10) this.setDamage(getDamage() + 5);
-            if (itemName.equals("cloak")) this.setDefense(1);
+            if (itemName.equals("cloak")) this.addDefense(1);
 
             inventory.getItems().clear();
 
@@ -276,7 +276,7 @@ public class Player extends Actor {
             this.setTileName();
         }
         if (item.equals("cloak")) {
-            this.setDefense(-1);
+            this.addDefense(-1);
             getGoldForCloak();
         }
     }

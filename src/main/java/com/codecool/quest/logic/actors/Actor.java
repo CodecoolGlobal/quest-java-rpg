@@ -44,7 +44,11 @@ public abstract class Actor implements Drawable {
     }
 
     public void setDefense(int newDefense) {
-        this.defense += newDefense;
+        this.defense = newDefense;
+    }
+
+    public void addDefense(int defenseToAdd) {
+        this.defense += defenseToAdd;
     }
 
 
