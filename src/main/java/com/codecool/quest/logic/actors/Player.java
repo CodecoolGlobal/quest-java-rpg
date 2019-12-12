@@ -18,11 +18,13 @@ public class Player extends Actor {
     private String tileName = "player";
     private boolean isLeverOpen = false;
     private int countSecretDoorOpen = 0;
+    private boolean wcIsUsed;
     private Item itemToPickUp;
     private String itemName;
     private int pubCoordX = 0;
     private int pubCoordY = 0;
     private boolean playedCard = false;
+    private List<String> cards = new ArrayList<>();
     public Map<String, Integer> inventoryMap = new HashMap<>();
     private ListView<String> inventory = new ListView<>();
     private String actualMap = "/map.txt";
@@ -32,15 +34,24 @@ public class Player extends Actor {
     public Player(Cell cell) {
         super(cell);
         this.setDamage(5);
+        this.wcIsUsed = false;
     }
 
-    public int getLevel() {return this.level;}
+    public int getLevel() {
+        return this.level;
+    }
 
-    public void setLevel(int lvl) {this.level = lvl;}
+    public void setLevel(int lvl) {
+        this.level = lvl;
+    }
 
-    public int getXp() {return this.xp;}
+    public int getXp() {
+        return this.xp;
+    }
 
-    public void setXp(int xp) {this.xp = xp;}
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
 
     public String getTileName() {
         setTileName();
@@ -107,7 +118,7 @@ public class Player extends Actor {
         return false;
     }
 
-    public void setActualMap(String mapName){
+    public void setActualMap(String mapName) {
         this.actualMap = mapName;
     }
 
@@ -275,9 +286,9 @@ public class Player extends Actor {
     }
 
     public void pubPeopleInteraction(GameMap map) {
-        Cell cellBar = map.getCell(17, 4);
+        Cell cellBar = map.getCell(12, 4);
         Cell cellCloak = map.getCell(20, 13);
-        Cell cellCard = map.getCell(3, 11);
+        Cell cellCard = map.getCell(8, 10);
 
         try {
             Cell neighbor = this.cell.getNeighbor(0, -3);
@@ -322,6 +333,8 @@ public class Player extends Actor {
         if (item.equals("cloak")) {
             this.addDefense(-1);
             getGoldForCloak();
+        } else if (item.equals("weapon")) {
+            this.addDamage(-3);
         }
     }
 
@@ -338,15 +351,15 @@ public class Player extends Actor {
     }
 
     public void playForWeapon(GameMap map) {
-        Cell cellCard = map.getCell(3, 11);
+        Cell cellCard = map.getCell(8, 10);
         if (hasWeapon() && cellCard.getType() == CellType.QUESTION && !playedCard) {
             getRandomCard(map);
         }
     }
 
+
     private void getRandomCard(GameMap map) {
         Random random = new Random();
-        List<String> cards = new ArrayList<>();
         cards.add("seven");
         cards.add("eight");
         cards.add("nine");
@@ -360,21 +373,63 @@ public class Player extends Actor {
         displayCardOnTableForPlayer(randomCard, map);
 
         index = random.nextInt(7);
-        randomCard = cards.get(index);
-        displayCardOnTableForStranger(randomCard, map);
+        String randomCardStranger = cards.get(index);
+        displayCardOnTableForStranger(randomCardStranger, map);
+
+        String winner = checkCardValues(cards, randomCard, randomCardStranger);
+        winWeapon(winner);
+
         playedCard = true;
     }
 
     private void displayCardOnTableForPlayer(String card, GameMap map) {
-        Cell cardPlayer = map.getCell(7, 11);
+        Cell cardPlayer = map.getCell(12, 12);
 
         fillArrayWithCardCellTypes(card, cardPlayer);
     }
 
     private void displayCardOnTableForStranger(String card, GameMap map) {
-        Cell cardPlayer = map.getCell(5, 11);
+        Cell cardPlayer = map.getCell(10, 12);
 
         fillArrayWithCardCellTypes(card, cardPlayer);
+    }
+
+    private String checkCardValues(List<String> cardList, String playerCard, String strangerCard) {
+        int playerCardNumber = 0;
+        int strangerCardNumber = 0;
+        for (String card : cardList) {
+            if (card.equals(playerCard)) {
+                playerCardNumber = cardList.indexOf(card);
+                System.out.println(playerCardNumber);
+            }
+
+            if (card.equals(strangerCard)) {
+                strangerCardNumber = cardList.indexOf(card);
+                System.out.println(strangerCardNumber);
+            }
+
+        }
+        if (playerCardNumber > strangerCardNumber) {
+            return "player";
+        } else if (strangerCardNumber > playerCardNumber) {
+            return "stranger";
+        }
+        return "tie";
+    }
+
+    private void winWeapon(String winner) {
+        System.out.println(winner);
+        int weaponValue = inventoryMap.getOrDefault("weapon", 0);
+        if (winner.equals("player")) {
+            inventoryMap.put("weapon", weaponValue + 1);
+            this.addDamage(3);
+            this.setTileName();
+        } else if (winner.equals("stranger")) {
+            inventoryMap.put("weapon", weaponValue-1);
+            this.addDamage(-3);
+            if (weaponValue-1 <= 0) removeItemFromInventory("weapon");
+        }
+
     }
 
     private void fillArrayWithCardCellTypes(String card, Cell cardPlayer) {
@@ -394,19 +449,9 @@ public class Player extends Actor {
         }
     }
 
-    private void hidePlayerCard(GameMap map) {
-        Cell cardPlayer = map.getCell(7, 11);
-        cardPlayer.setType(CellType.PILLARCENTER);
-    }
-
-    private void hideStrangerCard(GameMap map) {
-        Cell cardPlayer = map.getCell(5, 11);
-        cardPlayer.setType(CellType.PILLARCENTER);
-    }
-
 
     public void bartenderInteraction(GameMap map) {
-        Cell cellBar = map.getCell(17, 4);
+        Cell cellBar = map.getCell(12, 4);
 
         if (cellBar.getType() == CellType.QUESTION && hasEnoughGold()) {
             int potionNumber = inventoryMap.getOrDefault("potion", 0);
@@ -423,12 +468,31 @@ public class Player extends Actor {
         if (inventoryMap.containsKey("potion")) {
             int potionNumber = inventoryMap.get("potion");
             inventoryMap.replace("potion", potionNumber - 1);
-            setHealth(10);
+            if (this.getLevel() == 1 && this.getHealth() < 10) {setHealth(10);};
+            if (this.getLevel() == 2 && this.getHealth() < 12) {setHealth(12);};
+            if (this.getLevel() == 3 && this.getHealth() < 14) {setHealth(14);};
             if (potionNumber - 1 <= 0) {
                 inventoryMap.remove("potion");
             }
         }
     }
+
+    public void getHPWhenWCIsUsed() {
+        Cell cellLeft = this.getCellNeighbour(-1, 0);
+        if (cellLeft.getTileName().equals("wc") && !wcIsUsed) {
+            this.setHealth(this.getHealth() + 1);
+            this.wcIsUsed = true;
+        }
+    }
+
+    public boolean getWcIsUsed() {
+        return wcIsUsed;
+    }
+
+    public void setWcIsUsed(boolean used) {
+        this.wcIsUsed = used;
+    }
+
 
 }
 

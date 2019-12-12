@@ -181,6 +181,7 @@ public class Main extends Application {
                 map.getPlayer().getGoldForCloak(map);
                 map.getPlayer().playForWeapon(map);
                 map.getPlayer().bartenderInteraction(map);
+                map.getPlayer().getHPWhenWCIsUsed();
                 refresh();
                 break;
             case P:
@@ -267,7 +268,6 @@ public class Main extends Application {
     }
 
     private void enterNewLevel(String level) {
-        System.out.println("In enterNewLevel method");
         increaseCounter(level);
         setMapName(level);
         Player currentPlayer = this.map.getPlayer();
@@ -320,6 +320,7 @@ public class Main extends Application {
         this.map.getPlayer().setDefense(currentPlayer.getDefense());
         this.map.getPlayer().setLevel(currentPlayer.getLevel());
         this.map.getPlayer().setXp(currentPlayer.getXp());
+        this.map.getPlayer().setWcIsUsed(currentPlayer.getWcIsUsed());
         this.map.getPlayer().inventoryMap = currentPlayer.getInventoryMap();
         this.map.getPlayer().setTileName();
 
