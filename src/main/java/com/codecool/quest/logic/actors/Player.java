@@ -213,13 +213,15 @@ public class Player extends Actor {
     }
 
     private void checkLevel() {
-        if (9 < this.xp && this.xp < 30 && this.level == 1) {
+        if (this.xp > 9 && this.level == 1) {
             this.level = 2;
-            this.addDamage(2);
-            this.setHealth(15);
+            this.addDamage(1);
+            this.setHealth(12);
         }
         if (this.xp > 29 && this.level == 2) {
-
+            this.level = 3;
+            this.addDamage(1);
+            this.setHealth(14);
         }
     }
 
