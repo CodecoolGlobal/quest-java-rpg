@@ -28,19 +28,21 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Main extends Application {
+    GameMap start = MapLoader.loadMap("/start.txt");
     GameMap map = MapLoader.loadMap("/map.txt");
-    GameMap firstLevel = map;
+    GameMap firstLevel;
     GameMap secondMap;
     GameMap bonusMap;
     GameMap bossMap;
     private int counter = 0;
     private String mapName;
 
-    public Canvas canvas = new Canvas(
+    private Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
             map.getHeight() * Tiles.TILE_WIDTH);
 
-    GraphicsContext context = canvas.getGraphicsContext2D();
+    private GraphicsContext context = canvas.getGraphicsContext2D();
+
 
     Label healthLabel = new Label();
     Label damageLabel = new Label();
@@ -238,21 +240,29 @@ public class Main extends Application {
 
             }
         }
-        levelLabel.setText("Hero level: " + map.getPlayer().getLevel());
-        xpLabel.setText("XP: " + map.getPlayer().getXp());
-        healthLabel.setText("Health: " + map.getPlayer().getHealth());
-        damageLabel.setText("Attack: " + map.getPlayer().getDamage());
-        defenseLabel.setText("Defense: " + map.getPlayer().getDefense());
+        try {
+            levelLabel.setText("Hero level: " + map.getPlayer().getLevel());
+            xpLabel.setText("XP: " + map.getPlayer().getXp());
+            healthLabel.setText("Health: " + map.getPlayer().getHealth());
+            damageLabel.setText("Attack: " + map.getPlayer().getDamage());
+            defenseLabel.setText("Defense: " + map.getPlayer().getDefense());
+        } catch (Exception ignored) {}
+
 
 
     }
 
     private void displayInventory() {
         inventory.getItems().clear();
-        Map<String, Integer> inventoryMap = map.getPlayer().getInventoryMap();
-        for (Map.Entry<String, Integer> entry : inventoryMap.entrySet()) {
-            inventory.getItems().add(entry.getKey() + ": " + entry.getValue());
+        try {
+            Map<String, Integer> inventoryMap = map.getPlayer().getInventoryMap();
+            for (Map.Entry<String, Integer> entry : inventoryMap.entrySet()) {
+                inventory.getItems().add(entry.getKey() + ": " + entry.getValue());
+            }
+        } catch (Exception ignored) {
+
         }
+
     }
 
 

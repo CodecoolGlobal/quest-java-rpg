@@ -101,6 +101,15 @@ public class Tiles {
         tileMap.put("queen", new Tile(30, 17));
         tileMap.put("king", new Tile(31, 16));
         tileMap.put("ace", new Tile(20, 17));
+        tileMap.put("C", new Tile(21, 30));
+        tileMap.put("O", new Tile(20, 31));
+        tileMap.put("D", new Tile(22, 30));
+        tileMap.put("E", new Tile(23, 30));
+        tileMap.put("L", new Tile(30, 30));
+        tileMap.put("Q", new Tile(22, 31));
+        tileMap.put("U", new Tile(26, 31));
+        tileMap.put("S", new Tile(24, 31));
+        tileMap.put("T", new Tile(25, 31));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {

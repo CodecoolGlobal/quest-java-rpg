@@ -229,6 +229,33 @@ public class MapLoader {
                         case '7':
                             cell.setType(CellType.WC);
                             break;
+                        case '8':
+                            cell.setType(CellType.C);
+                            break;
+                        case '9':
+                            cell.setType(CellType.O);
+                            break;
+                        case 'J':
+                            cell.setType(CellType.D);
+                            break;
+                        case 'Q':
+                            cell.setType(CellType.E);
+                            break;
+                        case 'K':
+                            cell.setType(CellType.L);
+                            break;
+                        case ',':
+                            cell.setType(CellType.Q);
+                            break;
+                        case 'u':
+                            cell.setType(CellType.U);
+                            break;
+                        case 'U':
+                            cell.setType(CellType.S);
+                            break;
+                        case '<':
+                            cell.setType(CellType.T);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
