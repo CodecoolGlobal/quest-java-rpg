@@ -111,7 +111,7 @@ public class Main extends Application {
         }
     }
 
-    private void onKeyPressed(KeyEvent keyEvent) {
+    private void onKeyPressed(KeyEvent keyEvent){
         switch (keyEvent.getCode()) {
             case UP:
                 if (map.getPlayer().getHealth() < 1) {
@@ -186,6 +186,7 @@ public class Main extends Application {
                     break;
                 }
                 map.getPlayer().getGoldForCloak(map);
+                map.getPlayer().playForWeapon(map);
                 map.getPlayer().bartenderInteraction(map);
                 refresh();
                 break;
@@ -257,13 +258,7 @@ public class Main extends Application {
         } else if (level.equals("/map3.txt")) {
             bossMap = this.map;
         }
-        this.map.getPlayer().setHealth(currentPlayer.getHealth());
-        this.map.getPlayer().setDamage(currentPlayer.getDamage());
-        this.map.getPlayer().setDefense(currentPlayer.getDefense());
-        this.map.getPlayer().inventoryMap = currentPlayer.getInventoryMap();
-        this.map.getPlayer().setTileName();
-
-       setStageSize();
+        saveStats(currentPlayer);
     }
 
     private void setStageSize() {
@@ -279,13 +274,25 @@ public class Main extends Application {
     }
 
     private void enterPreviousLevel(GameMap previousMap) {
+        Player currentPlayer = this.map.getPlayer();
         if (this.map != previousMap) {
             this.map = previousMap;
+            saveStats(currentPlayer);
         } else {
             this.map = secondMap;
+            saveStats(currentPlayer);
         }
-        setStageSize();
 
+
+    }
+
+    private void saveStats(Player currentPlayer) {
+        this.map.getPlayer().setHealth(currentPlayer.getHealth());
+        this.map.getPlayer().setDamage(currentPlayer.getDamage());
+        this.map.getPlayer().setDefense(currentPlayer.getDefense());
+        this.map.getPlayer().inventoryMap = currentPlayer.getInventoryMap();
+        this.map.getPlayer().setTileName();
+        setStageSize();
     }
 
     private void setMapName(String mapName) {

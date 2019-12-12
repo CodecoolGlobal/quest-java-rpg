@@ -218,6 +218,27 @@ public class MapLoader {
                         case 'S':
                             cell.setType(CellType.CARDBACK);
                             break;
+                        case '7':
+                            cell.setType(CellType.SEVEN);
+                            break;
+                        case '8':
+                            cell.setType(CellType.EIGHT);
+                            break;
+                        case '9':
+                            cell.setType(CellType.NINE);
+                            break;
+                        case 'J':
+                            cell.setType(CellType.JUMBO);
+                            break;
+                        case 'Q':
+                            cell.setType(CellType.QUEEN);
+                            break;
+                        case 'K':
+                            cell.setType(CellType.KING);
+                            break;
+                        case ',':
+                            cell.setType(CellType.ACE);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

@@ -9,8 +9,10 @@ import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Weapon;
 import javafx.scene.control.ListView;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.sound.midi.Soundbank;
+import java.sql.SQLOutput;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Player extends Actor {
     private String tileName = "player";
@@ -61,15 +63,19 @@ public class Player extends Actor {
     //Player method
     public void openPub() {
         if (isNeighbourPub()) {
-            System.out.println("Open door");
             this.getCell().getNeighbor(pubCoordX, pubCoordY).setType(CellType.HOUSEOPEN);
         }
     }
 
     //Player method
     private boolean isNeighbourLever() {
-        String leverUpName = this.getCell().getNeighbor(0, 1).getTileName();
-        if (leverUpName.equals("lever-up") || leverUpName.equals("lever-down")) return true;
+        try {
+            String leverUpName = this.getCell().getNeighbor(0, 1).getTileName();
+            if (leverUpName.equals("lever-up") || leverUpName.equals("lever-down")) return true;
+        } catch (Exception ignored) {
+
+        }
+
         return false;
     }
 
@@ -142,7 +148,7 @@ public class Player extends Actor {
                 inventoryMap.replace(itemName, value + 1);
             }
             if (hasWeapon() && this.getDamage() != 10) this.setDamage(getDamage() + 5);
-            if (itemName.equals("cloak")) this.setDefense(1);
+            if (itemName.equals("cloak")) this.addDefense(1);
 
             inventory.getItems().clear();
 
@@ -270,7 +276,7 @@ public class Player extends Actor {
             this.setTileName();
         }
         if (item.equals("cloak")) {
-            this.setDefense(-1);
+            this.addDefense(-1);
             getGoldForCloak();
         }
     }
@@ -287,6 +293,75 @@ public class Player extends Actor {
         return false;
     }
 
+    public void playForWeapon(GameMap map) {
+        Cell cellCard = map.getCell(3, 11);
+        if (hasWeapon() && cellCard.getType() == CellType.QUESTION) {
+            getRandomCard(map);
+        }
+    }
+
+    private void getRandomCard(GameMap map) {
+        Random random = new Random();
+        List<String> cards = new ArrayList<>();
+        cards.add("seven");
+        cards.add("eight");
+        cards.add("nine");
+        cards.add("jumbo");
+        cards.add("queen");
+        cards.add("king");
+        cards.add("ace");
+
+        Integer index = random.nextInt(7);
+        String randomCard = cards.get(index);
+        displayCardOnTableForPlayer(randomCard, map);
+
+        index = random.nextInt(7);
+        randomCard = cards.get(index);
+        displayCardOnTableForStranger(randomCard, map);
+
+
+    }
+
+    private void displayCardOnTableForPlayer(String card, GameMap map) {
+        Cell cardPlayer = map.getCell(7, 11);
+
+        fillArrayWithCardCellTypes(card, cardPlayer);
+    }
+
+    private void displayCardOnTableForStranger(String card, GameMap map) {
+        Cell cardPlayer = map.getCell(5, 11);
+
+        fillArrayWithCardCellTypes(card, cardPlayer);
+    }
+
+    private void fillArrayWithCardCellTypes(String card, Cell cardPlayer) {
+        List<CellType> cellTypes = new ArrayList<>();
+        cellTypes.add(CellType.SEVEN);
+        cellTypes.add(CellType.EIGHT);
+        cellTypes.add(CellType.NINE);
+        cellTypes.add(CellType.JUMBO);
+        cellTypes.add(CellType.QUEEN);
+        cellTypes.add(CellType.KING);
+        cellTypes.add(CellType.ACE);
+
+        for (CellType cellType : cellTypes) {
+            if (cellType.getTileName().equals(card)) {
+                cardPlayer.setType(cellType);
+            }
+        }
+    }
+
+    private void hidePlayerCard(GameMap map) {
+        Cell cardPlayer = map.getCell(7, 11);
+        cardPlayer.setType(CellType.PILLARCENTER);
+    }
+
+    private void hideStrangerCard(GameMap map) {
+        Cell cardPlayer = map.getCell(5, 11);
+        cardPlayer.setType(CellType.PILLARCENTER);
+    }
+
+
     public void bartenderInteraction(GameMap map) {
         Cell cellBar = map.getCell(17, 4);
 
@@ -294,8 +369,8 @@ public class Player extends Actor {
             int potionNumber = inventoryMap.getOrDefault("potion", 0);
             int goldValue = inventoryMap.get("gold");
             inventoryMap.put("potion", potionNumber + 1);
-            inventoryMap.put("gold", goldValue-5);
-            if (goldValue-5 <= 0) {
+            inventoryMap.put("gold", goldValue - 5);
+            if (goldValue - 5 <= 0) {
                 inventoryMap.remove("gold");
             }
         }
@@ -304,9 +379,9 @@ public class Player extends Actor {
     public void usePotion() {
         if (inventoryMap.containsKey("potion")) {
             int potionNumber = inventoryMap.get("potion");
-            inventoryMap.replace("potion", potionNumber-1);
+            inventoryMap.replace("potion", potionNumber - 1);
             setHealth(10);
-            if (potionNumber-1 <= 0) {
+            if (potionNumber - 1 <= 0) {
                 inventoryMap.remove("potion");
             }
         }
