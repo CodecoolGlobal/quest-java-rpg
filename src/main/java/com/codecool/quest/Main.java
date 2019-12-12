@@ -28,7 +28,6 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Main extends Application {
-    GameMap start = MapLoader.loadMap("/start.txt");
     GameMap map = MapLoader.loadMap("/map.txt");
     GameMap firstLevel;
     GameMap secondMap;
@@ -344,9 +343,6 @@ public class Main extends Application {
         this.mapName = mapName;
     }
 
-    private String getMapName(){
-        return mapName;
-    }
 
     private void checkIfMonsterIsDead(){
         try {
