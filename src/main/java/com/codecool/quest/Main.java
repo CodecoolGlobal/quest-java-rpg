@@ -28,7 +28,7 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap("/map.txt");
+    GameMap map = MapLoader.loadMap("/start.txt");
     GameMap firstLevel;
     GameMap secondMap;
     GameMap bonusMap;
@@ -197,6 +197,9 @@ public class Main extends Application {
                 map.getPlayer().usePotion();
                 refresh();
                 break;
+            case Q:
+                enterNewLevel("/map.txt");
+                break;
         }
 
     }
@@ -286,7 +289,9 @@ public class Main extends Application {
         this.map = MapLoader.loadMap(level);
         if (level.equals("/bonus.txt")) {
             bonusMap = this.map;
-        } else if (level.equals("/map2.txt")) {
+        } else if (level.equals("/map.txt")) {
+            firstLevel = this.map;
+        }else if (level.equals("/map2.txt")) {
             secondMap = this.map;
         } else if (level.equals("/map3.txt")) {
             bossMap = this.map;
