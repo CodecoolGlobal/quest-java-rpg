@@ -112,7 +112,7 @@ public class Main extends Application {
         }
     }
 
-    private void onKeyPressed(KeyEvent keyEvent){
+    private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
                 if (map.getPlayer().getHealth() < 1) {
@@ -122,9 +122,9 @@ public class Main extends Application {
                 map.getPlayer().move(0, -1);
                 if (map.getPlayer().isPlayerAtSpecificDoor("house-center-open")) {
                     enterNewLevel("/bonus.txt");
-                } else if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter==0) {
+                } else if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter == 0) {
                     enterNewLevel("/map2.txt");
-                } else if(map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter>0) {
+                } else if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter > 0) {
                     enterPreviousLevel(firstLevel);
                 }
                 this.map.getPlayer().pubPeopleInteraction(map);
@@ -158,9 +158,9 @@ public class Main extends Application {
                 moveAllMonsters(map.monsterList);
                 map.getPlayer().move(1, 0);
                 this.map.getPlayer().pubPeopleInteraction(map);
-                if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter>=1) {
+                if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter == 1) {
                     enterNewLevel("/map3.txt");
-                } else if(map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter>0) {
+                } else if (map.getPlayer().isPlayerAtSpecificDoor("door-open") && counter > 1) {
                     enterPreviousLevel(secondMap);
                 }
                 refresh();
@@ -267,26 +267,33 @@ public class Main extends Application {
     private void setStageSize() {
         canvas.setWidth(map.getWidth() * Tiles.TILE_WIDTH);
         canvas.setHeight(map.getHeight() * Tiles.TILE_WIDTH);
-        stage.setWidth(map.getWidth()*32+200);
-        stage.setHeight(map.getHeight()*32+30);
+        stage.setWidth(map.getWidth() * 32 + 200);
+        stage.setHeight(map.getHeight() * 32 + 30);
     }
+
     private void increaseCounter(String levelName) {
         if (!levelName.equals("/bonus.txt")) {
             counter++;
+            System.out.println(counter);
         }
     }
 
     private void enterPreviousLevel(GameMap previousMap) {
         Player currentPlayer = this.map.getPlayer();
-        if (this.map != previousMap) {
-            this.map = previousMap;
-            saveStats(currentPlayer);
-        } else {
-            this.map = secondMap;
-            saveStats(currentPlayer);
+        if (previousMap == firstLevel) {
+            if (this.map != previousMap) {
+                this.map = previousMap;
+            } else {
+                this.map = secondMap;
+            }
+        } else if (previousMap == secondMap) {
+            if (this.map != previousMap) {
+                this.map = previousMap;
+            } else {
+                this.map = bossMap;
+            }
         }
-
-
+        saveStats(currentPlayer);
     }
 
     private void saveStats(Player currentPlayer) {
