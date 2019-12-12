@@ -1,9 +1,6 @@
 package com.codecool.quest.logic;
 
-import com.codecool.quest.logic.actors.Ghost;
-import com.codecool.quest.logic.actors.Player;
-import com.codecool.quest.logic.actors.Skeleton;
-import com.codecool.quest.logic.actors.Boss;
+import com.codecool.quest.logic.actors.*;
 import com.codecool.quest.logic.items.*;
 import javafx.scene.transform.Rotate;
 
@@ -45,6 +42,11 @@ public class MapLoader {
                             cell.setType(CellType.GROUND);
                             map.setSkeleton(new Skeleton(cell));
                             map.monsterList.add(map.getSkeleton());
+                            break;
+                        case '*':
+                            cell.setType(CellType.GROUND);
+                            map.setYeti(new Yeti(cell));
+                            map.monsterList.add(map.getYeti());
                             break;
                         case 'g':
                             if (file.equals("/map2.txt")) {

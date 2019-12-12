@@ -13,9 +13,9 @@ qBb.q    h0h            fhfFh0v...........vfF0f
 q...q    f0hFF              f0v...........vhF0h
 q.bbq    F000f              h0v...........vFf0f
 q...q    ffhVh          hFfFf0v...........vfF0F
-qBb.q    fsssh          F00000v...........vhF0f
-q...q    fsMsf          f0FhFfv...........vfh0fFhF
-q.Bbq    Fsssf          h0hfFFvfhF........G000000F
+qBb.q    f***h          F00000v...........vhF0f
+q...q    f*M*f          f0FhFfv...........vfh0fFhF
+q.Bbq    F***f          h0hfFFvfhF........G000000F
 q.g.q    fFhhf        FhfVfFhhvX0hf.......vfhFfFhF
 qbb.q                ffhf0X0Z0G00Zf.......vF
 q...q               hFZZ00Z0MXv0ZXF.......vF

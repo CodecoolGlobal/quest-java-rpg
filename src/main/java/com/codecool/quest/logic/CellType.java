@@ -49,7 +49,6 @@ public enum CellType {
     QUESTION("question"),
     CAMPFIRE("campfire"),
     NPC("npc"),
-    NPCPET("npc-pet"),
     VILLAGEHOUSE("village-house"),
     VILLAGEHOUSE2("village-house2"),
     VILLAGEDOOR("village-door"),

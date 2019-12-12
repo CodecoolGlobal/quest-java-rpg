@@ -36,6 +36,7 @@ public class Tiles {
         tileMap.put("player-c", new Tile(24, 2));
         tileMap.put("skeleton", new Tile(29, 6));
         tileMap.put("ghost", new Tile(26, 6));
+        tileMap.put("yeti", new Tile(28, 6));
         tileMap.put("key", new Tile(17, 23));
         tileMap.put("weapon", new Tile(0, 26));
         tileMap.put("cloak", new Tile(6, 23));
