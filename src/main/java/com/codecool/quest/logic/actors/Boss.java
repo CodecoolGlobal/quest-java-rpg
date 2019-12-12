@@ -18,7 +18,7 @@ public class Boss extends Monster{
     public Boss(Cell cell) {
         super(cell);
         this.setDamage(1);
-        this.setHealth(31);
+        this.setHealth(50);
     }
     @Override
     public String getTileName() {
@@ -30,7 +30,10 @@ public class Boss extends Monster{
     }
 
 
-    public void monsterMove(){
+    public void bossMove(){
+        System.out.println("what");
+        if (this.getTileName().equals("boss2")){
 
+        };
     }
 }
