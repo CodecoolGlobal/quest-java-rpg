@@ -338,6 +338,7 @@ public class Main extends Application {
         try {
             this.map.getSkeleton().monsterIsDead();
             this.map.getGhost().monsterIsDead();
+            this.map.getYeti().monsterIsDead();
         } catch (Exception ignored){
 
         }
