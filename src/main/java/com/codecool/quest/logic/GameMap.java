@@ -20,6 +20,7 @@ public class GameMap {
     private Item weapon;
     private Item helmet;
     private Item crown;
+    private Item pet;
     public List<Actor> monsterList = new ArrayList<>();
 
     public GameMap(int width, int height, CellType defaultCellType) {
@@ -74,6 +75,8 @@ public class GameMap {
     public Item getHelmet() {return helmet;}
 
     public void setWeapon(Item weapon) {this.weapon = weapon;}
+
+    public void setPet(Item pet) {this.pet = pet;}
 
     public Item getWeapon() {return weapon;}
 
