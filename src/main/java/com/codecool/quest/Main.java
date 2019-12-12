@@ -1,6 +1,7 @@
 package com.codecool.quest;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Monster;
@@ -26,7 +27,7 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap("/map2.txt");
+    GameMap map = MapLoader.loadMap("/map.txt");
     GameMap firstLevel = map;
     GameMap secondMap;
     GameMap bonusMap;

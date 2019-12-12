@@ -82,6 +82,9 @@ public class MapLoader {
                         case 'd':
                             cell.setType(CellType.DOOR);
                             break;
+                        case 'e':
+                            cell.setType(CellType.DOOROPEN);
+                            break;
                         case '4':
                             cell.setType(CellType.HOUSELEFT);
                             break;

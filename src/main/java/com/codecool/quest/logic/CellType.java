@@ -7,6 +7,7 @@ public enum CellType {
     FLOOR("floor"),
     WALL("wall"),
     DOOR("door"),
+    DOOROPEN("door-open"),
     SECRETDOOR("secret-door"),
     GROUND("tunnel"),
     ROOFLEFT("roof-left"),
