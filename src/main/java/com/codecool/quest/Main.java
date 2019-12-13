@@ -48,6 +48,7 @@ public class Main extends Application {
     Label defenseLabel = new Label();
     Label levelLabel = new Label();
     Label xpLabel = new Label();
+    Label questLabel = new Label();
     ListView<String> inventory = new ListView<>();
 
     public static Label nameLabel = new Label();

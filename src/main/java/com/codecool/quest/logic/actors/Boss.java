@@ -17,8 +17,8 @@ public class Boss extends Monster{
 
     public Boss(Cell cell) {
         super(cell);
-        this.setDamage(1);
-        this.setHealth(50);
+        this.setDamage(6);
+        this.setHealth(70);
     }
     @Override
     public String getTileName() {

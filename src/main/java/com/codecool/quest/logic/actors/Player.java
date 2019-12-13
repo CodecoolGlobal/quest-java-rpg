@@ -214,9 +214,11 @@ public class Player extends Actor {
                 checkLevel();
                 neighbour.setActor(null);
 
+
             }
         }
     }
+
 
     private void checkLevel() {
         if (this.xp > 9 && this.level == 1) {
@@ -224,10 +226,20 @@ public class Player extends Actor {
             this.addDamage(1);
             this.setHealth(12);
         }
-        if (this.xp > 34 && this.level == 2) {
+        if (this.xp > 24 && this.level == 2) {
             this.level = 3;
             this.addDamage(1);
             this.setHealth(14);
+        }
+        if (this.xp > 44 && this.level == 3) {
+            this.level = 4;
+            this.addDamage(1);
+            this.setHealth(16);
+        }
+        if (this.xp > 70 && this.level == 4) {
+            this.level = 5;
+            this.addDamage(1);
+            this.setHealth(18);
         }
     }
 
@@ -262,7 +274,13 @@ public class Player extends Actor {
         boolean isLeverDoorOpen = isNeighbourActionCell(x, y, "lever-door-open");
         boolean isPubOpen = isNeighbourActionCell(x, y, "house-center-open");
         boolean isSecretDoor = isNeighbourActionCell(x, y, "secret-door");
-
+        boolean isNpc = isNeighbourActionCell(x, y, "npc");
+        if (isNpc) {
+            if (inventoryMap.containsKey("npc-pet")) {
+                inventoryMap.put("key", 1);
+                inventoryMap.remove("npc-pet");
+            }
+        }
         openNewLevelDoorIfHasKey(neighbor, neighborIsDoor);
 
         if (this.getCell().getNeighbor(x, y).getActor() != null) {
@@ -344,7 +362,7 @@ public class Player extends Actor {
     }
 
     private boolean hasEnoughGold() {
-        if (inventoryMap.containsKey("gold") && inventoryMap.get("gold") >= 5) {
+        if (inventoryMap.containsKey("gold") && inventoryMap.get("gold") >= 3) {
             return true;
         }
         return false;
@@ -457,8 +475,8 @@ public class Player extends Actor {
             int potionNumber = inventoryMap.getOrDefault("potion", 0);
             int goldValue = inventoryMap.get("gold");
             inventoryMap.put("potion", potionNumber + 1);
-            inventoryMap.put("gold", goldValue - 5);
-            if (goldValue - 5 <= 0) {
+            inventoryMap.put("gold", goldValue - 3);
+            if (goldValue - 3 <= 0) {
                 inventoryMap.remove("gold");
             }
         }

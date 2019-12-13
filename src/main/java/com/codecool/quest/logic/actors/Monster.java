@@ -24,15 +24,15 @@ public abstract class Monster extends Actor {
         items.add(new Weapon());
     }
 
-    private List<Item> getItemList (){
+    public List<Item> getItemList (){
         return items;
     }
 
     public void monsterIsDead(){
         if (this.getHealth() <= 0) {
             Random random = new Random();
-            int randomNumber = random.nextInt(5);
-            if (randomNumber == 3 && !this.isDead) {
+            int randomNumber = random.nextInt(1);
+            if (randomNumber == 0 && !this.isDead) {
                 int randomItemIndex = random.nextInt(getItemList().size());
                 dropItem(getItemList().get(randomItemIndex));
             }

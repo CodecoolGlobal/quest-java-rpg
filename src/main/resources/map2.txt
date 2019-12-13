@@ -1,31 +1,31 @@
 50 30
 ###########e##fFfhffhfFFff   fvfFfhFhf############
 #í.g.......@í#hf000000000h   hvF...w..+.a.#.....í#
-#...í.í#######ff0f#######f   fvf..ggg.#.g.+...k..d
+#...í.í#######ff0f#######f   fvf..ggg.#.g.+......d
 #####V##Fh0000h00h#sssss#f FhfvFfhFfhf######...í##
-qbmBq0ffhF0fF000Ff###+###f f00G...........v##V##fF
-qbg.q0000000Ffhf Ffh000hFffF0fvfhFf.fff...vFC0Cfhf
-qBb.qfff0hf00000f0000fh f0000fv...........vhí0ífFh
-q...qf000fF0fhF000f0FhFfh0hfFhv...........vFF0f
-q.BbqFfffhf0f hFfFF0000000FfFhv...........vhf0f
-q.g.q    f00f     hFhFhhf00000v...........vfh0h
-qBb.q    h0h            fhfFh0v...........vfF0f
-q...q    f0hFF              f0v...........vhF0h
-q.bbq    F000f              h0v...........vFf0f
-q...q    ffhVh          hFfFf0v...........vfF0F
-qBb.q    f***h          F00000v...........vhF0f
-q...q    f*M*f          f0FhFfv...........vfh0fFhF
-q.Bbq    F***f          h0hfFFvfhF........G000000F
-q.g.q    fFhhf        FhfVfFhhvX0hf.......vfhFfFhF
-qbb.q                ffhf0X0Z0G00Zf.......vF
-q...q               hFZZ00Z0MXv0ZXF.......vF
-q.Bbq                hFZ0MNX0ZvZFh........vh
-q..Bq                 fX0000Zhvf..........vF
-qq.qq                  hFfhFhfv...........vf
-hc.cff                       fv...........vf
-f0000F                       hv...........vh
-FFff0fhFfhF                  Fv...........vF
-   h000000f                  fv...........vf
+qbmBq0ffhF0fF000Ff###+###f f00G0000000000fv##V##fF
+qbg.q0000000Ffhf Ffh000hFffF0fvfhFf0fffFhhvFC0Cfhf
+qBb.qfff0hf00000f0000fh f0000fvh  f0h    Fvhí0ífFh
+q...qf000fF0fhF000f0FhFfh0hfFhvf  h0F    fvFF0f
+q.BbqFfffhf0f hFfFF0000000FfFhvF  F0h    fvhf0f
+q.g.q    f00f     hFhFhhf00000vh  h0F    hvfh0h
+qBb.q    h0h            fhfFh0vf  F0f    FvfF0f
+q...q    f0hFF              f0vh  f0f    fvhF0h
+q.bbq    F000f              h0vf  h0fhfh hvFf0f
+q...q    ffhVh          hFfFf0vf  f0000f hvfF0F
+qBb.q    f***h          F00000vh  fhFh0h FvhF0f
+q...q    f*M*f          f0FhFfvf     h0ffFvfh0fFhF
+q.Bbq    F***f          h0hfFFvfhF   h0000G000000F
+q.g.q    fFhhf        FhfVfFhhvX0hf  f0fhhvfhFfFhF
+qbb.q                ffhf0X0Z0G00Zf  f0h FvF
+q...q               hFZZ00Z0MXv0ZXF  F0f fvF
+q.Bbq                hFZ0MNX0ZvZFh   f0h fvh
+q..Bq                 fX0000Zhvf     F0hfhvF
+qq.qq                  hFfhFhfvF     h000fvf
+hc.cff                       fvf     hFf0hvf
+f0000F                       hvF     fhF0fvh
+FFff0fhFfhF                  FvF       f0FvF
+   h000000f                  fvf       h0hvf
    FfhFfh0fhFfhFhFhhfhFfFffFhFvfhFfhfFfF0fvF
         f000000000000000000000G00000000000vh
         FfhFhFhhfhFfFffFhhFffFvhFhFhhfhFfFvf
