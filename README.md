@@ -1,37 +1,45 @@
-# Codecool Quest
+# RPG Mini Game
 
-#TEST COMMIT
+Strategic role-playing game where you are the hero, and you have to save the word!
 
-This is a simple tile-based RPG game.
+## Game Features
 
-## Opening the project
+- Experience based leveling system
+- 3 Different maps
+- Quest to be completed to progress
+- Randomized monster movement
+- Enemies with different attributes
+- Random item drops from monsters
+- Character changes on item pickup
+- Gambling system
+- Secret(hidden) places
 
-Open the project in IntelliJ IDEA. This is a Maven project, so you will need to open `pom.xml`.
 
-The project is using JavaFX.  Use the `javafx` maven plugin to build and run the program.
+## Game tutorial
 
-Build:
+Game is played using the arrow keys to move.
+Press arrow movement key against a monster to attack it.
+ Use also:
+- M key to start the game
+- A key to pick-up items,
+- D key to open doors,
+- S key for gambling/shopping in the bar,
+- P key to drink health potion.
 
+
+
+
+## Technologies used
 ```bash
-mvn javafx:compile
+- Java
+- Maven
+- JavaFX
 ```
 
-Run:
+## Game demo
 
-```bash
-mvn javafx:run
-```
+Here comes a basic game demonstration from the beginning and a sneak peak into the next level.
 
-## Architecture
+![Game Demo lvl1](/demo/rpg_lvl1.gif)
 
-The project is meant to teach the concept of **layer separation**. All of the game logic (that is, player movement, game rules, and so on), is in the `logic` package, completely independent of user interface code. In principle, you could implement a completely different interface (terminal, web, Virtual Reality...) for the same logic code.
-
-## Product Backlog
-
-[Codecool Quest Product Backlog](https://docs.google.com/spreadsheets/d/1CvVh2s6obWEh4eQxu8w4f3jBLhz208bG-1FybWGc1sA/edit#gid=0)
-
-## Graphics
-
-The tiles used in the game are from [1-Bit Pack by Kenney](https://kenney.nl/assets/bit-pack), shared on [CC0 1.0 Universal license](https://creativecommons.org/publicdomain/zero/1.0/).
-
-![tiles](src/main/resources/tiles.png)
+![Game lvl2](/demo/rpg_lvl2.png)
