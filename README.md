@@ -30,11 +30,11 @@ Press arrow movement key against a monster to attack it.
 
 
 ## Technologies used
-```bash
+
 - Java
 - Maven
 - JavaFX
-```
+
 
 ## Game demo
 
